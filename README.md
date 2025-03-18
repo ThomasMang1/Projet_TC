@@ -1,5 +1,5 @@
 # Projet_TC
-Projet Tronc Cummun 2025
+Projet Tronc Cummun 2025 Irrigo
 ## Authers
 - Thomas MANGIN
 - Jonathan ROSS
