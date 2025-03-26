@@ -2,9 +2,15 @@ from flask import Flask, render_template, jsonify, request
 from models import db, Plante, Zone, Arrosage, Robot
 from datetime import datetime
 import os
+from dotenv import load_dotenv
+
+# Charger les variables d'environnement
+load_dotenv()
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///irrigo.db'
+
+# Configuration PostgreSQL
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL', 'postgresql://user:password@localhost:5432/irrigo')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db.init_app(app)
 
