@@ -57,6 +57,90 @@ def get_arrosages():
         'humidite_apres': a.humidite_apres
     } for a in arrosages])
 
+@app.route('/api/plantes', methods=['POST'])
+def create_plante():
+    data = request.get_json()
+    
+    # Vérification des données requises
+    if not all(k in data for k in ['nom', 'humidite_min', 'humidite_max']):
+        return jsonify({'error': 'Données manquantes'}), 400
+    
+    # Création de la nouvelle plante
+    nouvelle_plante = Plante(
+        nom=data['nom'],
+        humidite_min=data['humidite_min'],
+        humidite_max=data['humidite_max'],
+        description=data.get('description'),
+        zone_id=data.get('zone_id'),
+        qr_code=data.get('qr_code')
+    )
+    
+    try:
+        db.session.add(nouvelle_plante)
+        db.session.commit()
+        return jsonify({
+            'id': nouvelle_plante.id,
+            'nom': nouvelle_plante.nom,
+            'message': 'Plante créée avec succès'
+        }), 201
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/api/plantes/<int:plante_id>', methods=['PUT'])
+def update_plante(plante_id):
+    plante = Plante.query.get_or_404(plante_id)
+    data = request.get_json()
+    
+    try:
+        if 'nom' in data:
+            plante.nom = data['nom']
+        if 'humidite_min' in data:
+            plante.humidite_min = data['humidite_min']
+        if 'humidite_max' in data:
+            plante.humidite_max = data['humidite_max']
+        if 'description' in data:
+            plante.description = data['description']
+        if 'zone_id' in data:
+            plante.zone_id = data['zone_id']
+        if 'qr_code' in data:
+            plante.qr_code = data['qr_code']
+            
+        db.session.commit()
+        return jsonify({
+            'id': plante.id,
+            'nom': plante.nom,
+            'message': 'Plante mise à jour avec succès'
+        })
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/api/plantes/<int:plante_id>', methods=['DELETE'])
+def delete_plante(plante_id):
+    plante = Plante.query.get_or_404(plante_id)
+    
+    try:
+        db.session.delete(plante)
+        db.session.commit()
+        return jsonify({'message': 'Plante supprimée avec succès'})
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/api/plantes/<int:plante_id>', methods=['GET'])
+def get_plante(plante_id):
+    plante = Plante.query.get_or_404(plante_id)
+    return jsonify({
+        'id': plante.id,
+        'nom': plante.nom,
+        'humidite_min': plante.humidite_min,
+        'humidite_max': plante.humidite_max,
+        'description': plante.description,
+        'zone_id': plante.zone_id,
+        'qr_code': plante.qr_code
+    })
+
 if __name__ == '__main__':
     with app.app_context():
         db.create_all()

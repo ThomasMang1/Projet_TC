@@ -96,7 +96,12 @@
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title"><i class='bx bx-leaf'></i> Plantes</h5>
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h5 class="card-title"><i class='bx bx-leaf'></i> Plantes</h5>
+                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addPlantModal">
+                                <i class='bx bx-plus'></i> Ajouter une plante
+                            </button>
+                        </div>
                         <div id="plants-list"></div>
                     </div>
                 </div>
@@ -109,6 +114,91 @@
                         <h5 class="card-title"><i class='bx bx-map'></i> Zones</h5>
                         <div id="zones-list"></div>
                     </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Ajout Plante -->
+    <div class="modal fade" id="addPlantModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Ajouter une nouvelle plante</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="addPlantForm">
+                        <div class="mb-3">
+                            <label for="plantName" class="form-label">Nom de la plante</label>
+                            <input type="text" class="form-control" id="plantName" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="humidityMin" class="form-label">Humidité minimale (%)</label>
+                            <input type="number" class="form-control" id="humidityMin" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="humidityMax" class="form-label">Humidité maximale (%)</label>
+                            <input type="number" class="form-control" id="humidityMax" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="plantDescription" class="form-label">Description</label>
+                            <textarea class="form-control" id="plantDescription"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="plantZone" class="form-label">Zone</label>
+                            <select class="form-control" id="plantZone">
+                                <option value="">Sélectionner une zone</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                    <button type="button" class="btn btn-primary" onclick="addPlant()">Ajouter</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Modification Plante -->
+    <div class="modal fade" id="editPlantModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Modifier la plante</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="editPlantForm">
+                        <input type="hidden" id="editPlantId">
+                        <div class="mb-3">
+                            <label for="editPlantName" class="form-label">Nom de la plante</label>
+                            <input type="text" class="form-control" id="editPlantName" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="editHumidityMin" class="form-label">Humidité minimale (%)</label>
+                            <input type="number" class="form-control" id="editHumidityMin" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="editHumidityMax" class="form-label">Humidité maximale (%)</label>
+                            <input type="number" class="form-control" id="editHumidityMax" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="editPlantDescription" class="form-label">Description</label>
+                            <textarea class="form-control" id="editPlantDescription"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="editPlantZone" class="form-label">Zone</label>
+                            <select class="form-control" id="editPlantZone">
+                                <option value="">Sélectionner une zone</option>
+                            </select>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                    <button type="button" class="btn btn-primary" onclick="updatePlant()">Mettre à jour</button>
                 </div>
             </div>
         </div>
@@ -135,10 +225,22 @@
                 .then(plantes => {
                     const plantsList = document.getElementById('plants-list');
                     plantsList.innerHTML = plantes.map(plante => `
-                        <div class="plant-item mb-2">
-                            <h6>${plante.nom}</h6>
-                            <p>Zone: ${plante.zone || 'Non assignée'}</p>
-                            <p>Humidité: ${plante.humidite_min}% - ${plante.humidite_max}%</p>
+                        <div class="plant-item mb-3 p-3 border rounded">
+                            <div class="d-flex justify-content-between align-items-start">
+                                <div>
+                                    <h6>${plante.nom}</h6>
+                                    <p class="mb-1">Zone: ${plante.zone || 'Non assignée'}</p>
+                                    <p class="mb-0">Humidité: ${plante.humidite_min}% - ${plante.humidite_max}%</p>
+                                </div>
+                                <div>
+                                    <button class="btn btn-sm btn-outline-primary me-2" onclick="editPlant(${plante.id})">
+                                        <i class='bx bx-edit'></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-outline-danger" onclick="deletePlant(${plante.id})">
+                                        <i class='bx bx-trash'></i>
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                     `).join('');
                 });
@@ -160,6 +262,128 @@
                 });
         }
 
+        // Fonction pour ajouter une plante
+        function addPlant() {
+            const formData = {
+                nom: document.getElementById('plantName').value,
+                humidite_min: parseFloat(document.getElementById('humidityMin').value),
+                humidite_max: parseFloat(document.getElementById('humidityMax').value),
+                description: document.getElementById('plantDescription').value,
+                zone_id: document.getElementById('plantZone').value || null
+            };
+
+            fetch('/api/plantes', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    alert('Erreur: ' + data.error);
+                } else {
+                    alert('Plante ajoutée avec succès!');
+                    // Fermer le modal
+                    const modal = bootstrap.Modal.getInstance(document.getElementById('addPlantModal'));
+                    modal.hide();
+                    // Mettre à jour la liste des plantes
+                    updatePlantsList();
+                }
+            })
+            .catch(error => {
+                alert('Erreur lors de l\'ajout de la plante: ' + error);
+            });
+        }
+
+        // Fonction pour charger les zones dans le select
+        function loadZones() {
+            fetch('/api/zones')
+                .then(response => response.json())
+                .then(zones => {
+                    const select = document.getElementById('plantZone');
+                    zones.forEach(zone => {
+                        const option = document.createElement('option');
+                        option.value = zone.id;
+                        option.textContent = zone.nom;
+                        select.appendChild(option);
+                    });
+                });
+        }
+
+        // Fonction pour supprimer une plante
+        function deletePlant(planteId) {
+            if (confirm('Êtes-vous sûr de vouloir supprimer cette plante ?')) {
+                fetch(`/api/plantes/${planteId}`, {
+                    method: 'DELETE'
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.error) {
+                        alert('Erreur: ' + data.error);
+                    } else {
+                        alert('Plante supprimée avec succès!');
+                        updatePlantsList();
+                    }
+                })
+                .catch(error => {
+                    alert('Erreur lors de la suppression de la plante: ' + error);
+                });
+            }
+        }
+
+        // Fonction pour ouvrir le modal de modification
+        function editPlant(planteId) {
+            fetch(`/api/plantes/${planteId}`)
+                .then(response => response.json())
+                .then(plante => {
+                    document.getElementById('editPlantId').value = plante.id;
+                    document.getElementById('editPlantName').value = plante.nom;
+                    document.getElementById('editHumidityMin').value = plante.humidite_min;
+                    document.getElementById('editHumidityMax').value = plante.humidite_max;
+                    document.getElementById('editPlantDescription').value = plante.description || '';
+                    document.getElementById('editPlantZone').value = plante.zone_id || '';
+                    
+                    const modal = new bootstrap.Modal(document.getElementById('editPlantModal'));
+                    modal.show();
+                });
+        }
+
+        // Fonction pour mettre à jour une plante
+        function updatePlant() {
+            const planteId = document.getElementById('editPlantId').value;
+            const formData = {
+                nom: document.getElementById('editPlantName').value,
+                humidite_min: parseFloat(document.getElementById('editHumidityMin').value),
+                humidite_max: parseFloat(document.getElementById('editHumidityMax').value),
+                description: document.getElementById('editPlantDescription').value,
+                zone_id: document.getElementById('editPlantZone').value || null
+            };
+
+            fetch(`/api/plantes/${planteId}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    alert('Erreur: ' + data.error);
+                } else {
+                    alert('Plante mise à jour avec succès!');
+                    const modal = bootstrap.Modal.getInstance(document.getElementById('editPlantModal'));
+                    modal.hide();
+                    updatePlantsList();
+                }
+            })
+            .catch(error => {
+                alert('Erreur lors de la mise à jour de la plante: ' + error);
+            });
+        }
+
         // Mise à jour périodique des données
         setInterval(updateRobotStatus, 30000);
         setInterval(updatePlantsList, 60000);
@@ -169,6 +393,7 @@
         updateRobotStatus();
         updatePlantsList();
         updateZonesList();
+        loadZones();
     </script>
 </body>
 </html> 

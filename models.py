@@ -9,7 +9,7 @@ class Plante(db.Model):
     humidite_min = db.Column(db.Float, nullable=False)
     humidite_max = db.Column(db.Float, nullable=False)
     description = db.Column(db.Text)
-    date_plantation = db.Column(db.DateTime, default=datetime.utcnow)
+    date_plantation = db.Column(db.DateTime, default=datetime.now(datetime.UTC))
     qr_code = db.Column(db.String(200))
     zone_id = db.Column(db.Integer, db.ForeignKey('zone.id'))
     arrosages = db.relationship('Arrosage', backref='plante', lazy=True)
@@ -24,7 +24,7 @@ class Zone(db.Model):
 
 class Arrosage(db.Model):
     id = db.Column(db.Integer, primary_key=True)
-    date = db.Column(db.DateTime, default=datetime.utcnow)
+    date = db.Column(db.DateTime, default=datetime.now(datetime.UTC))
     quantite_eau = db.Column(db.Float, nullable=False)  # en litres
     plante_id = db.Column(db.Integer, db.ForeignKey('plante.id'), nullable=False)
     humidite_avant = db.Column(db.Float)
