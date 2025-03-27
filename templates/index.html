@@ -111,7 +111,12 @@
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-body">
-                        <h5 class="card-title"><i class='bx bx-map'></i> Zones</h5>
+                        <div class="d-flex justify-content-between align-items-center mb-3">
+                            <h5 class="card-title"><i class='bx bx-map'></i> Zones</h5>
+                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addZoneModal">
+                                <i class='bx bx-plus'></i> Ajouter une zone
+                            </button>
+                        </div>
                         <div id="zones-list"></div>
                     </div>
                 </div>
@@ -204,6 +209,63 @@
         </div>
     </div>
 
+    <!-- Modal Ajout Zone -->
+    <div class="modal fade" id="addZoneModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Ajouter une nouvelle zone</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="addZoneForm">
+                        <div class="mb-3">
+                            <label for="zoneName" class="form-label">Nom de la zone</label>
+                            <input type="text" class="form-control" id="zoneName" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="zoneDescription" class="form-label">Description</label>
+                            <textarea class="form-control" id="zoneDescription"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                    <button type="button" class="btn btn-primary" onclick="addZone()">Ajouter</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Modification Zone -->
+    <div class="modal fade" id="editZoneModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Modifier la zone</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="editZoneForm">
+                        <input type="hidden" id="editZoneId">
+                        <div class="mb-3">
+                            <label for="editZoneName" class="form-label">Nom de la zone</label>
+                            <input type="text" class="form-control" id="editZoneName" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="editZoneDescription" class="form-label">Description</label>
+                            <textarea class="form-control" id="editZoneDescription"></textarea>
+                        </div>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                    <button type="button" class="btn btn-primary" onclick="updateZone()">Mettre à jour</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
@@ -253,10 +315,22 @@
                 .then(zones => {
                     const zonesList = document.getElementById('zones-list');
                     zonesList.innerHTML = zones.map(zone => `
-                        <div class="zone-item mb-2">
-                            <h6>${zone.nom}</h6>
-                            <p>Humidité actuelle: ${zone.humidite_actuelle}%</p>
-                            <p>Nombre de plantes: ${zone.nombre_plantes}</p>
+                        <div class="zone-item mb-3 p-3 border rounded">
+                            <div class="d-flex justify-content-between align-items-start">
+                                <div>
+                                    <h6>${zone.nom}</h6>
+                                    <p class="mb-1">Humidité actuelle: ${zone.humidite_actuelle}%</p>
+                                    <p class="mb-0">Nombre de plantes: ${zone.nombre_plantes}</p>
+                                </div>
+                                <div>
+                                    <button class="btn btn-sm btn-outline-primary me-2" onclick="editZone(${zone.id})">
+                                        <i class='bx bx-edit'></i>
+                                    </button>
+                                    <button class="btn btn-sm btn-outline-danger" onclick="deleteZone(${zone.id})">
+                                        <i class='bx bx-trash'></i>
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                     `).join('');
                 });
@@ -382,6 +456,105 @@
             .catch(error => {
                 alert('Erreur lors de la mise à jour de la plante: ' + error);
             });
+        }
+
+        // Fonction pour ajouter une zone
+        function addZone() {
+            const formData = {
+                nom: document.getElementById('zoneName').value,
+                description: document.getElementById('zoneDescription').value
+            };
+
+            fetch('/api/zones', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    alert('Erreur: ' + data.error);
+                } else {
+                    alert('Zone ajoutée avec succès!');
+                    const modal = bootstrap.Modal.getInstance(document.getElementById('addZoneModal'));
+                    modal.hide();
+                    updateZonesList();
+                    loadZones(); // Recharger les zones dans les selects
+                }
+            })
+            .catch(error => {
+                alert('Erreur lors de l\'ajout de la zone: ' + error);
+            });
+        }
+
+        // Fonction pour ouvrir le modal de modification de zone
+        function editZone(zoneId) {
+            fetch(`/api/zones/${zoneId}`)
+                .then(response => response.json())
+                .then(zone => {
+                    document.getElementById('editZoneId').value = zone.id;
+                    document.getElementById('editZoneName').value = zone.nom;
+                    document.getElementById('editZoneDescription').value = zone.description || '';
+                    
+                    const modal = new bootstrap.Modal(document.getElementById('editZoneModal'));
+                    modal.show();
+                });
+        }
+
+        // Fonction pour mettre à jour une zone
+        function updateZone() {
+            const zoneId = document.getElementById('editZoneId').value;
+            const formData = {
+                nom: document.getElementById('editZoneName').value,
+                description: document.getElementById('editZoneDescription').value
+            };
+
+            fetch(`/api/zones/${zoneId}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(formData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.error) {
+                    alert('Erreur: ' + data.error);
+                } else {
+                    alert('Zone mise à jour avec succès!');
+                    const modal = bootstrap.Modal.getInstance(document.getElementById('editZoneModal'));
+                    modal.hide();
+                    updateZonesList();
+                    loadZones(); // Recharger les zones dans les selects
+                }
+            })
+            .catch(error => {
+                alert('Erreur lors de la mise à jour de la zone: ' + error);
+            });
+        }
+
+        // Fonction pour supprimer une zone
+        function deleteZone(zoneId) {
+            if (confirm('Êtes-vous sûr de vouloir supprimer cette zone ?')) {
+                fetch(`/api/zones/${zoneId}`, {
+                    method: 'DELETE'
+                })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.error) {
+                        alert('Erreur: ' + data.error);
+                    } else {
+                        alert('Zone supprimée avec succès!');
+                        updateZonesList();
+                        loadZones(); // Recharger les zones dans les selects
+                    }
+                })
+                .catch(error => {
+                    alert('Erreur lors de la suppression de la zone: ' + error);
+                });
+            }
         }
 
         // Mise à jour périodique des données

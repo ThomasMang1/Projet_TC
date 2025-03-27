@@ -62,16 +62,32 @@ def create_plante():
     data = request.get_json()
     
     # Vérification des données requises
-    if not all(k in data for k in ['nom', 'humidite_min', 'humidite_max']):
-        return jsonify({'error': 'Données manquantes'}), 400
+    if not all(k in data for k in ['nom', 'humidite_min', 'humidite_max', 'zone_id']):
+        return jsonify({'error': 'Données manquantes. La zone est obligatoire.'}), 400
+    
+    # Validation des contraintes d'humidité
+    humidite_min = float(data['humidite_min'])
+    humidite_max = float(data['humidite_max'])
+    
+    if humidite_min < 0:
+        return jsonify({'error': 'L\'humidité minimale doit être positive'}), 400
+    if humidite_max > 100:
+        return jsonify({'error': 'L\'humidité maximale ne peut pas dépasser 100%'}), 400
+    if humidite_min >= humidite_max:
+        return jsonify({'error': 'L\'humidité minimale doit être inférieure à l\'humidité maximale'}), 400
+    
+    # Vérification que la zone existe
+    zone = Zone.query.get(data['zone_id'])
+    if not zone:
+        return jsonify({'error': 'Zone non trouvée'}), 404
     
     # Création de la nouvelle plante
     nouvelle_plante = Plante(
         nom=data['nom'],
-        humidite_min=data['humidite_min'],
-        humidite_max=data['humidite_max'],
+        humidite_min=humidite_min,
+        humidite_max=humidite_max,
         description=data.get('description'),
-        zone_id=data.get('zone_id'),
+        zone_id=data['zone_id'],
         qr_code=data.get('qr_code')
     )
     
@@ -95,10 +111,24 @@ def update_plante(plante_id):
     try:
         if 'nom' in data:
             plante.nom = data['nom']
+        
+        # Validation des contraintes d'humidité si modifiées
         if 'humidite_min' in data:
-            plante.humidite_min = data['humidite_min']
+            humidite_min = float(data['humidite_min'])
+            if humidite_min < 0:
+                return jsonify({'error': 'L\'humidité minimale doit être positive'}), 400
+            if humidite_min >= plante.humidite_max:
+                return jsonify({'error': 'L\'humidité minimale doit être inférieure à l\'humidité maximale'}), 400
+            plante.humidite_min = humidite_min
+            
         if 'humidite_max' in data:
-            plante.humidite_max = data['humidite_max']
+            humidite_max = float(data['humidite_max'])
+            if humidite_max > 100:
+                return jsonify({'error': 'L\'humidité maximale ne peut pas dépasser 100%'}), 400
+            if humidite_max <= plante.humidite_min:
+                return jsonify({'error': 'L\'humidité maximale doit être supérieure à l\'humidité minimale'}), 400
+            plante.humidite_max = humidite_max
+            
         if 'description' in data:
             plante.description = data['description']
         if 'zone_id' in data:
@@ -139,6 +169,82 @@ def get_plante(plante_id):
         'description': plante.description,
         'zone_id': plante.zone_id,
         'qr_code': plante.qr_code
+    })
+
+@app.route('/api/zones', methods=['POST'])
+def create_zone():
+    data = request.get_json()
+    
+    if not all(k in data for k in ['nom']):
+        return jsonify({'error': 'Le nom de la zone est obligatoire'}), 400
+    
+    nouvelle_zone = Zone(
+        nom=data['nom'],
+        humidite_actuelle=data.get('humidite_actuelle', 0)
+    )
+    
+    try:
+        db.session.add(nouvelle_zone)
+        db.session.commit()
+        return jsonify({
+            'id': nouvelle_zone.id,
+            'nom': nouvelle_zone.nom,
+            'message': 'Zone créée avec succès'
+        }), 201
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/api/zones/<int:zone_id>', methods=['PUT'])
+def update_zone(zone_id):
+    zone = Zone.query.get_or_404(zone_id)
+    data = request.get_json()
+    
+    try:
+        if 'nom' in data:
+            zone.nom = data['nom']
+        if 'humidite_actuelle' in data:
+            zone.humidite_actuelle = data['humidite_actuelle']
+            
+        db.session.commit()
+        return jsonify({
+            'id': zone.id,
+            'nom': zone.nom,
+            'message': 'Zone mise à jour avec succès'
+        })
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/api/zones/<int:zone_id>', methods=['DELETE'])
+def delete_zone(zone_id):
+    zone = Zone.query.get_or_404(zone_id)
+    
+    # Vérifier si la zone contient des plantes
+    if zone.plantes:
+        return jsonify({'error': 'Impossible de supprimer une zone contenant des plantes'}), 400
+    
+    try:
+        db.session.delete(zone)
+        db.session.commit()
+        return jsonify({'message': 'Zone supprimée avec succès'})
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/api/zones/<int:zone_id>', methods=['GET'])
+def get_zone(zone_id):
+    zone = Zone.query.get_or_404(zone_id)
+    return jsonify({
+        'id': zone.id,
+        'nom': zone.nom,
+        'humidite_actuelle': zone.humidite_actuelle,
+        'plantes': [{
+            'id': p.id,
+            'nom': p.nom,
+            'humidite_min': p.humidite_min,
+            'humidite_max': p.humidite_max
+        } for p in zone.plantes]
     })
 
 if __name__ == '__main__':
