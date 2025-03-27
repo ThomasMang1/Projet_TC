@@ -10,7 +10,13 @@ load_dotenv()
 app = Flask(__name__)
 
 # Configuration PostgreSQL
-app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL', 'postgresql://irrigo_user:irrigo_password@localhost:5432/irrigo_db')
+app.config['SQLALCHEMY_DATABASE_URI'] = (
+    f"postgresql://{os.getenv('DB_USER', 'irrigo_user')}:"
+    f"{os.getenv('DB_PASSWORD', 'irrigo_password')}@"
+    f"{os.getenv('DB_HOST', 'host.docker.internal')}:"
+    f"{os.getenv('DB_PORT', '5432')}/"
+    f"{os.getenv('DB_NAME', 'irrigo_db')}"
+)
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db.init_app(app)
 
