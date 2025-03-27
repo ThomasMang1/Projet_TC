@@ -1,6 +1,7 @@
 from flask_sqlalchemy import SQLAlchemy
 from datetime import datetime, timezone
 
+# Initialisation de la base de données (SQLite)
 db = SQLAlchemy()
 
 class Plante(db.Model):
