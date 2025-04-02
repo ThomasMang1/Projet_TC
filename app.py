@@ -1,7 +1,9 @@
-from flask import Flask, render_template, jsonify, request
+from flask import Flask, render_template, jsonify, request, send_file
 from models import db, Plante, Zone, Arrosage, Robot
 from datetime import datetime
 import os
+import csv
+import io
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///irrigo.db'
@@ -246,6 +248,51 @@ def get_zone(zone_id):
             'humidite_max': p.humidite_max
         } for p in zone.plantes]
     })
+
+@app.route('/api/plantes/export', methods=['GET'])
+def export_plantes():
+    # Créer un buffer en mémoire pour le fichier CSV
+    si = io.StringIO()
+    writer = csv.writer(si, delimiter=';', quotechar='"', quoting=csv.QUOTE_MINIMAL)
+    
+    # Écrire l'en-tête avec les colonnes
+    writer.writerow([
+        'ID',
+        'Nom de la plante',
+        'Humidité minimale (%)',
+        'Humidité maximale (%)',
+        'Description',
+        'Zone',
+        'Date de plantation',
+        'QR Code'
+    ])
+    
+    # Récupérer toutes les plantes
+    plantes = Plante.query.all()
+    
+    # Écrire les données
+    for plante in plantes:
+        writer.writerow([
+            str(plante.id),
+            plante.nom,
+            str(plante.humidite_min),
+            str(plante.humidite_max),
+            plante.description or '',
+            plante.zone.nom if plante.zone else 'Non assignée',
+            plante.date_plantation.strftime('%Y-%m-%d %H:%M:%S'),
+            plante.qr_code or ''
+        ])
+    
+    # Créer la réponse
+    output = si.getvalue()
+    si.close()
+    
+    return send_file(
+        io.BytesIO(output.encode('utf-8-sig')),  # Utiliser utf-8-sig pour Excel
+        mimetype='text/csv',
+        as_attachment=True,
+        download_name=f'plantes_export_{datetime.now().strftime("%Y%m%d_%H%M%S")}.csv'
+    )
 
 if __name__ == '__main__':
     with app.app_context():

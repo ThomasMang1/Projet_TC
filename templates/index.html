@@ -98,9 +98,14 @@
                     <div class="card-body">
                         <div class="d-flex justify-content-between align-items-center mb-3">
                             <h5 class="card-title"><i class='bx bx-leaf'></i> Plantes</h5>
-                            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addPlantModal">
-                                <i class='bx bx-plus'></i> Ajouter une plante
-                            </button>
+                            <div>
+                                <button class="btn btn-success me-2" onclick="exportPlantes()">
+                                    <i class='bx bx-export'></i> Exporter
+                                </button>
+                                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addPlantModal">
+                                    <i class='bx bx-plus'></i> Ajouter une plante
+                                </button>
+                            </div>
                         </div>
                         <div id="plants-list"></div>
                     </div>
@@ -555,6 +560,11 @@
                     alert('Erreur lors de la suppression de la zone: ' + error);
                 });
             }
+        }
+
+        // Fonction pour exporter les plantes
+        function exportPlantes() {
+            window.location.href = '/api/plantes/export';
         }
 
         // Mise à jour périodique des données
