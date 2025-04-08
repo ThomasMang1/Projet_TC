@@ -4,6 +4,7 @@ from datetime import datetime
 import os
 import csv
 import io
+import logging
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///irrigo.db'
@@ -293,6 +294,54 @@ def export_plantes():
         as_attachment=True,
         download_name=f'plantes_export_{datetime.now().strftime("%Y%m%d_%H%M%S")}.csv'
     )
+
+@app.route('/api/data', methods=['POST'])
+def receive_data():
+    """Reçoit les données du robot via UART et met à jour la base de données"""
+    try:
+        data = request.get_json()
+        
+        # Vérifier que toutes les données requises sont présentes
+        required_fields = ['temperature', 'humidity', 'battery', 'water_level']
+        if not all(field in data for field in required_fields):
+            return jsonify({"status": "error", "message": "Données incomplètes"}), 400
+        
+        # Récupérer le robot (on suppose qu'il n'y en a qu'un pour l'instant)
+        robot = Robot.query.first()
+        if not robot:
+            # Créer un robot s'il n'existe pas
+            robot = Robot(
+                nom="Robot Principal",
+                niveau_batterie=data['battery'],
+                niveau_eau=data['water_level'],
+                position_x=0,
+                position_y=0,
+                etat="en_attente"
+            )
+            db.session.add(robot)
+        else:
+            # Mettre à jour les données du robot
+            robot.niveau_batterie = data['battery']
+            robot.niveau_eau = data['water_level']
+            robot.derniere_mise_a_jour = datetime.now()
+        
+        # Mettre à jour l'humidité des zones
+        zones = Zone.query.all()
+        for zone in zones:
+            # Pour l'exemple, on met à jour toutes les zones avec la même humidité
+            # Dans un cas réel, il faudrait identifier la zone concernée
+            zone.humidite_actuelle = data['humidity']
+            zone.derniere_mesure = datetime.now()
+        
+        # Enregistrer les modifications
+        db.session.commit()
+        
+        return jsonify({"status": "ok", "message": "Données reçues et traitées"})
+        
+    except Exception as e:
+        db.session.rollback()
+        logging.error(f"Erreur lors du traitement des données: {e}")
+        return jsonify({"status": "error", "message": str(e)}), 500
 
 if __name__ == '__main__':
     with app.app_context():
