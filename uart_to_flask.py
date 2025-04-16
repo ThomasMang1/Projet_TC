@@ -22,7 +22,7 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 # Configuration
-SERIAL_PORT = os.environ.get('SERIAL_PORT', '/dev/ttyUSB0')  # Port série par défaut
+SERIAL_PORT = os.environ.get('SERIAL_PORT', 'COM3')  # Port série par défaut
 BAUD_RATE = int(os.environ.get('BAUD_RATE', '9600'))  # Vitesse de communication
 API_URL = os.environ.get('API_URL', 'http://localhost:5000')  # URL de l'API
 RETRY_INTERVAL = int(os.environ.get('RETRY_INTERVAL', '10'))  # Intervalle entre les tentatives en secondes

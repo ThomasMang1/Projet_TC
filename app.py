@@ -1,10 +1,15 @@
 from flask import Flask, render_template, jsonify, request, send_file
 from models import db, Plante, Zone, Arrosage, Robot
 from datetime import datetime
-import os
 import csv
 import io
 import logging
+
+import os
+for k, v in os.environ.items():
+    if 'é' in v:
+        print(f"Variable suspecte : {k} = {v}")
+
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://irrigo_user:irrigo_password@localhost:5432/irrigo_db'
