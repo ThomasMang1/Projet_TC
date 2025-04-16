@@ -7,7 +7,7 @@ import io
 import logging
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///irrigo.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://irrigo_user:irrigo_password@localhost:5432/irrigo_db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db.init_app(app)
 
