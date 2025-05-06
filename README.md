@@ -24,11 +24,7 @@ git clone [URL_DU_REPO]
 cd irrigo
 ```
 
-2. Créer un environnement virtuel :
-```bash
-python -m venv venv
-source venv/bin/activate  # Sur Windows : venv\Scripts\activate
-```
+2. Initialiser et lancer le conteneur docker (avec le docker-compose) :
 
 3. Installer les dépendances :
 ```bash
@@ -62,17 +58,8 @@ python app.py
 - `GET /api/arrosages` : Historique des arrosages
 
 ## Technologies Utilisées
+- HTML/CSS
 - Python 3.8+
 - Flask
 - SQLAlchemy
-- Bootstrap 5
-- Chart.js
-- Boxicons
-
-## Contribution
-Les contributions sont les bienvenues ! N'hésitez pas à :
-1. Fork le projet
-2. Créer une branche pour votre fonctionnalité
-3. Commiter vos changements
-4. Pousser vers la branche
-5. Ouvrir une Pull Request
+- PostgreSQL
