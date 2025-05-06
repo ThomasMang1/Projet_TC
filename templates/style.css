@@ -1,0 +1,15 @@
+.card {
+    border-radius: 15px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-bottom: 20px;
+}
+
+.status-card {
+    background: linear-gradient(135deg, #00b4db, #0083B0);
+    color: white;
+}
+
+.chart-container {
+    height: 300px;
+    margin-bottom: 20px;
+} 
