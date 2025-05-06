@@ -3,7 +3,13 @@ from models import db, Plante, Zone, Arrosage, Robot
 from datetime import datetime
 import csv
 import io
+import os
 import logging
+from models import DatasetData
+from meteomatics.api import query_time_series
+from datetime import datetime
+import requests
+
 
 
 app = Flask(__name__)
@@ -15,6 +21,7 @@ db.init_app(app)
 def index():
     return render_template('index.html')
 
+
 @app.route('/api/plantes', methods=['GET'])
 def get_plantes():
     plantes = Plante.query.all()
@@ -25,6 +32,7 @@ def get_plantes():
         'humidite_max': p.humidite_max,
         'zone': p.zone.nom if p.zone else None
     } for p in plantes])
+
 
 @app.route('/api/robot/status', methods=['GET'])
 def get_robot_status():
@@ -342,8 +350,65 @@ def receive_data():
         db.session.rollback()
         logging.error(f"Erreur lors du traitement des données: {e}")
         return jsonify({"status": "error", "message": str(e)}), 500
+    
+
+
+
+@app.route('/api/meteo', methods=['GET'])
+def get_meteo():
+    try:
+        # Récupération des paramètres lat et lon depuis l'URL
+        lat = float(request.args.get('lat', 43.6045))  # Coordonnée par défaut : Toulouse, France
+        lon = float(request.args.get('lon', 1.4442))
+
+        api_key = "faac6c1944bff8f1353c89e2b45b646d"  # Remplacez par votre clé API
+
+        # Vérification que la clé API existe
+        if not api_key:
+            return jsonify({'error': 'API key missing or invalid.'}), 400
+
+        # Construction de l'URL de l'API OpenWeatherMap
+        url = f'https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid={api_key}&units=metric'
+    
+
+        # Envoi de la requête GET
+        response = requests.get(url)
+        data = response.json()
+
+        if response.status_code != 200:
+            raise Exception(f"Erreur API: {data.get('message', 'Erreur inconnue')}")
+
+        # Traitement de la réponse
+        # OpenWeatherMap renvoie des informations sous une structure différente
+        # Extraction des données principales
+        main = data.get('main', {})
+        weather = data.get('weather', [{}])[0]  # La liste "weather" contient un dictionnaire avec les informations météo
+
+        # Si les données principales ne sont pas disponibles
+        if not main or not weather:
+            return jsonify({'error': 'Aucune donnée météo disponible pour cette localisation'}), 404
+
+        # Création de la réponse avec les données extraites
+        result = {
+            'heure': datetime.utcfromtimestamp(data['dt']).isoformat(),  # Heure de la prévision en UTC
+            'temperature_C': main.get('temp', 'Non disponible'),  # Température en Celsius
+            'precipitations_mm': data.get('rain', {}).get('1h', 0),  # Précipitations sur la dernière heure (s'il y en a)
+            'description': weather.get('description', 'Non disponible'),  # Description des conditions météorologiques (par ex. 'clair')
+            'pluie': data.get('rain', {}).get('1h', 0),
+            'humidity': main.get('humidity', 'Non disponible'),
+            'wind_speed': data.get('wind', {}).get('speed', 'Non disponible')
+        }
+
+        return jsonify(result)
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+
 
 if __name__ == '__main__':
     with app.app_context():
         db.create_all()
     app.run(debug=True)
+
+    

@@ -15,6 +15,16 @@ class Plante(db.Model):
     zone_id = db.Column(db.Integer, db.ForeignKey('zone.id'))
     arrosages = db.relationship('Arrosage', backref='plante', lazy=True)
 
+class DatasetData(db.Model):
+    __tablename__ = 'dataset_data'
+
+    id = db.Column(db.Integer, primary_key=True)
+    nom = db.Column(db.String)  # ou db.String(255) selon la définition
+    humidite_min = db.Column(db.Float)
+    humidite_max = db.Column(db.Float)
+    # ajoute les autres colonnes si besoin
+
+
 class Zone(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     nom = db.Column(db.String(100), nullable=False)

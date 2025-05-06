@@ -16,3 +16,16 @@
 2025-04-16 09:33:51,120 - ERROR - Erreur de connexion (tentative 2/3): HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /api/data (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000016B42184B90>: Failed to establish a new connection: [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée'))
 2025-04-16 09:33:57,178 - ERROR - Erreur de connexion (tentative 3/3): HTTPConnectionPool(host='localhost', port=5000): Max retries exceeded with url: /api/data (Caused by NewConnectionError('<urllib3.connection.HTTPConnection object at 0x0000016B42186E10>: Failed to establish a new connection: [WinError 10061] Aucune connexion n’a pu être établie car l’ordinateur cible l’a expressément refusée'))
 2025-04-16 09:34:01,416 - INFO - Arrêt du programme par l'utilisateur
+2025-04-16 08:03:07,112 - INFO - Démarrage du bridge UART vers API sur COM3 à 9600 bauds
+2025-04-16 08:03:07,802 - INFO - Reçu du robot: T=40;H=78;BATT=128;WATER=180
+2025-04-16 08:03:11,943 - INFO - Arrêt du programme par l'utilisateur
+2025-04-16 08:05:23,208 - INFO - Démarrage du bridge UART vers API sur COM3 à 9600 bauds
+2025-04-16 08:05:34,238 - INFO - Reçu du robot: T=40;H=78;BATT=128;WATER=180
+2025-04-16 08:05:36,330 - INFO - Données envoyées avec succès: {'temperature': 40.0, 'humidity': 78.0, 'battery': 128.0, 'water_level': 180.0, 'timestamp': '2025-04-16T08:05:34.238986'}
+2025-04-16 08:05:46,338 - INFO - Reçu du robot: T=40;H=78;BATT=128;WATER=180
+2025-04-16 08:05:48,420 - INFO - Données envoyées avec succès: {'temperature': 40.0, 'humidity': 78.0, 'battery': 128.0, 'water_level': 180.0, 'timestamp': '2025-04-16T08:05:46.338591'}
+2025-04-16 08:05:58,427 - INFO - Reçu du robot: T=40;H=78;BATT=128;WATER=180
+2025-04-16 08:06:00,510 - INFO - Données envoyées avec succès: {'temperature': 40.0, 'humidity': 78.0, 'battery': 128.0, 'water_level': 180.0, 'timestamp': '2025-04-16T08:05:58.427396'}
+2025-04-16 08:06:10,511 - INFO - Reçu du robot: T=40;H=78;BATT=128;WATER=180
+2025-04-16 08:06:12,599 - INFO - Données envoyées avec succès: {'temperature': 40.0, 'humidity': 78.0, 'battery': 128.0, 'water_level': 180.0, 'timestamp': '2025-04-16T08:06:10.511932'}
+2025-04-16 08:06:21,868 - INFO - Arrêt du programme par l'utilisateur

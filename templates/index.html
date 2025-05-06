@@ -83,12 +83,15 @@
                         <h5 class="card-title"><i class='bx bx-sun'></i> Météo</h5>
                         <div id="weather-info">
                             <p>Température: <span id="temperature">--</span>°C</p>
-                            <p>Humidité: <span id="humidity">--</span>%</p>
                             <p>Prévisions: <span id="forecast">--</span></p>
+                            <p>Humidité: <span id="humidity">--</span></p>
+                            <p>Vitesse du vent: <span id="wind">--</span></p>
+
                         </div>
                     </div>
                 </div>
             </div>
+
         </div>
 
         <div class="row mt-4">
@@ -390,6 +393,33 @@
                     });
                 });
         }
+
+       
+        // Fonction pour récupérer les données météo et les afficher
+        async function fetchWeather() {
+            try {
+                const response = await fetch('/api/meteo?lat=43.6045&lon=1.4442');  // Toulouse par défaut
+                const data = await response.json(); 
+
+                if (response.ok) {
+                    document.getElementById('temperature').textContent = data.temperature_C;
+                    document.getElementById('forecast').textContent = data.description;
+                    document.getElementById('humidity').textContent = data.humidity + '%'; // Si tu veux l'humidité, il faut la rajouter côté API
+                    document.getElementById('wind').textContent = data.wind_speed + ' m/s';
+                } else {
+                    console.error('Erreur API:', data.error);
+                    document.getElementById('weather-info').innerHTML = '<p>Erreur lors de la récupération de la météo</p>';
+                }
+            } catch (error) {
+                console.error('Erreur fetch:', error);
+                document.getElementById('weather-info').innerHTML = '<p>Erreur de chargement des données météo</p>';
+            }
+        }
+
+        // Appelle la fonction au chargement de la page
+        window.addEventListener('DOMContentLoaded', fetchWeather);
+   
+
 
         // Fonction pour supprimer une plante
         function deletePlant(planteId) {
