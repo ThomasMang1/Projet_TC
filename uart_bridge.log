@@ -51,3 +51,4 @@
 2025-05-07 09:33:57,001 - ERROR - Erreur de communication série: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
 2025-05-07 09:34:27,003 - ERROR - Erreur de communication série: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
 2025-05-07 09:34:57,005 - ERROR - Erreur de communication série: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-07 09:35:27,012 - ERROR - Erreur de communication série: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
