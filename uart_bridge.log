@@ -29,3 +29,5 @@
 2025-04-16 08:06:10,511 - INFO - Reçu du robot: T=40;H=78;BATT=128;WATER=180
 2025-04-16 08:06:12,599 - INFO - Données envoyées avec succès: {'temperature': 40.0, 'humidity': 78.0, 'battery': 128.0, 'water_level': 180.0, 'timestamp': '2025-04-16T08:06:10.511932'}
 2025-04-16 08:06:21,868 - INFO - Arrêt du programme par l'utilisateur
+2025-05-07 09:10:39,097 - INFO - DÃ©marrage du bridge UART vers API sur COM3 Ã  9600 bauds
+2025-05-07 09:10:39,098 - ERROR - Impossible d'ouvrir le port sÃ©rie COM3: could not open port 'COM3': FileNotFoundError(2, 'Le fichier spÃ©cifiÃ© est introuvable.', None, 2)

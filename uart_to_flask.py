@@ -29,7 +29,7 @@ RETRY_INTERVAL = int(os.environ.get('RETRY_INTERVAL', '10'))  # Intervalle entre
 MAX_RETRIES = int(os.environ.get('MAX_RETRIES', '3'))  # Nombre maximum de tentatives en cas d'échec
 
 def parse_data(data_string):
-    """Parse les données reçues du robot au format T=22.4;H=51.0;BATT=83.2;WATER=15.0"""
+    """Parse les données reçues du robot au format exemple T=22.4;H=51.0;BATT=83.2;WATER=15.0"""
     try:
         # Utiliser une expression régulière pour extraire les valeurs
         pattern = r'([A-Z]+)=([0-9.]+)'
@@ -110,11 +110,11 @@ def main():
             # Lire une ligne du port série
             line = ser.readline().decode().strip()
             
-            if line:
+            if line and line.startswith("$$$"):
                 logger.info(f"Reçu du robot: {line}")
                 
-                # Parser les données
-                parsed_data = parse_data(line)
+                # Parser les données (en retirant le préfixe "$$$")
+                parsed_data = parse_data(line[3:])
                 
                 if parsed_data:
                     # Envoyer à l'API
