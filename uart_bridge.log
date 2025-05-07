@@ -31,3 +31,23 @@
 2025-04-16 08:06:21,868 - INFO - Arr�t du programme par l'utilisateur
 2025-05-07 09:10:39,097 - INFO - Démarrage du bridge UART vers API sur COM3 à 9600 bauds
 2025-05-07 09:10:39,098 - ERROR - Impossible d'ouvrir le port série COM3: could not open port 'COM3': FileNotFoundError(2, 'Le fichier spécifié est introuvable.', None, 2)
+2025-05-07 09:27:56,092 - INFO - Démarrage du bridge UART vers API sur COM3 à 9600 bauds
+2025-05-07 09:28:36,537 - ERROR - Erreur inattendue: 'utf-8' codec can't decode byte 0x81 in position 0: invalid start byte
+2025-05-07 09:28:46,541 - ERROR - Erreur de communication série: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-07 09:29:16,632 - ERROR - Erreur de communication série: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-07 09:29:23,606 - INFO - Arrêt du programme par l'utilisateur
+2025-05-07 09:29:38,827 - INFO - Démarrage du bridge UART vers API sur COM3 à 9600 bauds
+2025-05-07 09:30:07,740 - ERROR - Erreur inattendue: 'utf-8' codec can't decode byte 0x81 in position 0: invalid start byte
+2025-05-07 09:30:17,743 - ERROR - Erreur de communication série: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-07 09:30:22,572 - INFO - Arrêt du programme par l'utilisateur
+2025-05-07 09:30:26,299 - INFO - Démarrage du bridge UART vers API sur COM3 à 9600 bauds
+2025-05-07 09:30:46,988 - ERROR - Erreur inattendue: 'utf-8' codec can't decode byte 0x81 in position 0: invalid start byte
+2025-05-07 09:30:56,991 - ERROR - Erreur de communication série: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-07 09:31:26,993 - ERROR - Erreur de communication série: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-07 09:31:56,994 - ERROR - Erreur de communication série: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-07 09:32:26,996 - ERROR - Erreur de communication série: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-07 09:32:56,998 - ERROR - Erreur de communication série: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-07 09:33:27,000 - ERROR - Erreur de communication série: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-07 09:33:57,001 - ERROR - Erreur de communication série: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-07 09:34:27,003 - ERROR - Erreur de communication série: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-07 09:34:57,005 - ERROR - Erreur de communication série: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))

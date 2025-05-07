@@ -29,7 +29,7 @@ RETRY_INTERVAL = int(os.environ.get('RETRY_INTERVAL', '10'))  # Intervalle entre
 MAX_RETRIES = int(os.environ.get('MAX_RETRIES', '3'))  # Nombre maximum de tentatives en cas d'échec
 
 def parse_data(data_string):
-    """Parse les données reçues du robot au format exemple T=22.4;H=51.0;BATT=83.2;WATER=15.0"""
+    """Parse les données reçues du robot au format exemple $$$T=22.4;H=51.0;BATT=83.2;WATER=15.0"""
     try:
         # Utiliser une expression régulière pour extraire les valeurs
         pattern = r'([A-Z]+)=([0-9.]+)'
@@ -119,6 +119,7 @@ def main():
                 if parsed_data:
                     # Envoyer à l'API
                     send_to_api(parsed_data)
+                    print("ça marche")
             
             # Attendre avant la prochaine lecture
             time.sleep(RETRY_INTERVAL)
