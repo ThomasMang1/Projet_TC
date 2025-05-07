@@ -6,8 +6,6 @@ import io
 import os
 import logging
 from models import DatasetData
-from meteomatics.api import query_time_series
-from datetime import datetime
 import requests
 
 
