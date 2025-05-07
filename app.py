@@ -1,14 +1,14 @@
 from flask import Flask, render_template, jsonify, request, send_file
 from models import db, Plante, Zone, Arrosage, Robot
-from datetime import datetime
+from datetime import datetime, timezone, timedelta
 import csv
 import io
 import os
 import logging
 from models import DatasetData
 from meteomatics.api import query_time_series
-from datetime import datetime
 import requests
+from sqlalchemy import func
 
 
 
@@ -404,11 +404,46 @@ def get_meteo():
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
+@app.route('/api/consommation-eau', methods=['GET'])
+def get_consommation_eau():
+    try:
+        # Récupérer la date d'il y a 7 jours
+        date_limite = datetime.now(timezone.utc) - timedelta(days=7)
+        
+        # Requête pour obtenir la somme de l'eau consommée par jour
+        resultats = db.session.query(
+            func.date(Arrosage.date).label('date'),
+            func.sum(Arrosage.quantite_eau).label('total_eau')
+        ).filter(
+            Arrosage.date >= date_limite
+        ).group_by(
+            func.date(Arrosage.date)
+        ).all()
+        
+        # Créer un dictionnaire avec toutes les dates des 7 derniers jours
+        dates = {}
+        for i in range(7):
+            date = (datetime.now(timezone.utc) - timedelta(days=i)).date()
+            dates[date.isoformat()] = 0
+        
+        # Remplir avec les données de la base
+        for date, total in resultats:
+            dates[date.isoformat()] = float(total)
+        
+        # Convertir en liste triée par date
+        consommation = [
+            {'date': date, 'total_eau': total}
+            for date, total in sorted(dates.items())
+        ]
+        
+        return jsonify(consommation)
+        
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
 
 
 if __name__ == '__main__':
     with app.app_context():
         db.create_all()
     app.run(debug=True)
-
-    
