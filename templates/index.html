@@ -116,6 +116,59 @@
                 </div>
             </div>
 
+            <!-- Modal pour ajouter une plante -->
+    <div class="modal fade" id="addPlantModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Ajouter une plante</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="addPlantForm">
+                    <h2>Sélectionnez une plante</h2>
+                <label for="plantSelect">Nom de la plante</label>
+                <select id="plantSelect" onchange="showPlantInfo()">
+                    <option value="" selected disabled>Choisir une plante...</option>
+                </select>
+
+                <div id="plantInfo" style="display:none;">
+                    <h3>Détails de la plante</h3>
+                    <p><strong>Humidité Min :</strong> <span id="humidityMin">-</span>%</p>
+                    <p><strong>Humidité Max :</strong> <span id="humidityMax">-</span>%</p>
+                    <p><strong>Zone :</strong> <span id="zone">-</span></p>
+                </div>
+
+                <!-- Liste des plantes en cartes -->
+                <div id="plants-list"></div>
+
+
+                    <div id="plantInfo" style="display:none;">
+                        <h3>Détails de la plante</h3>
+                        <p><strong>Humidité Min :</strong> <span id="humidityMin">-</span>%</p>
+                        <p><strong>Humidité Max :</strong> <span id="humidityMax">-</span>%</p>
+                        <p><strong>Zone :</strong> <span id="zone">-</span></p>
+                    </div>
+
+                        <div class="mb-3">
+                            <label for="humiditeMin" class="form-label">Humidité minimale</label>
+                            <input type="number" class="form-control" id="humiditeMin" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="humiditeMax" class="form-label">Humidité maximale</label>
+                            <input type="number" class="form-control" id="humiditeMax" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="zone" class="form-label">Zone</label>
+                            <input type="text" class="form-control" id="zone">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Ajouter</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
             <!-- Zones -->
             <div class="col-md-6">
                 <div class="card">
@@ -144,27 +197,28 @@
                 <div class="modal-body">
                     <form id="addPlantForm">
                         <div class="mb-3">
-                            <label for="plantName" class="form-label">Nom de la plante</label>
-                            <input type="text" class="form-control" id="plantName" required>
+                        <label for="plantSelect" class="form-label">Nom de la plante</label>
+                        <select id="plantSelect" class="form-select" onchange="showPlantInfo()">
+                            <option value="" selected disabled>Choisir une plante...</option>
+                        </select>
+                    </div>
+
+                    <!-- Informations sur la plante sélectionnée -->
+                    <div id="plantInfo" class="mt-3" style="display: none;">
+                        <div class="mb-3">
+                            <label for="humidityMin" class="form-label">Humidité Min</label>
+                            <input type="text" id="humidityMin" class="form-control" readonly>
                         </div>
                         <div class="mb-3">
-                            <label for="humidityMin" class="form-label">Humidité minimale (%)</label>
-                            <input type="number" class="form-control" id="humidityMin" required>
+                            <label for="humidityMax" class="form-label">Humidité Max</label>
+                            <input type="text" id="humidityMax" class="form-control" readonly>
                         </div>
                         <div class="mb-3">
-                            <label for="humidityMax" class="form-label">Humidité maximale (%)</label>
-                            <input type="number" class="form-control" id="humidityMax" required>
+                            <label for="zone" class="form-label">Zone</label>
+                            <input type="text" id="zone" class="form-control" readonly>
                         </div>
-                        <div class="mb-3">
-                            <label for="plantDescription" class="form-label">Description</label>
-                            <textarea class="form-control" id="plantDescription"></textarea>
-                        </div>
-                        <div class="mb-3">
-                            <label for="plantZone" class="form-label">Zone</label>
-                            <select class="form-control" id="plantZone">
-                                <option value="">Sélectionner une zone</option>
-                            </select>
-                        </div>
+                    </div>
+
                     </form>
                 </div>
                 <div class="modal-footer">
@@ -186,28 +240,40 @@
                 <div class="modal-body">
                     <form id="editPlantForm">
                         <input type="hidden" id="editPlantId">
+                        <!-- Formulaire pour ajouter une plante -->
                         <div class="mb-3">
-                            <label for="editPlantName" class="form-label">Nom de la plante</label>
-                            <input type="text" class="form-control" id="editPlantName" required>
+                            <label for="plantSelect" class="form-label">Nom de la plante</label>
+                            <select id="plantSelect" class="form-select">
+                                <option value="" selected disabled>Choisir une plante...</option>
+                                <!-- Les options seront chargées automatiquement par JavaScript -->
+                            </select>
                         </div>
+
+                       <div class="mb-3">
+                        <label for="plantSelect" class="form-label">Nom de la plante</label>
+                        <select id="plantSelect" class="form-select" onchange="showPlantInfo()">
+                            <option value="" selected disabled>Choisir une plante...</option>
+                        </select>
+                    </div>
+                    <div id="plantInfo" style="display:none;">
                         <div class="mb-3">
                             <label for="editHumidityMin" class="form-label">Humidité minimale (%)</label>
-                            <input type="number" class="form-control" id="editHumidityMin" required>
+                            <input type="number" class="form-control" id="editHumidityMin" readonly>
                         </div>
                         <div class="mb-3">
                             <label for="editHumidityMax" class="form-label">Humidité maximale (%)</label>
-                            <input type="number" class="form-control" id="editHumidityMax" required>
+                            <input type="number" class="form-control" id="editHumidityMax" readonly>
                         </div>
                         <div class="mb-3">
                             <label for="editPlantDescription" class="form-label">Description</label>
-                            <textarea class="form-control" id="editPlantDescription"></textarea>
+                            <textarea class="form-control" id="editPlantDescription" readonly></textarea>
                         </div>
                         <div class="mb-3">
                             <label for="editPlantZone" class="form-label">Zone</label>
-                            <select class="form-control" id="editPlantZone">
-                                <option value="">Sélectionner une zone</option>
-                            </select>
+                            <input class="form-control" id="editPlantZone" readonly>
                         </div>
+                    </div>
+
                     </form>
                 </div>
                 <div class="modal-footer">
@@ -609,5 +675,109 @@
         loadZones();
     </script>
     <script src="{{ url_for('static', filename='js/consommation-eau.js') }}"></script>
+
+
+    <script>
+    // Variable globale pour stocker les plantes
+    let plantesData = [];
+
+    // Charger les plantes au chargement de la page
+    document.addEventListener("DOMContentLoaded", () => {
+        loadPlants();
+        loadPlantsDropdown();
+    });
+
+    // ✅ Fonction pour charger les plantes dans la liste (cartes)
+    function loadPlants() {
+        fetch('/api/plantes')
+            .then(response => response.json())
+            .then(data => {
+                const plantsList = document.getElementById('plants-list');
+                plantsList.innerHTML = ''; // Vider la liste
+                data.forEach(plant => {
+                    plantsList.innerHTML += `
+                        <div class="card mb-2">
+                            <div class="card-body">
+                                <h6>${plant.nom}</h6>
+                                <p>Humidité: ${plant.humidite_min}% - ${plant.humidite_max}%</p>
+                                <p>Zone: ${plant.zone ? plant.zone : 'Aucune'}</p>
+                            </div>
+                        </div>
+                    `;
+                });
+            })
+            .catch(error => console.error("Erreur lors du chargement des plantes :", error));
+    }
+
+    // ✅ Fonction pour charger les plantes dans le dropdown (menu déroulant)
+    function loadPlantsDropdown() {
+        fetch('/api/plantes')
+            .then(response => response.json())
+            .then(data => {
+                plantesData = data; // Stocker les plantes pour utilisation ultérieure
+                const plantSelect = document.getElementById('plantSelect');
+                plantSelect.innerHTML = '<option value="" selected disabled>Choisir une plante...</option>';
+                
+                data.forEach(plant => {
+                    const option = document.createElement('option');
+                    option.value = plant.nom;
+                    option.textContent = plant.nom;
+                    plantSelect.appendChild(option);
+                });
+            })
+            .catch(error => console.error("Erreur lors du chargement des plantes :", error));
+    }
+
+    // ✅ Fonction pour afficher les informations de la plante sélectionnée
+    function showPlantInfo() {
+        const selectedPlant = document.getElementById('plantSelect').value;
+        const plantInfo = plantesData.find(plant => plant.nom === selectedPlant);
+
+        if (plantInfo) {
+            document.getElementById('humidityMin').textContent = plantInfo.humidite_min ?? 'Non défini';
+            document.getElementById('humidityMax').textContent = plantInfo.humidite_max ?? 'Non défini';
+            document.getElementById('zone').textContent = plantInfo.zone ?? 'Non définie';
+            document.getElementById('plantInfo').style.display = 'block';
+        } else {
+            document.getElementById('plantInfo').style.display = 'none';
+        }
+    }
+
+    // ✅ Fonction pour ajouter une nouvelle plante
+    document.getElementById('addPlantForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const plantName = document.getElementById('plantName').value;
+        const humiditeMin = document.getElementById('humiditeMin').value;
+        const humiditeMax = document.getElementById('humiditeMax').value;
+        const zone = document.getElementById('zone').value;
+
+        fetch('/api/plantes', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                nom: plantName,
+                humidite_min: humiditeMin,
+                humidite_max: humiditeMax,
+                zone: zone
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('addPlantForm').reset();
+            document.querySelector('#addPlantModal .btn-close').click();
+            loadPlants(); // Recharger la liste des plantes
+            loadPlantsDropdown(); // Recharger le menu déroulant
+        })
+        .catch(error => {
+            console.error("Erreur lors de l'ajout de la plante :", error);
+        });
+    });
+</script>
+
+
+
 </body>
 </html> 

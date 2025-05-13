@@ -9,29 +9,63 @@ from models import DatasetData
 from meteomatics.api import query_time_series
 import requests
 from sqlalchemy import func
-
-
+from flask import request
+from flask import Flask, render_template, jsonify, request
+from sqlalchemy import create_engine, text
+from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
+
+# Configuration de la base de données (PostgreSQL)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://irrigo_user:irrigo_password@localhost:5432/irrigo_db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-db.init_app(app)
 
+# Initialisation de SQLAlchemy
+db = SQLAlchemy(app)
+
+# Route principale
 @app.route('/')
 def index():
     return render_template('index.html')
 
-
+# Route API pour récupérer les plantes
 @app.route('/api/plantes', methods=['GET'])
 def get_plantes():
-    plantes = Plante.query.all()
-    return jsonify([{
-        'id': p.id,
-        'nom': p.nom,
-        'humidite_min': p.humidite_min,
-        'humidite_max': p.humidite_max,
-        'zone': p.zone.nom if p.zone else None
-    } for p in plantes])
+    result = db.session.execute(text("SELECT plantes, humidite_min, humidite_max, zone FROM tableau_plantes"))
+    plantes_disponibles = result.fetchall()
+    plantes = [{
+        'nom': p[0],
+        'humidite_min': p[1],
+        'humidite_max': p[2],
+        'zone': p[3]
+    } for p in plantes_disponibles]
+    return jsonify(plantes)
+
+# Route API pour ajouter une plante
+@app.route('/api/plantes', methods=['POST'])
+def add_plante():
+    data = request.get_json()
+    nom = data.get('nom')
+
+    # Vérifier si la plante existe dans tableau_plantes
+    plante_existante = result = db.session.execute(text("SELECT plantes, humidite_min, humidite_max FROM tableau_plantes"))
+
+    
+
+    if not plante_existante:
+        return jsonify({'error': 'Cette plante n\'existe pas dans la liste disponible.'}), 400
+
+    # Ajouter la plante sélectionnée dans la table Plante
+    new_plante = Plante(
+        nom=nom,
+        humidite_min=data.get('humidite_min'),
+        humidite_max=data.get('humidite_max'),
+        zone=data.get('zone')
+    )
+    db.session.add(new_plante)
+    db.session.commit()
+
+    return jsonify({'message': 'Plante ajoutée avec succès'}), 201
 
 
 @app.route('/api/robot/status', methods=['GET'])
