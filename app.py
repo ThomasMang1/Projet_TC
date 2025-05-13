@@ -475,7 +475,83 @@ def get_consommation_eau():
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
+@app.route('/api/check_plant', methods=['POST'])
+def check_plant():
+    """Vérifie si une plante correspond à la couleur détectée"""
+    try:
+        data = request.get_json()
+        
+        # Vérifier que les données de couleur sont présentes
+        if not all(k in data for k in ['r', 'g', 'b']):
+            return jsonify({'error': 'Données de couleur incomplètes'}), 400
+            
+        # Ici, vous devrez implémenter la logique pour vérifier si la couleur
+        # correspond à une plante dans votre base de données
+        # Pour l'exemple, nous retournons des valeurs fictives
+        is_plant = True  # À remplacer par votre logique
+        water_volume = 100  # Volume en ml
+        
+        return jsonify({
+            'is_plant': is_plant,
+            'water_volume': water_volume if is_plant else 0
+        })
+        
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
 
+@app.route('/api/robot/status', methods=['POST'])
+def update_robot_status():
+    """Met à jour le statut du robot"""
+    try:
+        data = request.get_json()
+        
+        # Récupérer le robot
+        robot = Robot.query.first()
+        if not robot:
+            robot = Robot(nom="Robot Principal")
+            db.session.add(robot)
+            
+        # Mettre à jour les données
+        if 'full_wt' in data:
+            robot.niveau_eau_max = data['full_wt']
+        if 'empty_wt' in data:
+            robot.niveau_eau_min = data['empty_wt']
+        if 'cur_wt' in data:
+            robot.niveau_eau = data['cur_wt']
+            
+        robot.derniere_mise_a_jour = datetime.now()
+        
+        db.session.commit()
+        return jsonify({'status': 'ok'})
+        
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/api/robot/humidity', methods=['POST'])
+def update_humidity():
+    """Met à jour les données d'humidité"""
+    try:
+        data = request.get_json()
+        
+        # Vérifier les données requises
+        required_fields = ['dry_val', 'wet_val', 'humidity']
+        if not all(field in data for field in required_fields):
+            return jsonify({'error': 'Données incomplètes'}), 400
+            
+        # Mettre à jour l'humidité de la zone actuelle
+        # Note: Dans un cas réel, vous devrez déterminer la zone actuelle
+        zones = Zone.query.all()
+        for zone in zones:
+            zone.humidite_actuelle = data['humidity']
+            zone.derniere_mesure = datetime.now()
+            
+        db.session.commit()
+        return jsonify({'status': 'ok'})
+        
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({'error': str(e)}), 500
 
 if __name__ == '__main__':
     with app.app_context():
