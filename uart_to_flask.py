@@ -9,6 +9,7 @@ import logging
 import sys
 import os
 from datetime import datetime
+from typing import Dict, Optional, Tuple
 
 # Configuration du logging
 logging.basicConfig(
@@ -22,123 +23,215 @@ logging.basicConfig(
 logger = logging.getLogger(__name__)
 
 # Configuration
-SERIAL_PORT = os.environ.get('SERIAL_PORT', 'COM3')  # Port série par défaut
-BAUD_RATE = int(os.environ.get('BAUD_RATE', '9600'))  # Vitesse de communication
-API_URL = os.environ.get('API_URL', 'http://localhost:5000')  # URL de l'API
-RETRY_INTERVAL = int(os.environ.get('RETRY_INTERVAL', '10'))  # Intervalle entre les tentatives en secondes
-MAX_RETRIES = int(os.environ.get('MAX_RETRIES', '3'))  # Nombre maximum de tentatives en cas d'échec
+SERIAL_PORT = os.environ.get('SERIAL_PORT', 'COM3')
+BAUD_RATE = int(os.environ.get('BAUD_RATE', '9600'))
+API_URL = os.environ.get('API_URL', 'http://localhost:5000')
+RETRY_INTERVAL = int(os.environ.get('RETRY_INTERVAL', '10'))
+MAX_RETRIES = int(os.environ.get('MAX_RETRIES', '3'))
+STATUS_INTERVAL = 10  # Intervalle d'envoi du status en secondes
 
-def parse_data(data_string):
-    """Parse les données reçues du robot au format exemple $$$T=22.4;H=51.0;BATT=83.2;WATER=15.0"""
-    try:
-        # Utiliser une expression régulière pour extraire les valeurs
-        pattern = r'([A-Z]+)=([0-9.]+)'
-        matches = re.findall(pattern, data_string)
-        
-        if not matches:
-            logger.warning(f"Format de données invalide: {data_string}")
-            return None
-            
-        # Convertir en dictionnaire
-        data = {}
-        for key, value in matches:
-            data[key] = float(value)
-            
-        # Vérifier que toutes les données attendues sont présentes
-        required_keys = ['T', 'H', 'BATT', 'WATER']
-        if not all(key in data for key in required_keys):
-            logger.warning(f"Données incomplètes: {data}")
-            return None
-            
-        return data
-    except Exception as e:
-        logger.error(f"Erreur lors du parsing des données: {e}")
-        return None
-
-def send_to_api(data):
-    """Envoie les données à l'API Flask"""
-    if not data:
-        return False
-        
-    # Préparer les données pour l'API
-    api_data = {
-        "temperature": data.get('T'),
-        "humidity": data.get('H'),
-        "battery": data.get('BATT'),
-        "water_level": data.get('WATER'),
-        "timestamp": datetime.now().isoformat()
-    }
+class RobotPacket:
+    """Classe pour gérer les paquets de communication avec le robot"""
     
-    # Tentatives d'envoi avec retry
-    for attempt in range(MAX_RETRIES):
+    @staticmethod
+    def parse_packet(data_string: str) -> Optional[Dict]:
+        """Parse un paquet reçu du robot"""
         try:
+            # Vérifier si le paquet est valide
+            if not (data_string.startswith('{') and data_string.endswith('}')):
+                return None
+                
+            # Extraire le type et les données
+            match = re.match(r'\{(\w+)\{(.*)\}\}', data_string)
+            if not match:
+                return None
+                
+            packet_type = match.group(1)
+            data_str = match.group(2)
+            
+            # Parser les données selon le type
+            if packet_type == 'colour':
+                data = json.loads(data_str)
+                return {'type': 'colour', 'data': data}
+                
+            elif packet_type == 'status':
+                data = json.loads(data_str)
+                return {'type': 'status', 'data': data}
+                
+            elif packet_type == 'acknowledge':
+                data = json.loads(data_str)
+                return {'type': 'acknowledge', 'data': data}
+                
+            elif packet_type == 'humidity':
+                data = json.loads(data_str)
+                return {'type': 'humidity', 'data': data}
+                
+            return None
+            
+        except Exception as e:
+            logger.error(f"Erreur lors du parsing du paquet: {e}")
+            return None
+    
+    @staticmethod
+    def create_water_cmd(val: bool, volume: float) -> str:
+        """Crée un paquet de commande d'arrosage"""
+        return json.dumps({
+            'water_cmd': {
+                'val': val,
+                'volume': volume
+            }
+        })
+    
+    @staticmethod
+    def create_config(val: str) -> str:
+        """Crée un paquet de configuration"""
+        if val not in ['stop', 'go', 'calibrate']:
+            raise ValueError("Valeur de configuration invalide")
+        return json.dumps({
+            'config': {
+                'val': val
+            }
+        })
+
+class RobotBridge:
+    """Classe principale pour gérer la communication avec le robot"""
+    
+    def __init__(self):
+        self.ser = None
+        self.last_status_time = 0
+        self.current_color = None
+        self.current_humidity = None
+        
+    def connect(self) -> bool:
+        """Établit la connexion série avec le robot"""
+        try:
+            self.ser = serial.Serial(SERIAL_PORT, BAUD_RATE, timeout=1)
+            logger.info(f"Connexion établie sur {SERIAL_PORT} à {BAUD_RATE} bauds")
+            return True
+        except serial.SerialException as e:
+            logger.error(f"Erreur de connexion série: {e}")
+            return False
+    
+    def send_packet(self, packet: str) -> bool:
+        """Envoie un paquet au robot"""
+        try:
+            if not self.ser:
+                return False
+            self.ser.write((packet + '\n').encode())
+            return True
+        except Exception as e:
+            logger.error(f"Erreur lors de l'envoi du paquet: {e}")
+            return False
+    
+    def check_plant_by_color(self, color: Dict) -> Tuple[bool, Optional[float]]:
+        """Vérifie si une plante correspond à la couleur détectée"""
+        try:
+            # Appel à l'API pour vérifier la plante
             response = requests.post(
-                f"{API_URL}/api/data", 
-                json=api_data,
+                f"{API_URL}/api/check_plant",
+                json={'color': color},
                 timeout=5
             )
             
             if response.status_code == 200:
-                logger.info(f"Données envoyées avec succès: {api_data}")
-                return True
-            else:
-                logger.warning(f"Erreur HTTP {response.status_code}: {response.text}")
-                
-        except requests.exceptions.RequestException as e:
-            logger.error(f"Erreur de connexion (tentative {attempt+1}/{MAX_RETRIES}): {e}")
-            
-        # Attendre avant de réessayer
-        if attempt < MAX_RETRIES - 1:
-            time.sleep(2)
-            
-    return False
-
-def main():
-    """Fonction principale"""
-    logger.info(f"Démarrage du bridge UART vers API sur {SERIAL_PORT} à {BAUD_RATE} bauds")
-    
-    # Configuration du port série
-    try:
-        ser = serial.Serial(SERIAL_PORT, BAUD_RATE, timeout=1)
-    except serial.SerialException as e:
-        logger.error(f"Impossible d'ouvrir le port série {SERIAL_PORT}: {e}")
-        return
-    
-    # Boucle principale
-    while True:
-        try:
-            # Lire une ligne du port série
-            line = ser.readline().decode().strip()
-            
-            if line and line.startswith("$$$"):
-                logger.info(f"Reçu du robot: {line}")
-                
-                # Parser les données (en retirant le préfixe "$$$")
-                parsed_data = parse_data(line[3:])
-                
-                if parsed_data:
-                    # Envoyer à l'API
-                    send_to_api(parsed_data)
-                    print("ça marche")
-            
-            # Attendre avant la prochaine lecture
-            time.sleep(RETRY_INTERVAL)
-            
-        except serial.SerialException as e:
-            logger.error(f"Erreur de communication série: {e}")
-            # Attendre plus longtemps en cas d'erreur
-            time.sleep(30)
+                data = response.json()
+                return data.get('is_plant', False), data.get('water_volume')
+            return False, None
             
         except Exception as e:
-            logger.error(f"Erreur inattendue: {e}")
-            time.sleep(10)
+            logger.error(f"Erreur lors de la vérification de la plante: {e}")
+            return False, None
     
-    # Fermer le port série (ne sera jamais atteint dans cette boucle infinie)
-    ser.close()
+    def handle_packet(self, packet: Dict) -> None:
+        """Gère un paquet reçu du robot"""
+        packet_type = packet['type']
+        data = packet['data']
+        
+        if packet_type == 'colour':
+            self.current_color = data
+            is_plant, water_volume = self.check_plant_by_color(data)
+            
+            if is_plant and water_volume:
+                # Envoyer la commande d'arrosage
+                water_cmd = RobotPacket.create_water_cmd(True, water_volume)
+                self.send_packet(water_cmd)
+            else:
+                # Envoyer une commande d'arrosage négative
+                water_cmd = RobotPacket.create_water_cmd(False, 0)
+                self.send_packet(water_cmd)
+                
+        elif packet_type == 'status':
+            # Envoyer le status à l'API
+            try:
+                response = requests.post(
+                    f"{API_URL}/api/robot/status",
+                    json=data,
+                    timeout=5
+                )
+                if response.status_code != 200:
+                    logger.warning(f"Erreur lors de l'envoi du status: {response.text}")
+            except Exception as e:
+                logger.error(f"Erreur lors de l'envoi du status: {e}")
+                
+        elif packet_type == 'humidity':
+            self.current_humidity = data
+            # Envoyer les données d'humidité à l'API
+            try:
+                response = requests.post(
+                    f"{API_URL}/api/robot/humidity",
+                    json=data,
+                    timeout=5
+                )
+                if response.status_code != 200:
+                    logger.warning(f"Erreur lors de l'envoi de l'humidité: {response.text}")
+            except Exception as e:
+                logger.error(f"Erreur lors de l'envoi de l'humidité: {e}")
+    
+    def run(self):
+        """Boucle principale de communication"""
+        if not self.connect():
+            return
+        
+        while True:
+            try:
+                # Lire une ligne du port série
+                line = self.ser.readline().decode().strip()
+                
+                if line:
+                    # Parser le paquet
+                    packet = RobotPacket.parse_packet(line)
+                    if packet:
+                        logger.info(f"Paquet reçu: {packet}")
+                        self.handle_packet(packet)
+                
+                # Vérifier si c'est le moment d'envoyer un status
+                current_time = time.time()
+                if current_time - self.last_status_time >= STATUS_INTERVAL:
+                    config = RobotPacket.create_config('go')
+                    self.send_packet(config)
+                    self.last_status_time = current_time
+                
+                # Petit délai pour éviter de surcharger le CPU
+                time.sleep(0.1)
+                
+            except serial.SerialException as e:
+                logger.error(f"Erreur de communication série: {e}")
+                time.sleep(5)
+                if not self.connect():
+                    return
+                    
+            except Exception as e:
+                logger.error(f"Erreur inattendue: {e}")
+                time.sleep(1)
+        
+        # Fermer le port série (ne sera jamais atteint dans cette boucle infinie)
+        if self.ser:
+            self.ser.close()
 
 if __name__ == "__main__":
     try:
-        main()
+        bridge = RobotBridge()
+        bridge.run()
     except KeyboardInterrupt:
         logger.info("Arrêt du programme par l'utilisateur")
     except Exception as e:
