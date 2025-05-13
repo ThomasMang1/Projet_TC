@@ -446,16 +446,16 @@ def check_plant():
     """Vérifie si une plante correspond à la couleur détectée"""
     try:
         data = request.get_json()
-        color = data.get('color')
         
-        if not color:
-            return jsonify({'error': 'Données de couleur manquantes'}), 400
+        # Vérifier que les données de couleur sont présentes
+        if not all(k in data for k in ['r', 'g', 'b']):
+            return jsonify({'error': 'Données de couleur incomplètes'}), 400
             
         # Ici, vous devrez implémenter la logique pour vérifier si la couleur
         # correspond à une plante dans votre base de données
         # Pour l'exemple, nous retournons des valeurs fictives
         is_plant = True  # À remplacer par votre logique
-        water_volume = 0.5  # À remplacer par votre logique
+        water_volume = 100  # Volume en ml
         
         return jsonify({
             'is_plant': is_plant,

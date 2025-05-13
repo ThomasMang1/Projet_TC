@@ -100,3 +100,12 @@
 2025-05-07 10:22:59,700 - ERROR - Erreur de communication série: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
 2025-05-07 10:23:29,702 - ERROR - Erreur de communication série: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
 2025-05-07 10:23:49,532 - INFO - Arrêt du programme par l'utilisateur
+2025-05-13 17:13:47,439 - ERROR - Erreur de connexion série: could not open port 'COM3': FileNotFoundError(2, 'Le fichier spécifié est introuvable.', None, 2)
+2025-05-13 17:14:14,034 - INFO - Connexion établie sur COM3 à 9600 bauds
+2025-05-13 17:14:15,378 - ERROR - Erreur inattendue: 'utf-8' codec can't decode byte 0x81 in position 0: invalid start byte
+2025-05-13 17:14:16,396 - ERROR - Erreur inattendue: 'utf-8' codec can't decode byte 0xca in position 0: invalid continuation byte
+2025-05-13 17:14:19,377 - ERROR - Erreur inattendue: 'utf-8' codec can't decode byte 0xcc in position 1: invalid continuation byte
+2025-05-13 17:14:20,388 - ERROR - Erreur inattendue: 'utf-8' codec can't decode byte 0xca in position 0: invalid continuation byte
+2025-05-13 17:14:23,375 - ERROR - Erreur inattendue: 'utf-8' codec can't decode byte 0xcc in position 1: invalid continuation byte
+2025-05-13 17:14:24,377 - ERROR - Erreur inattendue: 'utf-8' codec can't decode byte 0xca in position 0: invalid continuation byte
+2025-05-13 17:14:25,237 - INFO - Arrêt du programme par l'utilisateur

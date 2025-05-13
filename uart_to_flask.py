@@ -4,7 +4,6 @@ import serial
 import requests
 import time
 import json
-import re
 import logging
 import sys
 import os
@@ -41,46 +40,29 @@ class RobotPacket:
             if not (data_string.startswith('{') and data_string.endswith('}')):
                 return None
                 
-            # Extraire le type et les données
-            match = re.match(r'\{(\w+)\{(.*)\}\}', data_string)
-            if not match:
+            # Parser le JSON
+            data = json.loads(data_string)
+            
+            # Vérifier le type de paquet
+            if 'type' not in data:
                 return None
                 
-            packet_type = match.group(1)
-            data_str = match.group(2)
-            
-            # Parser les données selon le type
-            if packet_type == 'colour':
-                data = json.loads(data_str)
-                return {'type': 'colour', 'data': data}
-                
-            elif packet_type == 'status':
-                data = json.loads(data_str)
-                return {'type': 'status', 'data': data}
-                
-            elif packet_type == 'acknowledge':
-                data = json.loads(data_str)
-                return {'type': 'acknowledge', 'data': data}
-                
-            elif packet_type == 'humidity':
-                data = json.loads(data_str)
-                return {'type': 'humidity', 'data': data}
-                
-            return None
+            return data
             
         except Exception as e:
             logger.error(f"Erreur lors du parsing du paquet: {e}")
             return None
     
     @staticmethod
-    def create_water_cmd(val: bool, volume: float) -> str:
+    def create_water_cmd(val: bool, amount: int = 0) -> str:
         """Crée un paquet de commande d'arrosage"""
-        return json.dumps({
-            'water_cmd': {
-                'val': val,
-                'volume': volume
-            }
-        })
+        packet = {
+            'type': 'water_cmd',
+            'val': str(val).lower()
+        }
+        if val and amount > 0:
+            packet['amount'] = amount
+        return json.dumps(packet)
     
     @staticmethod
     def create_config(val: str) -> str:
@@ -88,9 +70,8 @@ class RobotPacket:
         if val not in ['stop', 'go', 'calibrate']:
             raise ValueError("Valeur de configuration invalide")
         return json.dumps({
-            'config': {
-                'val': val
-            }
+            'type': 'config',
+            'val': val
         })
 
 class RobotBridge:
@@ -100,7 +81,6 @@ class RobotBridge:
         self.ser = None
         self.last_status_time = 0
         self.current_color = None
-        self.current_humidity = None
         
     def connect(self) -> bool:
         """Établit la connexion série avec le robot"""
@@ -123,7 +103,7 @@ class RobotBridge:
             logger.error(f"Erreur lors de l'envoi du paquet: {e}")
             return False
     
-    def check_plant_by_color(self, color: Dict) -> Tuple[bool, Optional[float]]:
+    def check_plant_by_color(self, color: Dict) -> Tuple[bool, Optional[int]]:
         """Vérifie si une plante correspond à la couleur détectée"""
         try:
             # Appel à l'API pour vérifier la plante
@@ -145,11 +125,10 @@ class RobotBridge:
     def handle_packet(self, packet: Dict) -> None:
         """Gère un paquet reçu du robot"""
         packet_type = packet['type']
-        data = packet['data']
         
         if packet_type == 'colour':
-            self.current_color = data
-            is_plant, water_volume = self.check_plant_by_color(data)
+            self.current_color = packet
+            is_plant, water_volume = self.check_plant_by_color(packet)
             
             if is_plant and water_volume:
                 # Envoyer la commande d'arrosage
@@ -157,35 +136,14 @@ class RobotBridge:
                 self.send_packet(water_cmd)
             else:
                 # Envoyer une commande d'arrosage négative
-                water_cmd = RobotPacket.create_water_cmd(False, 0)
+                water_cmd = RobotPacket.create_water_cmd(False)
                 self.send_packet(water_cmd)
                 
-        elif packet_type == 'status':
-            # Envoyer le status à l'API
-            try:
-                response = requests.post(
-                    f"{API_URL}/api/robot/status",
-                    json=data,
-                    timeout=5
-                )
-                if response.status_code != 200:
-                    logger.warning(f"Erreur lors de l'envoi du status: {response.text}")
-            except Exception as e:
-                logger.error(f"Erreur lors de l'envoi du status: {e}")
-                
-        elif packet_type == 'humidity':
-            self.current_humidity = data
-            # Envoyer les données d'humidité à l'API
-            try:
-                response = requests.post(
-                    f"{API_URL}/api/robot/humidity",
-                    json=data,
-                    timeout=5
-                )
-                if response.status_code != 200:
-                    logger.warning(f"Erreur lors de l'envoi de l'humidité: {response.text}")
-            except Exception as e:
-                logger.error(f"Erreur lors de l'envoi de l'humidité: {e}")
+        elif packet_type == 'acknowledge':
+            if packet.get('status') == 'success':
+                logger.info("Commande exécutée avec succès")
+            else:
+                logger.warning(f"Échec de la commande: {packet.get('status')}")
     
     def run(self):
         """Boucle principale de communication"""
