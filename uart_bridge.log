@@ -109,3 +109,15 @@
 2025-05-13 17:14:23,375 - ERROR - Erreur inattendue: 'utf-8' codec can't decode byte 0xcc in position 1: invalid continuation byte
 2025-05-13 17:14:24,377 - ERROR - Erreur inattendue: 'utf-8' codec can't decode byte 0xca in position 0: invalid continuation byte
 2025-05-13 17:14:25,237 - INFO - ArrÃªt du programme par l'utilisateur
+2025-05-13 17:18:14,513 - INFO - Connexion établie sur COM3 à 9600 bauds
+2025-05-13 17:18:14,765 - ERROR - Erreur inattendue: 'utf-8' codec can't decode byte 0x84 in position 0: invalid start byte
+2025-05-13 17:18:15,767 - ERROR - Erreur inattendue: 'utf-8' codec can't decode byte 0xca in position 0: invalid continuation byte
+2025-05-13 17:18:18,764 - ERROR - Erreur inattendue: 'utf-8' codec can't decode byte 0xcc in position 1: invalid continuation byte
+2025-05-13 17:18:19,766 - ERROR - Erreur inattendue: 'utf-8' codec can't decode byte 0xca in position 0: invalid continuation byte
+2025-05-13 17:18:22,744 - ERROR - Erreur inattendue: 'utf-8' codec can't decode byte 0xcc in position 1: invalid continuation byte
+2025-05-13 17:18:23,749 - ERROR - Erreur inattendue: 'utf-8' codec can't decode byte 0xca in position 0: invalid continuation byte
+2025-05-13 17:18:26,743 - ERROR - Erreur inattendue: 'utf-8' codec can't decode byte 0xcc in position 1: invalid continuation byte
+2025-05-13 17:18:27,745 - ERROR - Erreur inattendue: 'utf-8' codec can't decode byte 0xca in position 0: invalid continuation byte
+2025-05-13 17:18:30,506 - ERROR - Erreur inattendue: 'utf-8' codec can't decode byte 0xcc in position 1: invalid continuation byte
+2025-05-13 17:18:31,514 - ERROR - Erreur de communication série: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-13 17:18:36,219 - INFO - Arrêt du programme par l'utilisateur

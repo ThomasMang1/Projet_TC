@@ -3,7 +3,6 @@ from datetime import datetime, timezone
 
 # Initialisation de la base de données
 db = SQLAlchemy()
-
 class Plante(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     nom = db.Column(db.String(100), nullable=False)

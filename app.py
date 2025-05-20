@@ -28,45 +28,47 @@ db = SQLAlchemy(app)
 def index():
     return render_template('index.html')
 
-# Route API pour récupérer les plantes
 @app.route('/api/plantes', methods=['GET'])
 def get_plantes():
-    result = db.session.execute(text("SELECT plantes, humidite_min, humidite_max, zone FROM tableau_plantes"))
+    result = db.session.execute(text("SELECT plantes, humidite_min, humidite_max FROM tableau_plantes"))
     plantes_disponibles = result.fetchall()
     plantes = [{
         'nom': p[0],
         'humidite_min': p[1],
-        'humidite_max': p[2],
-        'zone': p[3]
+        'humidite_max': p[2]
     } for p in plantes_disponibles]
     return jsonify(plantes)
 
-# Route API pour ajouter une plante
+
 @app.route('/api/plantes', methods=['POST'])
 def add_plante():
     data = request.get_json()
     nom = data.get('nom')
+    humidite_min = data.get('humidite_min')
+    humidite_max = data.get('humidite_max')
 
-    # Vérifier si la plante existe dans tableau_plantes
-    plante_existante = result = db.session.execute(text("SELECT plantes, humidite_min, humidite_max FROM tableau_plantes"))
+    if not nom:
+        return jsonify({'error': 'Nom de plante manquant'}), 400
 
-    
+    # Vérifier que la plante existe bien dans tableau_plantes
+    result = db.session.execute(
+        text("SELECT * FROM tableau_plantes WHERE plantes = :nom"),
+        {'nom': nom}
+    )
+    plante_existante = result.fetchone()
 
     if not plante_existante:
-        return jsonify({'error': 'Cette plante n\'existe pas dans la liste disponible.'}), 400
+        return jsonify({'error': "Cette plante n'existe pas dans la base de référence"}), 400
 
-    # Ajouter la plante sélectionnée dans la table Plante
     new_plante = Plante(
         nom=nom,
-        humidite_min=data.get('humidite_min'),
-        humidite_max=data.get('humidite_max'),
-        zone=data.get('zone')
+        humidite_min=humidite_min,
+        humidite_max=humidite_max
     )
     db.session.add(new_plante)
     db.session.commit()
 
     return jsonify({'message': 'Plante ajoutée avec succès'}), 201
-
 
 @app.route('/api/robot/status', methods=['GET'])
 def get_robot_status():
