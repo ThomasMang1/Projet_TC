@@ -489,13 +489,11 @@ def check_plant():
             
         # Ici, vous devrez implémenter la logique pour vérifier si la couleur
         # correspond à une plante dans votre base de données
-        # Pour l'exemple, nous retournons des valeurs fictives
-        is_plant = True  # À remplacer par votre logique
-        water_volume = 100  # Volume en ml
+        # Pour l'exemple, nous retournons simplement un booléen
+        is_plant = True  # À remplacer par votre logique de comparaison de couleur
         
         return jsonify({
-            'is_plant': is_plant,
-            'water_volume': water_volume if is_plant else 0
+            'is_plant': is_plant
         })
         
     except Exception as e:
@@ -532,24 +530,134 @@ def update_robot_status():
 
 @app.route('/api/robot/humidity', methods=['POST'])
 def update_humidity():
-    """Met à jour les données d'humidité"""
+    """Met à jour les données d'humidité et renvoie la quantité d'eau nécessaire"""
     try:
         data = request.get_json()
         
         # Vérifier les données requises
-        required_fields = ['dry_val', 'wet_val', 'humidity']
+        required_fields = ['humidity']
         if not all(field in data for field in required_fields):
             return jsonify({'error': 'Données incomplètes'}), 400
             
         # Mettre à jour l'humidité de la zone actuelle
-        # Note: Dans un cas réel, vous devrez déterminer la zone actuelle
         zones = Zone.query.all()
         for zone in zones:
             zone.humidite_actuelle = data['humidity']
             zone.derniere_mesure = datetime.now()
             
         db.session.commit()
+        
+        # Calculer la quantité d'eau nécessaire (exemple simplifié)
+        # À remplacer par votre logique de calcul
+        water_amount = 100  # en mL
+        
+        return jsonify({
+            'water_amount': water_amount
+        })
+        
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({'error': str(e)}), 500
+
+# Ajout de deux nouvelles routes pour gérer les requêtes du robot
+# Ajouter ces routes à la fin du fichier, avant if __name__ == '__main__':
+
+@app.route('/api/check_plant', methods=['POST'])
+def check_plant():
+    """Vérifie si une plante correspond à la couleur détectée et retourne 1 ou 0"""
+    try:
+        data = request.get_json()
+        
+        # Vérifier que les données de couleur sont présentes
+        if not all(k in data for k in ['r', 'g', 'b']):
+            return jsonify({'error': 'Données de couleur incomplètes'}), 400
+        
+        r = data.get('r', 0)
+        g = data.get('g', 0) 
+        b = data.get('b', 0)
+        
+        # Récupérer le robot pour mettre à jour la couleur actuelle
+        robot = Robot.query.first()
+        if robot:
+            # Stocker la couleur dans la base de données comme une chaîne représentant un tableau
+            robot.couleur_actuelle = f"[{r},{g},{b}]"
+            db.session.commit()
+        
+        # Logique simplifiée pour vérifier si la couleur correspond à une plante
+        # Pour un exemple réel, vous devriez implémenter une vérification plus robuste
+        # en comparant avec des couleurs dans votre base de données
+        is_plant = True  # Remplacez par votre logique de détection
+        
+        return jsonify({
+            'is_plant': is_plant
+        })
+        
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/api/robot/color', methods=['POST'])
+def update_robot_color():
+    """Met à jour la couleur actuelle du robot"""
+    try:
+        data = request.get_json()
+        
+        if not all(k in data for k in ['r', 'g', 'b']):
+            return jsonify({'error': 'Données de couleur incomplètes'}), 400
+            
+        r = data.get('r', 0)
+        g = data.get('g', 0)
+        b = data.get('b', 0)
+        
+        robot = Robot.query.first()
+        if not robot:
+            robot = Robot(nom="Robot Principal")
+            db.session.add(robot)
+            
+        # Stocker la couleur comme une chaîne représentant un tableau
+        robot.couleur_actuelle = f"[{r},{g},{b}]"
+        
+        db.session.commit()
         return jsonify({'status': 'ok'})
+        
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/api/robot/humidity', methods=['POST'])
+def update_humidity():
+    """Met à jour les données d'humidité et renvoie la quantité d'eau nécessaire en mL"""
+    try:
+        data = request.get_json()
+        
+        # Vérifier les données requises
+        if 'humidity' not in data:
+            return jsonify({'error': 'Donnée d\'humidité manquante'}), 400
+            
+        humidity = float(data['humidity'])
+        
+        # Mettre à jour l'humidité de la zone actuelle
+        zones = Zone.query.all()
+        for zone in zones:
+            zone.humidite_actuelle = humidity
+            zone.derniere_mesure = datetime.now()
+            
+        db.session.commit()
+        
+        # Calculer la quantité d'eau nécessaire en mL (entier)
+        # Cette logique devrait être adaptée à vos besoins spécifiques
+        # Par exemple, baser la quantité sur les plantes dans la zone
+        water_amount = 0
+        try:
+            # Exemple de calcul: plus c'est sec, plus on arrose
+            # Supposons qu'une humidité de 0% nécessite 100mL et 100% nécessite 0mL
+            water_amount = int(max(0, 100 - humidity))
+        except:
+            water_amount = 0
+        
+        return jsonify({
+            'water_amount': water_amount
+        })
         
     except Exception as e:
         db.session.rollback()
