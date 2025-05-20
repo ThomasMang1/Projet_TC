@@ -20,8 +20,8 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://irrigo_user:irrigo_password@localhost:5432/irrigo_db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
-# Initialisation de SQLAlchemy
-db = SQLAlchemy(app)
+db.init_app(app)
+
 
 # Route principale
 @app.route('/')

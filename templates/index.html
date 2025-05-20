@@ -156,7 +156,7 @@
   </div>
 </div>
 
-         <!--  Zones
+         <!--  Zones-->
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-body">
@@ -171,7 +171,7 @@
                 </div>
             </div>
         </div>
-    </div>--> 
+    </div>
 
     <!-- Modal Ajout Plante -->
     <div class="modal fade" id="addPlantModal" tabindex="-1">
@@ -217,53 +217,57 @@
         </div>
         </div>
 
-    <!-- Modal Modification Plante -->
-    <div class="modal fade" id="editPlantModal" tabindex="-1">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title">Modifier la plante</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
-                </div>
-                <div class="modal-body">
-                    <form id="editPlantForm">
-                        <input type="hidden" id="editPlantId">
-                        <!-- Formulaire pour ajouter une plante -->
-                        <div class="mb-3">
-                            <label for="plantSelect" class="form-label">Nom de la plante</label>
-                            <select id="plantSelect" class="form-select">
-                                <option value="" selected disabled>Choisir une plante...</option>
-                                <!-- Les options seront chargées automatiquement par JavaScript -->
-                            </select>
+        <!-- Modal Modification Plante -->
+        <div class="modal fade" id="editPlantModal" tabindex="-1">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Modifier la plante</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
                     </div>
+                    <div class="modal-body">
+                        <form id="editPlantForm">
+                            <input type="hidden" id="editPlantId">
 
-                       <div class="mb-3">
-                        <label for="plantSelect" class="form-label">Nom de la plante</label>
-                        <select id="plantSelect" class="form-select" onchange="showPlantInfo()">
-                            <option value="" selected disabled>Choisir une plante...</option>
-                        </select>
-                    </div>
-                    <div id="plantInfo" style="display:none;">
-                        <div class="mb-3">
-                            <label for="editHumidityMin" class="form-label">Humidité minimale (%)</label>
-                            <input type="number" class="form-control" id="editHumidityMin" readonly>
-                        </div>
-                        <div class="mb-3">
-                            <label for="editHumidityMax" class="form-label">Humidité maximale (%)</label>
-                            <input type="number" class="form-control" id="editHumidityMax" readonly>
-                        </div>
-                        <div class="mb-3">
-                            <label for="editPlantDescription" class="form-label">Description</label>
-                            <textarea class="form-control" id="editPlantDescription" readonly></textarea>
-                        </div>
-                        <div class="mb-3">
-                            <label for="editPlantZone" class="form-label">Zone</label>
-                            <input class="form-control" id="editPlantZone" readonly>
-                        </div>
-                    </div>
+                            <!-- Nom de la plante -->
+                            <div class="mb-3">
+                                <label for="plantSelect" class="form-label">Nom de la plante</label>
+                                <select id="plantSelect" class="form-select" onchange="showPlantInfo()">
+                                    <option value="" selected disabled>Choisir une plante...</option>
+                                    <!-- Options ajoutées dynamiquement -->
+                                </select>
+                            </div>
 
-                    </form>
+                            <div id="plantInfo" style="display:none;">
+                                <div class="mb-3">
+                                    <label for="editHumidityMin" class="form-label">Humidité minimale (%)</label>
+                                    <input type="number" class="form-control" id="editHumidityMin" readonly>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="editHumidityMax" class="form-label">Humidité maximale (%)</label>
+                                    <input type="number" class="form-control" id="editHumidityMax" readonly>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="editPlantDescription" class="form-label">Description</label>
+                                    <textarea class="form-control" id="editPlantDescription" readonly></textarea>
+                                </div>
+
+                                <!-- Dropdown Zones -->
+                                <div class="mb-3">
+                                    <label for="editPlantZone" class="form-label">Zone</label>
+                                    <select id="editPlantZone" class="form-select">
+                                        <option value="" selected disabled>Choisir une zone...</option>
+                                        <!-- Options ajoutées dynamiquement -->
+                                    </select>
+                                </div>
+                            </div>
+
+                        </form>
+                    </div>
                 </div>
+            </div>
+        </div>
+
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
                     <button type="button" class="btn btn-primary" onclick="updatePlant()">Mettre à jour</button>
@@ -272,7 +276,7 @@
     </div>
     </div>
 
-    <!-- Modal Ajout Zone 
+    <!-- Modal Ajout Zone -->
     <div class="modal fade" id="addZoneModal" tabindex="-1">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -300,7 +304,7 @@
         </div>
     </div>
 
-    Modal Modification Zone 
+    
     <div class="modal fade" id="editZoneModal" tabindex="-1">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -342,33 +346,33 @@
                 });
         }
 
-        // Fonction pour mettre à jour la liste des zones
-        function updateZonesList() {
-  fetch('/api/zones')
-    .then(response => response.json())
-    .then(zones => {
-      const zonesList = document.getElementById('zones-list');
-                    zonesList.innerHTML = zones.map(zone => `
-                        <div class="zone-item mb-3 p-3 border rounded">
-                            <div class="d-flex justify-content-between align-items-start">
-                                <div>
-                                    <h6>${zone.nom}</h6>
-                                    <p class="mb-1">Humidité actuelle: ${zone.humidite_actuelle}%</p>
-                                    <p class="mb-0">Nombre de plantes: ${zone.nombre_plantes}</p>
-                                </div>
-                                <div>
-                                    <button class="btn btn-sm btn-outline-primary me-2" onclick="editZone(${zone.id})">
-                                        <i class='bx bx-edit'></i>
-                                    </button>
-                                    <button class="btn btn-sm btn-outline-danger" onclick="deleteZone(${zone.id})">
-                                        <i class='bx bx-trash'></i>
-                                    </button>
-            </div>
-          </div>
-                        </div>
-                    `).join('');
-    });
+    function updateZonesList() {
+    fetch('/api/zones')
+        .then(response => response.json())
+        .then(zones => {
+            const container = document.getElementById('zones-list');
+            container.innerHTML = ''; // vider avant de remplir
+
+            zones.forEach(zone => {
+                const card = document.createElement('div');
+                card.className = 'card mb-3';
+
+                card.innerHTML = `
+                    <div class="card-body">
+                        <h5 class="card-title">${zone.nom}</h5>
+                        <p class="card-text">Nombre de plantes: ${zone.nombre_plantes}</p>
+                        <button class="btn btn-sm btn-primary" onclick="editZone(${zone.id})">Modifier</button>
+                    </div>
+                `;
+
+                container.appendChild(card);
+            });
+        })
+        .catch(err => {
+            console.error('Erreur lors du chargement des zones:', err);
+        });
 }
+
 
      function addPlant() {
     const nom = document.getElementById('plantSelect').value;
@@ -452,7 +456,10 @@
 
         // Appelle la fonction au chargement de la page
         window.addEventListener('DOMContentLoaded', fetchWeather);
-   
+        document.addEventListener('DOMContentLoaded', () => {
+            updateZonesList();
+        });
+
 
 
         // Fonction pour supprimer une plante
@@ -675,19 +682,42 @@
             .catch(error => console.error("Erreur lors du chargement des plantes :", error));
     }
 
-        function showPlantInfo() {
-        const selectedPlant = document.getElementById('plantSelect').value;
-        const plantInfo = plantesData.find(p => p.nom === selectedPlant);
+   function showPlantInfo() {
+    const selectedPlant = document.getElementById('plantSelect').value;
+    const plantInfo = plantesData.find(p => p.nom === selectedPlant);
 
-        if (plantInfo) {
-            document.getElementById('plantInfo').style.display = 'block';
-            document.getElementById('humidityMin').value = plantInfo.humidite_min ?? '';
-            document.getElementById('humidityMax').value = plantInfo.humidite_max ?? '';
-            document.getElementById('zone').value = plantInfo.zone ?? '';
-        } else {
-            document.getElementById('plantInfo').style.display = 'none';
-        }
+    if (plantInfo) {
+        document.getElementById('plantInfo').style.display = 'block';
+        document.getElementById('humidityMin').value = plantInfo.humidite_min ?? '';
+        document.getElementById('humidityMax').value = plantInfo.humidite_max ?? '';
+
+        // Charger les zones depuis l'API
+        fetch('/api/zones')
+            .then(response => response.json())
+            .then(zones => {
+                const zoneSelect = document.getElementById('zone');
+                zoneSelect.innerHTML = '<option value="" disabled>Choisir une zone...</option>';
+
+                zones.forEach(zone => {
+                    const option = document.createElement('option');
+                    option.value = zone.id;
+                    option.textContent = zone.nom;
+                    zoneSelect.appendChild(option);
+                });
+
+                // Sélectionner la zone correspondant à la plante (en supposant plantInfo.zone_id)
+                if (plantInfo.zone_id) {
+                    zoneSelect.value = plantInfo.zone_id;
+                } else {
+                    zoneSelect.value = '';
+                }
+            });
+
+    } else {
+        document.getElementById('plantInfo').style.display = 'none';
     }
+}
+
 
     // Écoute l'ouverture de la modale pour charger les plantes
     const addPlantModal = document.getElementById('addPlantModal');
@@ -729,6 +759,82 @@
             console.error("Erreur lors de l'ajout de la plante :", error);
         });
     });
+
+
+
+    function updateZonesList() {
+    fetch('/api/zones')
+        .then(response => response.json())
+        .then(zones => {
+            const container = document.getElementById('zones-list');
+            container.innerHTML = ''; // vider avant d'ajouter
+
+            if (zones.length === 0) {
+                container.innerHTML = '<p>Aucune zone trouvée.</p>';
+                return;
+            }
+
+            zones.forEach(zone => {
+                const card = document.createElement('div');
+                card.className = 'card mb-3'; // Bootstrap card avec marge basse
+
+                card.innerHTML = `
+                    <div class="card-body">
+                        <h5 class="card-title">${zone.nom}</h5>
+                        <p class="card-text">Nombre de plantes : ${zone.nombre_plantes}</p>
+                        <button class="btn btn-primary btn-sm" onclick="editZone(${zone.id})">Modifier</button>
+                    </div>
+                `;
+
+                container.appendChild(card);
+            });
+        })
+        .catch(err => {
+            console.error('Erreur lors du chargement des zones:', err);
+            document.getElementById('zones-list').innerHTML = '<p>Erreur lors du chargement des zones.</p>';
+        });
+}
+
+function loadZonesDropdown() {
+    fetch('/api/zones')
+        .then(response => response.json())
+        .then(zones => {
+            const zoneSelect = document.getElementById('plantZone'); // ID du select pour les zones dans ton formulaire
+            zoneSelect.innerHTML = '<option value="" selected disabled>Choisir une zone...</option>';
+
+            zones.forEach(zone => {
+                const option = document.createElement('option');
+                option.value = zone.id;  // Utilise l’id de la zone comme valeur
+                option.textContent = zone.nom;
+                zoneSelect.appendChild(option);
+            });
+        })
+        .catch(err => {
+            console.error('Erreur lors du chargement des zones:', err);
+        });
+}
+
+function loadZonesDropdownForEdit() {
+    fetch('/api/zones')
+        .then(response => response.json())
+        .then(zones => {
+            const zoneSelect = document.getElementById('editPlantZone');
+            zoneSelect.innerHTML = '<option value="" selected disabled>Choisir une zone...</option>';
+            zones.forEach(zone => {
+                const option = document.createElement('option');
+                option.value = zone.id;
+                option.textContent = zone.nom;
+                zoneSelect.appendChild(option);
+            });
+        })
+        .catch(err => console.error('Erreur chargement zones (edit):', err));
+}
+
+// Appeler cette fonction au moment d'ouverture du modal
+document.getElementById('editPlantModal').addEventListener('show.bs.modal', () => {
+    loadZonesDropdownForEdit();
+});
+
 </script>
 
 
