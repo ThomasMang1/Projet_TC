@@ -27,7 +27,7 @@ BAUD_RATE = int(os.environ.get('BAUD_RATE', '19200'))
 API_URL = os.environ.get('API_URL', 'http://localhost:5000')
 RETRY_INTERVAL = int(os.environ.get('RETRY_INTERVAL', '10'))
 MAX_RETRIES = int(os.environ.get('MAX_RETRIES', '3'))
-STATUS_INTERVAL = 10  # Intervalle d'envoi du status en secondes
+STATUS_INTERVAL = 10  # Intervalle d'envoi du status en secondes.
 
 class RobotPacket:
     """Classe pour gérer les paquets de communication avec le robot"""
