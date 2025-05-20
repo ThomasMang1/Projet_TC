@@ -23,7 +23,7 @@ logger = logging.getLogger(__name__)
 
 # Configuration
 SERIAL_PORT = os.environ.get('SERIAL_PORT', 'COM3')
-BAUD_RATE = int(os.environ.get('BAUD_RATE', '9600'))
+BAUD_RATE = int(os.environ.get('BAUD_RATE', '19200'))
 API_URL = os.environ.get('API_URL', 'http://localhost:5000')
 RETRY_INTERVAL = int(os.environ.get('RETRY_INTERVAL', '10'))
 MAX_RETRIES = int(os.environ.get('MAX_RETRIES', '3'))
@@ -36,12 +36,20 @@ class RobotPacket:
     def parse_packet(data_string: str) -> Optional[Dict]:
         """Parse un paquet reçu du robot"""
         try:
+            # Vérifier si le paquet commence par $$$
+            if not data_string.startswith('$$$'):
+                return None
+                
+            # Extraire la partie JSON après $$$
+            json_str = data_string[3:]
+            
             # Vérifier si le paquet est valide
-            if not (data_string.startswith('{') and data_string.endswith('}')):
+            if not (json_str.startswith('{') and json_str.endswith('}')):
                 return None
                 
             # Parser le JSON
-            data = json.loads(data_string)
+            data = json.loads(json_str)
+            print("parsed")
             
             # Vérifier le type de paquet
             if 'type' not in data:
@@ -62,14 +70,14 @@ class RobotPacket:
         }
         if val and amount > 0:
             packet['amount'] = amount
-        return json.dumps(packet)
+        return '$$$' + json.dumps(packet)
     
     @staticmethod
     def create_config(val: str) -> str:
         """Crée un paquet de configuration"""
         if val not in ['stop', 'go', 'calibrate']:
             raise ValueError("Valeur de configuration invalide")
-        return json.dumps({
+        return '$$$' + json.dumps({
             'type': 'config',
             'val': val
         })
@@ -81,11 +89,19 @@ class RobotBridge:
         self.ser = None
         self.last_status_time = 0
         self.current_color = None
+        self.buffer = bytearray()
         
     def connect(self) -> bool:
         """Établit la connexion série avec le robot"""
         try:
-            self.ser = serial.Serial(SERIAL_PORT, BAUD_RATE, timeout=1)
+            self.ser = serial.Serial(
+                port=SERIAL_PORT,
+                baudrate=BAUD_RATE,
+                timeout=1,
+                bytesize=serial.EIGHTBITS,
+                parity=serial.PARITY_NONE,
+                stopbits=serial.STOPBITS_ONE
+            )
             logger.info(f"Connexion établie sur {SERIAL_PORT} à {BAUD_RATE} bauds")
             return True
         except serial.SerialException as e:
@@ -97,11 +113,30 @@ class RobotBridge:
         try:
             if not self.ser:
                 return False
-            self.ser.write((packet + '\n').encode())
+            self.ser.write((packet + '\n').encode('ascii'))
             return True
         except Exception as e:
             logger.error(f"Erreur lors de l'envoi du paquet: {e}")
             return False
+    
+    def read_line(self) -> Optional[str]:
+        """Lit une ligne complète du port série"""
+        try:
+            while self.ser.in_waiting:
+                byte = self.ser.read(1)
+                if byte:
+                    if byte == b'\n':
+                        # Fin de ligne trouvée
+                        line = self.buffer.decode('ascii', errors='ignore').strip()
+                        self.buffer.clear()
+                        return line
+                    else:
+                        self.buffer.extend(byte)
+            return None
+        except Exception as e:
+            logger.error(f"Erreur lors de la lecture: {e}")
+            self.buffer.clear()
+            return None
     
     def check_plant_by_color(self, color: Dict) -> Tuple[bool, Optional[int]]:
         """Vérifie si une plante correspond à la couleur détectée"""
@@ -144,6 +179,19 @@ class RobotBridge:
                 logger.info("Commande exécutée avec succès")
             else:
                 logger.warning(f"Échec de la commande: {packet.get('status')}")
+                
+        elif packet_type == 'status':
+            # Envoyer le status à l'API
+            try:
+                response = requests.post(
+                    f"{API_URL}/api/robot/status",
+                    json=packet,
+                    timeout=5
+                )
+                if response.status_code != 200:
+                    logger.warning(f"Erreur lors de l'envoi du status: {response.text}")
+            except Exception as e:
+                logger.error(f"Erreur lors de l'envoi du status: {e}")
     
     def run(self):
         """Boucle principale de communication"""
@@ -153,7 +201,7 @@ class RobotBridge:
         while True:
             try:
                 # Lire une ligne du port série
-                line = self.ser.readline().decode().strip()
+                line = self.read_line()
                 
                 if line:
                     # Parser le paquet
