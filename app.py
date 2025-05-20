@@ -135,7 +135,7 @@ def create_plante():
         humidite_max=humidite_max,
         description=data.get('description'),
         zone_id=data['zone_id'],
-        qr_code=data.get('qr_code')
+        color=data.get('color')
     )
     
     try:
@@ -180,8 +180,8 @@ def update_plante(plante_id):
             plante.description = data['description']
         if 'zone_id' in data:
             plante.zone_id = data['zone_id']
-        if 'qr_code' in data:
-            plante.qr_code = data['qr_code']
+        if 'color' in data:
+            plante.color = data['color']
             
         db.session.commit()
         return jsonify({
@@ -215,7 +215,7 @@ def get_plante(plante_id):
         'humidite_max': plante.humidite_max,
         'description': plante.description,
         'zone_id': plante.zone_id,
-        'qr_code': plante.qr_code
+        'color': plante.color
     })
 
 @app.route('/api/zones', methods=['POST'])
@@ -309,7 +309,7 @@ def export_plantes():
         'Description',
         'Zone',
         'Date de plantation',
-        'QR Code'
+        'Color'
     ])
     
     # Récupérer toutes les plantes
@@ -325,7 +325,7 @@ def export_plantes():
             plante.description or '',
             plante.zone.nom if plante.zone else 'Non assignée',
             plante.date_plantation.strftime('%Y-%m-%d %H:%M:%S'),
-            plante.qr_code or ''
+            plante.color or ''
         ])
     
     # Créer la réponse
@@ -387,8 +387,6 @@ def receive_data():
         logging.error(f"Erreur lors du traitement des données: {e}")
         return jsonify({"status": "error", "message": str(e)}), 500
     
-
-
 
 @app.route('/api/meteo', methods=['GET'])
 def get_meteo():
@@ -477,28 +475,6 @@ def get_consommation_eau():
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
-@app.route('/api/check_plant', methods=['POST'])
-def check_plant():
-    """Vérifie si une plante correspond à la couleur détectée"""
-    try:
-        data = request.get_json()
-        
-        # Vérifier que les données de couleur sont présentes
-        if not all(k in data for k in ['r', 'g', 'b']):
-            return jsonify({'error': 'Données de couleur incomplètes'}), 400
-            
-        # Ici, vous devrez implémenter la logique pour vérifier si la couleur
-        # correspond à une plante dans votre base de données
-        # Pour l'exemple, nous retournons simplement un booléen
-        is_plant = True  # À remplacer par votre logique de comparaison de couleur
-        
-        return jsonify({
-            'is_plant': is_plant
-        })
-        
-    except Exception as e:
-        return jsonify({'error': str(e)}), 500
-
 @app.route('/api/robot/status', methods=['POST'])
 def update_robot_status():
     """Met à jour le statut du robot"""
@@ -528,39 +504,6 @@ def update_robot_status():
         db.session.rollback()
         return jsonify({'error': str(e)}), 500
 
-@app.route('/api/robot/humidity', methods=['POST'])
-def update_humidity():
-    """Met à jour les données d'humidité et renvoie la quantité d'eau nécessaire"""
-    try:
-        data = request.get_json()
-        
-        # Vérifier les données requises
-        required_fields = ['humidity']
-        if not all(field in data for field in required_fields):
-            return jsonify({'error': 'Données incomplètes'}), 400
-            
-        # Mettre à jour l'humidité de la zone actuelle
-        zones = Zone.query.all()
-        for zone in zones:
-            zone.humidite_actuelle = data['humidity']
-            zone.derniere_mesure = datetime.now()
-            
-        db.session.commit()
-        
-        # Calculer la quantité d'eau nécessaire (exemple simplifié)
-        # À remplacer par votre logique de calcul
-        water_amount = 100  # en mL
-        
-        return jsonify({
-            'water_amount': water_amount
-        })
-        
-    except Exception as e:
-        db.session.rollback()
-        return jsonify({'error': str(e)}), 500
-
-# Ajout de deux nouvelles routes pour gérer les requêtes du robot
-# Ajouter ces routes à la fin du fichier, avant if __name__ == '__main__':
 
 @app.route('/api/check_plant', methods=['POST'])
 def check_plant():
