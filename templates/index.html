@@ -137,10 +137,14 @@
         <label for="humidityMax" class="form-label">Humidité Max</label>
         <input type="text" id="humidityMax" class="form-control" readonly>
     </div>
-    <div class="mb-3">
-        <label for="zone" class="form-label">Zone</label>
-        <input type="text" id="zone" class="form-control" readonly>
+    <div class="mb-3" id="zoneSelectContainer" style="display:none;">
+    <label for="zoneSelect" class="form-label">Zone</label>
+    <select id="zoneSelect" class="form-select">
+        <option value="" selected disabled>Choisir une zone...</option>
+        <!-- Options zones ajoutées dynamiquement -->
+    </select>
     </div>
+
     </div>
 
 
@@ -374,47 +378,7 @@
 }
 
 
-     function addPlant() {
-    const nom = document.getElementById('plantSelect').value;
-    const humidite_min = parseFloat(document.getElementById('humidityMin').value);
-    const humidite_max = parseFloat(document.getElementById('humidityMax').value);
-    const zone = document.getElementById('zone').value;
-
-    if (!nom) {
-        alert("Veuillez sélectionner une plante.");
-        return;
-    }
-
-    const data = {
-        nom: nom,
-        humidite_min: humidite_min,
-        humidite_max: humidite_max,
-        zone: zone
-    };
-
-    fetch('/api/plantes', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(data)
-    })
-    .then(response => response.json())
-    .then(responseData => {
-        if (responseData.error) {
-            alert("Erreur : " + responseData.error);
-        } else {
-            alert("Plante ajoutée avec succès !");
-            const modal = bootstrap.Modal.getInstance(document.getElementById('addPlantModal'));
-            modal.hide();
-            updatePlantsList(); // Recharge la liste des plantes
-        }
-    })
-    .catch(error => {
-        alert("Erreur lors de l'ajout : " + error);
-    });
-}
-
+    
 
 
         // Fonction pour charger les zones dans le select
@@ -682,22 +646,30 @@
             .catch(error => console.error("Erreur lors du chargement des plantes :", error));
     }
 
-   function showPlantInfo() {
+function showPlantInfo() {
     const selectedPlant = document.getElementById('plantSelect').value;
     const plantInfo = plantesData.find(p => p.nom === selectedPlant);
 
     if (plantInfo) {
+        // Affiche la section infos plante
         document.getElementById('plantInfo').style.display = 'block';
+
+        // Remplit humidité min et max
         document.getElementById('humidityMin').value = plantInfo.humidite_min ?? '';
         document.getElementById('humidityMax').value = plantInfo.humidite_max ?? '';
 
-        // Charger les zones depuis l'API
+        // Affiche le dropdown zone et charge les options
+        const zoneSelectContainer = document.getElementById('zoneSelectContainer');
+        const zoneSelect = document.getElementById('zoneSelect');
+        zoneSelectContainer.style.display = 'block';
+
+        // Vide les options existantes
+        zoneSelect.innerHTML = '<option value="" disabled>Choisir une zone...</option>';
+
+        // Charge zones depuis API
         fetch('/api/zones')
             .then(response => response.json())
             .then(zones => {
-                const zoneSelect = document.getElementById('zone');
-                zoneSelect.innerHTML = '<option value="" disabled>Choisir une zone...</option>';
-
                 zones.forEach(zone => {
                     const option = document.createElement('option');
                     option.value = zone.id;
@@ -705,18 +677,24 @@
                     zoneSelect.appendChild(option);
                 });
 
-                // Sélectionner la zone correspondant à la plante (en supposant plantInfo.zone_id)
+                // Sélectionne la zone correspondant à la plante si existante
                 if (plantInfo.zone_id) {
                     zoneSelect.value = plantInfo.zone_id;
                 } else {
                     zoneSelect.value = '';
                 }
+            })
+            .catch(err => {
+                console.error("Erreur chargement zones :", err);
             });
 
     } else {
+        // Cache la section infos plante et zone
         document.getElementById('plantInfo').style.display = 'none';
+        document.getElementById('zoneSelectContainer').style.display = 'none';
     }
 }
+
 
 
     // Écoute l'ouverture de la modale pour charger les plantes
@@ -835,9 +813,25 @@ document.getElementById('editPlantModal').addEventListener('show.bs.modal', () =
     loadZonesDropdownForEdit();
 });
 
+function loadZones() {
+    fetch('/api/zones')  // ou ta route réelle
+        .then(response => response.json())
+        .then(zones => {
+            const zoneSelect = document.getElementById('zoneSelect');
+            zoneSelect.innerHTML = '<option value="" selected disabled>Choisir une zone...</option>';
+            zones.forEach(zone => {
+                const option = document.createElement('option');
+                option.value = zone.id;   // ou zone.nom selon ce que tu veux
+                option.textContent = zone.nom;
+                zoneSelect.appendChild(option);
+            });
+        })
+        .catch(err => {
+            console.error('Erreur chargement zones:', err);
+        });
+}
+
+
 </script>
-
-
-
 </body>
 </html> 
