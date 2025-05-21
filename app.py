@@ -9,8 +9,11 @@ from models import DatasetData
 from meteomatics.api import query_time_series
 import requests
 from sqlalchemy import func
-
-
+from flask import request
+from flask import Flask, render_template, jsonify, request
+from sqlalchemy import create_engine, text
+from flask_sqlalchemy import SQLAlchemy
+from uart_to_flask import RobotBridge
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://irrigo_user:irrigo_password@localhost:5432/irrigo_db'
@@ -517,6 +520,37 @@ def update_humidity():
         
     except Exception as e:
         db.session.rollback()
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/api/robot/command', methods=['POST'])
+def send_robot_command():
+    """Envoie une commande au robot via UART"""
+    try:
+        data = request.get_json()
+        command = data.get('command')
+        
+        if command not in ['start', 'stop']:
+            return jsonify({'error': 'Commande invalide'}), 400
+            
+        # Convertir la commande en caractère UART
+        if command == 'start':
+            uart_command = "$"
+        else:
+            uart_command = "#"
+        
+        # Créer une instance de RobotBridge et envoyer la commande
+        bridge = RobotBridge()
+        
+        if bridge.connect():
+            success = bridge.send_packet(uart_command)
+            if success:
+                return jsonify({'status': 'ok', 'message': f'Commande {command} envoyée'})
+            else:
+                return jsonify({'error': 'Erreur lors de l\'envoi de la commande'}), 500
+        else:
+            return jsonify({'error': 'Impossible de se connecter au port série'}), 500
+        
+    except Exception as e:
         return jsonify({'error': str(e)}), 500
 
 if __name__ == '__main__':

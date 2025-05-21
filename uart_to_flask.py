@@ -60,27 +60,7 @@ class RobotPacket:
         except Exception as e:
             logger.error(f"Erreur lors du parsing du paquet: {e}")
             return None
-    
-    @staticmethod
-    def create_water_cmd(val: bool, amount: int = 0) -> str:
-        """Crée un paquet de commande d'arrosage"""
-        packet = {
-            'type': 'water_cmd',
-            'val': str(val).lower()
-        }
-        if val and amount > 0:
-            packet['amount'] = amount
-        return '$$$' + json.dumps(packet)
-    
-    @staticmethod
-    def create_config(val: str) -> str:
-        """Crée un paquet de configuration"""
-        if val not in ['stop', 'go', 'calibrate']:
-            raise ValueError("Valeur de configuration invalide")
-        return '$$$' + json.dumps({
-            'type': 'config',
-            'val': val
-        })
+
 
 class RobotBridge:
     """Classe principale pour gérer la communication avec le robot"""
@@ -113,7 +93,8 @@ class RobotBridge:
         try:
             if not self.ser:
                 return False
-            self.ser.write((packet + '\n').encode('ascii'))
+            self.ser.write((packet).encode("ASCII"))
+            logger.info("paquet envoyé dans la methode send_packet")
             return True
         except Exception as e:
             logger.error(f"Erreur lors de l'envoi du paquet: {e}")
@@ -163,22 +144,23 @@ class RobotBridge:
         
         if packet_type == 'colour':
             self.current_color = packet
-            is_plant, water_volume = self.check_plant_by_color(packet)
-            
+            # is_plant, water_volume = self.check_plant_by_color(packet)
+            is_plant = True
+            water_volume = "1"
+
             if is_plant and water_volume:
                 # Envoyer la commande d'arrosage
-                water_cmd = RobotPacket.create_water_cmd(True, water_volume)
-                self.send_packet(water_cmd)
+                logger.info("envoi d'un packet de '1'")
+                self.send_packet(water_volume)
             else:
                 # Envoyer une commande d'arrosage négative
-                water_cmd = RobotPacket.create_water_cmd(False)
-                self.send_packet(water_cmd)
+                water_volume = "0"
+                self.send_packet(water_volume)
                 
-        elif packet_type == 'acknowledge':
-            if packet.get('status') == 'success':
-                logger.info("Commande exécutée avec succès")
-            else:
-                logger.warning(f"Échec de la commande: {packet.get('status')}")
+        elif packet_type == 'humidity':
+            water_volume = "100"
+            self.send_packet(water_volume)
+            logger.info("Commande d'humidité exécutée avec succès")
                 
         elif packet_type == 'status':
             # Envoyer le status à l'API
@@ -195,6 +177,7 @@ class RobotBridge:
     
     def run(self):
         """Boucle principale de communication"""
+        logger.info("ceci est un test de renvoi de logs")
         if not self.connect():
             return
         
@@ -209,13 +192,6 @@ class RobotBridge:
                     if packet:
                         logger.info(f"Paquet reçu: {packet}")
                         self.handle_packet(packet)
-                
-                # Vérifier si c'est le moment d'envoyer un status
-                current_time = time.time()
-                if current_time - self.last_status_time >= STATUS_INTERVAL:
-                    config = RobotPacket.create_config('go')
-                    self.send_packet(config)
-                    self.last_status_time = current_time
                 
                 # Petit délai pour éviter de surcharger le CPU
                 time.sleep(0.1)
