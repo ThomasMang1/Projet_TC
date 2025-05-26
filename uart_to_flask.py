@@ -94,17 +94,17 @@ class RobotBridge:
             if not self.ser:
                 return False
             self.ser.write((packet).encode("ASCII"))
-            logger.info("paquet envoyé dans la methode send_packet")
+            logger.info("paquet ", packet, " envoyé dans l'UART")
             return True
         except Exception as e:
             logger.error(f"Erreur lors de l'envoi du paquet: {e}")
             return False
     
-    def read_line(self) -> Optional[str]:
+    def read_line(self) -> Optional[str]: # Optional : retourne soit un str soit rien
         """Lit une ligne complète du port série"""
         try:
             while self.ser.in_waiting:
-                byte = self.ser.read(1)
+                byte = self.ser.read(1) # read(1) : lit un octet
                 if byte:
                     if byte == b'\n':
                         # Fin de ligne trouvée
@@ -145,15 +145,15 @@ class RobotBridge:
         if packet_type == 'colour':
             self.current_color = packet
             # is_plant, water_volume = self.check_plant_by_color(packet)
-            is_plant = True
-            water_volume = "1"
+            is_plant = True # pour le test
+            water_volume = "1" # pour le test
 
             if is_plant and water_volume:
                 # Envoyer la commande d'arrosage
                 logger.info("envoi d'un packet de '1'")
-                self.send_packet(water_volume)
+                self.send_packet("1")
             else:
-                # Envoyer une commande d'arrosage négative
+                # Envoyer une commande d'arrosage nulle
                 water_volume = "0"
                 self.send_packet(water_volume)
                 

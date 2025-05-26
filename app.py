@@ -102,7 +102,7 @@ def create_plante():
         humidite_max=humidite_max,
         description=data.get('description'),
         zone_id=data['zone_id'],
-        qr_code=data.get('qr_code')
+        color=data.get('color')
     )
     
     try:
@@ -147,8 +147,8 @@ def update_plante(plante_id):
             plante.description = data['description']
         if 'zone_id' in data:
             plante.zone_id = data['zone_id']
-        if 'qr_code' in data:
-            plante.qr_code = data['qr_code']
+        if 'color' in data:
+            plante.color = data['color']
             
         db.session.commit()
         return jsonify({
@@ -182,7 +182,7 @@ def get_plante(plante_id):
         'humidite_max': plante.humidite_max,
         'description': plante.description,
         'zone_id': plante.zone_id,
-        'qr_code': plante.qr_code
+        'color': plante.color
     })
 
 @app.route('/api/zones', methods=['POST'])
@@ -276,7 +276,7 @@ def export_plantes():
         'Description',
         'Zone',
         'Date de plantation',
-        'QR Code'
+        'Couleur'
     ])
     
     # Récupérer toutes les plantes
@@ -292,7 +292,7 @@ def export_plantes():
             plante.description or '',
             plante.zone.nom if plante.zone else 'Non assignée',
             plante.date_plantation.strftime('%Y-%m-%d %H:%M:%S'),
-            plante.qr_code or ''
+            plante.color or ''
         ])
     
     # Créer la réponse

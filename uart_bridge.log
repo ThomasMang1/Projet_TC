@@ -1577,3 +1577,806 @@
 2025-05-21 11:04:41,980 - INFO - paquet envoyé dans la methode send_packet
 2025-05-21 11:04:42,099 - INFO - 127.0.0.1 - - [21/May/2025 11:04:42] "POST /api/robot/command HTTP/1.1" 200 -
 2025-05-21 11:05:05,210 - INFO - 127.0.0.1 - - [21/May/2025 11:05:05] "GET /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:27:47,908 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-05-21 11:27:47,908 - INFO - [33mPress CTRL+C to quit[0m
+2025-05-21 11:27:47,908 - INFO -  * Restarting with stat
+2025-05-21 11:27:50,366 - WARNING -  * Debugger is active!
+2025-05-21 11:27:50,373 - INFO -  * Debugger PIN: 925-914-748
+2025-05-21 11:28:04,688 - INFO - 127.0.0.1 - - [21/May/2025 11:28:04] "GET /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:28:06,114 - INFO - 127.0.0.1 - - [21/May/2025 11:28:06] "GET / HTTP/1.1" 200 -
+2025-05-21 11:28:06,191 - INFO - 127.0.0.1 - - [21/May/2025 11:28:06] "GET /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:28:06,232 - INFO - 127.0.0.1 - - [21/May/2025 11:28:06] "GET /api/zones HTTP/1.1" 200 -
+2025-05-21 11:28:06,277 - INFO - 127.0.0.1 - - [21/May/2025 11:28:06] "GET /api/plantes HTTP/1.1" 200 -
+2025-05-21 11:28:06,281 - INFO - 127.0.0.1 - - [21/May/2025 11:28:06] "GET /api/zones HTTP/1.1" 200 -
+2025-05-21 11:28:06,334 - INFO - 127.0.0.1 - - [21/May/2025 11:28:06] "[36mGET /static/js/consommation-eau.js HTTP/1.1[0m" 304 -
+2025-05-21 11:28:06,352 - INFO - 127.0.0.1 - - [21/May/2025 11:28:06] "GET /api/consommation-eau HTTP/1.1" 200 -
+2025-05-21 11:28:06,453 - INFO - 127.0.0.1 - - [21/May/2025 11:28:06] "GET /api/meteo?lat=43.6045&lon=1.4442 HTTP/1.1" 200 -
+2025-05-21 11:28:36,194 - INFO - 127.0.0.1 - - [21/May/2025 11:28:36] "GET /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:29:06,205 - INFO - 127.0.0.1 - - [21/May/2025 11:29:06] "GET /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:29:06,205 - INFO - 127.0.0.1 - - [21/May/2025 11:29:06] "GET /api/plantes HTTP/1.1" 200 -
+2025-05-21 11:29:06,254 - INFO - 127.0.0.1 - - [21/May/2025 11:29:06] "GET /api/zones HTTP/1.1" 200 -
+2025-05-21 11:29:36,200 - INFO - 127.0.0.1 - - [21/May/2025 11:29:36] "GET /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:30:08,317 - INFO - 127.0.0.1 - - [21/May/2025 11:30:08] "GET /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:30:08,339 - INFO - 127.0.0.1 - - [21/May/2025 11:30:08] "GET /api/plantes HTTP/1.1" 200 -
+2025-05-21 11:30:08,370 - INFO - 127.0.0.1 - - [21/May/2025 11:30:08] "GET /api/zones HTTP/1.1" 200 -
+2025-05-21 11:30:36,203 - INFO - 127.0.0.1 - - [21/May/2025 11:30:36] "GET /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:31:06,205 - INFO - 127.0.0.1 - - [21/May/2025 11:31:06] "GET /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:31:06,215 - INFO - 127.0.0.1 - - [21/May/2025 11:31:06] "GET /api/plantes HTTP/1.1" 200 -
+2025-05-21 11:31:06,224 - INFO - 127.0.0.1 - - [21/May/2025 11:31:06] "GET /api/zones HTTP/1.1" 200 -
+2025-05-21 11:32:06,220 - INFO - 127.0.0.1 - - [21/May/2025 11:32:06] "GET /api/plantes HTTP/1.1" 200 -
+2025-05-21 11:32:06,226 - INFO - 127.0.0.1 - - [21/May/2025 11:32:06] "GET /api/zones HTTP/1.1" 200 -
+2025-05-21 11:32:13,966 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-05-21 11:32:13,966 - INFO - [33mPress CTRL+C to quit[0m
+2025-05-21 11:32:13,974 - INFO -  * Restarting with stat
+2025-05-21 11:32:16,833 - WARNING -  * Debugger is active!
+2025-05-21 11:32:16,833 - INFO -  * Debugger PIN: 925-914-748
+2025-05-21 11:32:22,714 - INFO - 127.0.0.1 - - [21/May/2025 11:32:22] "GET /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:32:22,731 - INFO - 127.0.0.1 - - [21/May/2025 11:32:22] "GET / HTTP/1.1" 200 -
+2025-05-21 11:32:22,845 - INFO - 127.0.0.1 - - [21/May/2025 11:32:22] "GET /api/plantes HTTP/1.1" 200 -
+2025-05-21 11:32:22,855 - INFO - 127.0.0.1 - - [21/May/2025 11:32:22] "GET /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:32:22,888 - INFO - 127.0.0.1 - - [21/May/2025 11:32:22] "GET /api/zones HTTP/1.1" 200 -
+2025-05-21 11:32:22,935 - INFO - 127.0.0.1 - - [21/May/2025 11:32:22] "GET /api/zones HTTP/1.1" 200 -
+2025-05-21 11:32:23,029 - INFO - 127.0.0.1 - - [21/May/2025 11:32:23] "[36mGET /static/js/consommation-eau.js HTTP/1.1[0m" 304 -
+2025-05-21 11:32:23,058 - INFO - 127.0.0.1 - - [21/May/2025 11:32:23] "GET /api/consommation-eau HTTP/1.1" 200 -
+2025-05-21 11:32:23,148 - INFO - 127.0.0.1 - - [21/May/2025 11:32:23] "GET /api/meteo?lat=43.6045&lon=1.4442 HTTP/1.1" 200 -
+2025-05-21 11:32:25,718 - ERROR - Erreur de connexion série: could not open port 'COM3': FileNotFoundError(2, 'Le fichier spécifié est introuvable.', None, 2)
+2025-05-21 11:32:25,718 - INFO - 127.0.0.1 - - [21/May/2025 11:32:25] "[35m[1mPOST /api/robot/command HTTP/1.1[0m" 500 -
+2025-05-21 11:33:12,615 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-05-21 11:33:12,618 - INFO - [33mPress CTRL+C to quit[0m
+2025-05-21 11:33:12,620 - INFO -  * Restarting with stat
+2025-05-21 11:33:15,315 - WARNING -  * Debugger is active!
+2025-05-21 11:33:15,324 - INFO -  * Debugger PIN: 925-914-748
+2025-05-21 11:33:22,886 - INFO - 127.0.0.1 - - [21/May/2025 11:33:22] "GET /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:33:22,965 - INFO - 127.0.0.1 - - [21/May/2025 11:33:22] "GET /api/plantes HTTP/1.1" 200 -
+2025-05-21 11:33:22,979 - INFO - 127.0.0.1 - - [21/May/2025 11:33:22] "GET /api/zones HTTP/1.1" 200 -
+2025-05-21 11:33:23,310 - INFO - 127.0.0.1 - - [21/May/2025 11:33:23] "GET / HTTP/1.1" 200 -
+2025-05-21 11:33:23,395 - INFO - 127.0.0.1 - - [21/May/2025 11:33:23] "GET /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:33:23,407 - INFO - 127.0.0.1 - - [21/May/2025 11:33:23] "GET /api/plantes HTTP/1.1" 200 -
+2025-05-21 11:33:23,419 - INFO - 127.0.0.1 - - [21/May/2025 11:33:23] "GET /api/zones HTTP/1.1" 200 -
+2025-05-21 11:33:23,474 - INFO - 127.0.0.1 - - [21/May/2025 11:33:23] "GET /api/zones HTTP/1.1" 200 -
+2025-05-21 11:33:23,603 - INFO - 127.0.0.1 - - [21/May/2025 11:33:23] "[36mGET /static/js/consommation-eau.js HTTP/1.1[0m" 304 -
+2025-05-21 11:33:23,635 - INFO - 127.0.0.1 - - [21/May/2025 11:33:23] "GET /api/consommation-eau HTTP/1.1" 200 -
+2025-05-21 11:33:23,733 - INFO - 127.0.0.1 - - [21/May/2025 11:33:23] "GET /api/meteo?lat=43.6045&lon=1.4442 HTTP/1.1" 200 -
+2025-05-21 11:33:33,154 - INFO - Connexion établie sur COM3 à 19200 bauds
+2025-05-21 11:33:33,154 - INFO - paquet envoyé dans la methode send_packet
+2025-05-21 11:33:33,274 - INFO - 127.0.0.1 - - [21/May/2025 11:33:33] "POST /api/robot/command HTTP/1.1" 200 -
+2025-05-21 11:33:42,879 - INFO - Connexion établie sur COM3 à 19200 bauds
+2025-05-21 11:33:42,879 - INFO - paquet envoyé dans la methode send_packet
+2025-05-21 11:33:42,997 - INFO - 127.0.0.1 - - [21/May/2025 11:33:42] "POST /api/robot/command HTTP/1.1" 200 -
+2025-05-21 11:33:48,225 - INFO - Connexion établie sur COM3 à 19200 bauds
+2025-05-21 11:33:48,227 - INFO - paquet envoyé dans la methode send_packet
+2025-05-21 11:33:48,347 - INFO - 127.0.0.1 - - [21/May/2025 11:33:48] "POST /api/robot/command HTTP/1.1" 200 -
+2025-05-21 11:33:57,166 - INFO - ceci est un test de renvoi de logs
+2025-05-21 11:33:57,188 - INFO - Connexion établie sur COM3 à 19200 bauds
+2025-05-21 11:34:00,016 - INFO - Paquet reçu: {'type': 'status', 'full_wt': 3679, 'empty_wt': 3543, 'cur_wt': 3679}
+2025-05-21 11:34:02,089 - INFO - 127.0.0.1 - - [21/May/2025 11:34:02] "POST /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:34:03,912 - INFO - Paquet reçu: {'type': 'status', 'full_wt': 3679, 'empty_wt': 3543, 'cur_wt': 3682}
+2025-05-21 11:34:05,962 - INFO - 127.0.0.1 - - [21/May/2025 11:34:05] "POST /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:34:08,995 - INFO - Paquet reçu: {'type': 'status', 'full_wt': 3679, 'empty_wt': 3543, 'cur_wt': 3683}
+2025-05-21 11:34:11,033 - INFO - 127.0.0.1 - - [21/May/2025 11:34:11] "POST /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:34:14,093 - INFO - Paquet reçu: {'type': 'status', 'full_wt': 3679, 'empty_wt': 3543, 'cur_wt': 3680}
+2025-05-21 11:34:16,167 - INFO - 127.0.0.1 - - [21/May/2025 11:34:16] "POST /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:34:19,214 - INFO - Paquet reçu: {'type': 'status', 'full_wt': 3679, 'empty_wt': 3543, 'cur_wt': 3679}
+2025-05-21 11:34:21,259 - INFO - 127.0.0.1 - - [21/May/2025 11:34:21] "POST /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:34:24,327 - INFO - Paquet reçu: {'type': 'status', 'full_wt': 3679, 'empty_wt': 3543, 'cur_wt': 3681}
+2025-05-21 11:34:26,414 - INFO - 127.0.0.1 - - [21/May/2025 11:34:26] "POST /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:34:29,464 - INFO - Paquet reçu: {'type': 'status', 'full_wt': 3679, 'empty_wt': 3543, 'cur_wt': 3683}
+2025-05-21 11:34:31,523 - INFO - 127.0.0.1 - - [21/May/2025 11:34:31] "POST /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:34:34,574 - INFO - Paquet reçu: {'type': 'status', 'full_wt': 3679, 'empty_wt': 3543, 'cur_wt': 3679}
+2025-05-21 11:34:36,629 - INFO - 127.0.0.1 - - [21/May/2025 11:34:36] "POST /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:34:39,682 - INFO - Paquet reçu: {'type': 'colour', 'r': 585365, 'g': 296296, 'b': 956}
+2025-05-21 11:34:39,684 - INFO - envoi d'un packet de '1'
+2025-05-21 11:34:39,684 - INFO - paquet envoyé dans la methode send_packet
+2025-05-21 11:34:42,327 - INFO - Paquet reçu: {'type': 'status', 'full_wt': 3679, 'empty_wt': 3543, 'cur_wt': 3682}
+2025-05-21 11:34:44,377 - INFO - 127.0.0.1 - - [21/May/2025 11:34:44] "POST /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:34:47,630 - INFO - Paquet reçu: {'type': 'humidity', 'humidity': 4006}
+2025-05-21 11:34:47,631 - INFO - paquet envoyé dans la methode send_packet
+2025-05-21 11:34:47,631 - INFO - Commande d'humidité exécutée avec succès
+2025-05-21 11:34:47,840 - INFO - Paquet reçu: {'type': 'humidity', 'humidity': 4011}
+2025-05-21 11:34:47,843 - INFO - paquet envoyé dans la methode send_packet
+2025-05-21 11:34:47,843 - INFO - Commande d'humidité exécutée avec succès
+2025-05-21 11:34:48,047 - INFO - Paquet reçu: {'type': 'humidity', 'humidity': 4007}
+2025-05-21 11:34:48,048 - INFO - paquet envoyé dans la methode send_packet
+2025-05-21 11:34:48,049 - INFO - Commande d'humidité exécutée avec succès
+2025-05-21 11:34:48,257 - INFO - Paquet reçu: {'type': 'humidity', 'humidity': 4008}
+2025-05-21 11:34:48,259 - INFO - paquet envoyé dans la methode send_packet
+2025-05-21 11:34:48,261 - INFO - Commande d'humidité exécutée avec succès
+2025-05-21 11:34:48,471 - INFO - Paquet reçu: {'type': 'humidity', 'humidity': 4007}
+2025-05-21 11:34:48,472 - INFO - paquet envoyé dans la methode send_packet
+2025-05-21 11:34:48,473 - INFO - Commande d'humidité exécutée avec succès
+2025-05-21 11:34:48,783 - INFO - Paquet reçu: {'type': 'humidity', 'humidity': 4007}
+2025-05-21 11:34:48,785 - INFO - paquet envoyé dans la methode send_packet
+2025-05-21 11:34:48,785 - INFO - Commande d'humidité exécutée avec succès
+2025-05-21 11:34:48,989 - INFO - Paquet reçu: {'type': 'humidity', 'humidity': 4007}
+2025-05-21 11:34:48,989 - INFO - paquet envoyé dans la methode send_packet
+2025-05-21 11:34:48,990 - INFO - Commande d'humidité exécutée avec succès
+2025-05-21 11:34:49,193 - INFO - Paquet reçu: {'type': 'humidity', 'humidity': 4009}
+2025-05-21 11:34:49,194 - INFO - paquet envoyé dans la methode send_packet
+2025-05-21 11:34:49,194 - INFO - Commande d'humidité exécutée avec succès
+2025-05-21 11:34:49,404 - INFO - Paquet reçu: {'type': 'humidity', 'humidity': 4009}
+2025-05-21 11:34:49,404 - INFO - paquet envoyé dans la methode send_packet
+2025-05-21 11:34:49,404 - INFO - Commande d'humidité exécutée avec succès
+2025-05-21 11:34:49,609 - INFO - Paquet reçu: {'type': 'humidity', 'humidity': 4008}
+2025-05-21 11:34:49,609 - INFO - paquet envoyé dans la methode send_packet
+2025-05-21 11:34:49,610 - INFO - Commande d'humidité exécutée avec succès
+2025-05-21 11:34:49,813 - INFO - Paquet reçu: {'type': 'status', 'full_wt': 3679, 'empty_wt': 3543, 'cur_wt': 3679}
+2025-05-21 11:34:51,887 - INFO - 127.0.0.1 - - [21/May/2025 11:34:51] "POST /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:34:52,294 - INFO - Paquet reçu: {'type': 'status', 'full_wt': 3679, 'empty_wt': 3543, 'cur_wt': 3677}
+2025-05-21 11:34:54,377 - INFO - 127.0.0.1 - - [21/May/2025 11:34:54] "POST /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:36:24,986 - INFO - Arrêt du programme par l'utilisateur
+2025-05-21 11:36:32,924 - INFO - 127.0.0.1 - - [21/May/2025 11:36:32] "GET /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:36:32,934 - INFO - 127.0.0.1 - - [21/May/2025 11:36:32] "GET /api/plantes HTTP/1.1" 200 -
+2025-05-21 11:36:32,943 - INFO - 127.0.0.1 - - [21/May/2025 11:36:32] "GET /api/zones HTTP/1.1" 200 -
+2025-05-21 11:36:35,410 - INFO - Connexion établie sur COM3 à 19200 bauds
+2025-05-21 11:36:35,411 - INFO - paquet envoyé dans la methode send_packet
+2025-05-21 11:36:35,533 - INFO - 127.0.0.1 - - [21/May/2025 11:36:35] "POST /api/robot/command HTTP/1.1" 200 -
+2025-05-21 11:36:47,219 - INFO - ceci est un test de renvoi de logs
+2025-05-21 11:36:47,238 - INFO - Connexion établie sur COM3 à 19200 bauds
+2025-05-21 11:36:54,198 - INFO - 127.0.0.1 - - [21/May/2025 11:36:54] "GET /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:37:00,904 - INFO - Paquet reçu: {'type': 'colour', 'r': 685714, 'g': 338028, 'b': 296296}
+2025-05-21 11:37:00,904 - INFO - envoi d'un packet de '1'
+2025-05-21 11:37:00,905 - INFO - paquet envoyé dans la methode send_packet
+2025-05-21 11:37:02,016 - INFO - Paquet reçu: {'type': 'humidity', 'humidity': 4008}
+2025-05-21 11:37:02,017 - INFO - paquet envoyé dans la methode send_packet
+2025-05-21 11:37:02,017 - INFO - Commande d'humidité exécutée avec succès
+2025-05-21 11:37:04,533 - INFO - Paquet reçu: {'type': 'status', 'full_wt': 3679, 'empty_wt': 3543, 'cur_wt': 3685}
+2025-05-21 11:37:06,630 - INFO - 127.0.0.1 - - [21/May/2025 11:37:06] "POST /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:37:12,474 - INFO - Paquet reçu: {'type': 'status', 'full_wt': 3679, 'empty_wt': 3543, 'cur_wt': 3679}
+2025-05-21 11:37:14,525 - INFO - 127.0.0.1 - - [21/May/2025 11:37:14] "POST /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:37:16,660 - INFO - Paquet reçu: {'type': 'status', 'full_wt': 3679, 'empty_wt': 3543, 'cur_wt': 3679}
+2025-05-21 11:37:18,728 - INFO - 127.0.0.1 - - [21/May/2025 11:37:18] "POST /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:37:21,764 - INFO - Paquet reçu: {'type': 'status', 'full_wt': 3679, 'empty_wt': 3543, 'cur_wt': 3682}
+2025-05-21 11:37:23,854 - INFO - 127.0.0.1 - - [21/May/2025 11:37:23] "POST /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:37:24,204 - INFO - 127.0.0.1 - - [21/May/2025 11:37:24] "GET /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:37:24,210 - INFO - 127.0.0.1 - - [21/May/2025 11:37:24] "GET /api/plantes HTTP/1.1" 200 -
+2025-05-21 11:37:24,219 - INFO - 127.0.0.1 - - [21/May/2025 11:37:24] "GET /api/zones HTTP/1.1" 200 -
+2025-05-21 11:37:26,887 - INFO - Paquet reçu: {'type': 'status', 'full_wt': 3679, 'empty_wt': 3543, 'cur_wt': 3681}
+2025-05-21 11:37:28,956 - INFO - 127.0.0.1 - - [21/May/2025 11:37:28] "POST /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:37:31,987 - INFO - Paquet reçu: {'type': 'status', 'full_wt': 3679, 'empty_wt': 3543, 'cur_wt': 3683}
+2025-05-21 11:37:34,055 - INFO - 127.0.0.1 - - [21/May/2025 11:37:34] "POST /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:37:37,099 - INFO - Paquet reçu: {'type': 'status', 'full_wt': 3679, 'empty_wt': 3543, 'cur_wt': 3680}
+2025-05-21 11:37:39,153 - INFO - 127.0.0.1 - - [21/May/2025 11:37:39] "POST /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:37:42,192 - INFO - Paquet reçu: {'type': 'status', 'full_wt': 3679, 'empty_wt': 3543, 'cur_wt': 3679}
+2025-05-21 11:37:44,243 - INFO - 127.0.0.1 - - [21/May/2025 11:37:44] "POST /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:37:54,223 - INFO - 127.0.0.1 - - [21/May/2025 11:37:54] "GET /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:37:55,473 - INFO - Paquet reçu: {'type': 'colour', 'r': 648648, 'g': 315789, 'b': 0}
+2025-05-21 11:37:55,473 - INFO - envoi d'un packet de '1'
+2025-05-21 11:37:55,474 - INFO - paquet envoyé dans la methode send_packet
+2025-05-21 11:37:57,900 - INFO - Paquet reçu: {'type': 'status', 'full_wt': 3679, 'empty_wt': 3543, 'cur_wt': 3682}
+2025-05-21 11:37:59,965 - INFO - 127.0.0.1 - - [21/May/2025 11:37:59] "POST /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:38:00,173 - INFO - Paquet reçu: {'type': 'humidity', 'humidity': 4005}
+2025-05-21 11:38:00,174 - INFO - paquet envoyé dans la methode send_packet
+2025-05-21 11:38:00,176 - INFO - Commande d'humidité exécutée avec succès
+2025-05-21 11:38:00,379 - INFO - Paquet reçu: {'type': 'humidity', 'humidity': 4008}
+2025-05-21 11:38:00,380 - INFO - paquet envoyé dans la methode send_packet
+2025-05-21 11:38:00,381 - INFO - Commande d'humidité exécutée avec succès
+2025-05-21 11:38:00,584 - INFO - Paquet reçu: {'type': 'humidity', 'humidity': 4008}
+2025-05-21 11:38:00,584 - INFO - paquet envoyé dans la methode send_packet
+2025-05-21 11:38:00,585 - INFO - Commande d'humidité exécutée avec succès
+2025-05-21 11:38:00,791 - INFO - Paquet reçu: {'type': 'humidity', 'humidity': 4006}
+2025-05-21 11:38:00,793 - INFO - paquet envoyé dans la methode send_packet
+2025-05-21 11:38:00,794 - INFO - Commande d'humidité exécutée avec succès
+2025-05-21 11:38:00,998 - INFO - Paquet reçu: {'type': 'humidity', 'humidity': 4008}
+2025-05-21 11:38:00,998 - INFO - paquet envoyé dans la methode send_packet
+2025-05-21 11:38:00,999 - INFO - Commande d'humidité exécutée avec succès
+2025-05-21 11:38:01,303 - INFO - Paquet reçu: {'type': 'status', 'full_wt': 3679, 'empty_wt': 3543, 'cur_wt': 3681}
+2025-05-21 11:38:03,398 - INFO - 127.0.0.1 - - [21/May/2025 11:38:03] "POST /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:38:04,409 - INFO - Paquet reçu: {'type': 'status', 'full_wt': 3679, 'empty_wt': 3543, 'cur_wt': 3681}
+2025-05-21 11:38:06,486 - INFO - 127.0.0.1 - - [21/May/2025 11:38:06] "POST /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:38:08,405 - INFO - Paquet reçu: {'type': 'status', 'full_wt': 3679, 'empty_wt': 3543, 'cur_wt': 3679}
+2025-05-21 11:38:10,458 - INFO - 127.0.0.1 - - [21/May/2025 11:38:10] "POST /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:38:12,373 - INFO - Paquet reçu: {'type': 'status', 'full_wt': 3679, 'empty_wt': 3543, 'cur_wt': 3682}
+2025-05-21 11:38:14,429 - INFO - 127.0.0.1 - - [21/May/2025 11:38:14] "POST /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:38:16,345 - INFO - Paquet reçu: {'type': 'status', 'full_wt': 3679, 'empty_wt': 3543, 'cur_wt': 3683}
+2025-05-21 11:38:18,394 - INFO - 127.0.0.1 - - [21/May/2025 11:38:18] "POST /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:38:20,717 - INFO - Paquet reçu: {'type': 'colour', 'r': 480000, 'g': 235294, 'b': 212389}
+2025-05-21 11:38:20,718 - INFO - envoi d'un packet de '1'
+2025-05-21 11:38:20,718 - INFO - paquet envoyé dans la methode send_packet
+2025-05-21 11:38:21,927 - INFO - Paquet reçu: {'type': 'humidity', 'humidity': 4008}
+2025-05-21 11:38:21,928 - INFO - paquet envoyé dans la methode send_packet
+2025-05-21 11:38:21,929 - INFO - Commande d'humidité exécutée avec succès
+2025-05-21 11:38:24,211 - INFO - 127.0.0.1 - - [21/May/2025 11:38:24] "GET /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:38:24,218 - INFO - 127.0.0.1 - - [21/May/2025 11:38:24] "GET /api/plantes HTTP/1.1" 200 -
+2025-05-21 11:38:24,226 - INFO - 127.0.0.1 - - [21/May/2025 11:38:24] "GET /api/zones HTTP/1.1" 200 -
+2025-05-21 11:38:24,340 - INFO - Paquet reçu: {'type': 'status', 'full_wt': 3679, 'empty_wt': 3543, 'cur_wt': 3682}
+2025-05-21 11:38:26,399 - INFO - 127.0.0.1 - - [21/May/2025 11:38:26] "POST /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:38:32,340 - INFO - Paquet reçu: {'type': 'status', 'full_wt': 3679, 'empty_wt': 3543, 'cur_wt': 3680}
+2025-05-21 11:38:34,418 - INFO - 127.0.0.1 - - [21/May/2025 11:38:34] "POST /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:38:36,633 - INFO - Paquet reçu: {'type': 'status', 'full_wt': 3679, 'empty_wt': 3543, 'cur_wt': 3681}
+2025-05-21 11:38:38,696 - INFO - 127.0.0.1 - - [21/May/2025 11:38:38] "POST /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:38:48,706 - INFO - Paquet reçu: {'type': 'colour', 'r': 685714, 'g': 338028, 'b': 296296}
+2025-05-21 11:38:48,707 - INFO - envoi d'un packet de '1'
+2025-05-21 11:38:48,707 - INFO - paquet envoyé dans la methode send_packet
+2025-05-21 11:38:49,816 - INFO - Paquet reçu: {'type': 'humidity', 'humidity': 4008}
+2025-05-21 11:38:49,817 - INFO - paquet envoyé dans la methode send_packet
+2025-05-21 11:38:49,817 - INFO - Commande d'humidité exécutée avec succès
+2025-05-21 11:38:52,336 - INFO - Paquet reçu: {'type': 'status', 'full_wt': 3679, 'empty_wt': 3543, 'cur_wt': 3684}
+2025-05-21 11:38:54,210 - INFO - 127.0.0.1 - - [21/May/2025 11:38:54] "GET /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:38:54,440 - INFO - 127.0.0.1 - - [21/May/2025 11:38:54] "POST /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:39:00,273 - INFO - Paquet reçu: {'type': 'status', 'full_wt': 3679, 'empty_wt': 3543, 'cur_wt': 3682}
+2025-05-21 11:39:02,340 - INFO - 127.0.0.1 - - [21/May/2025 11:39:02] "POST /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:39:04,361 - INFO - Paquet reçu: {'type': 'status', 'full_wt': 3679, 'empty_wt': 3543, 'cur_wt': 3680}
+2025-05-21 11:39:06,410 - INFO - 127.0.0.1 - - [21/May/2025 11:39:06] "POST /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:39:08,327 - INFO - Paquet reçu: {'type': 'status', 'full_wt': 3679, 'empty_wt': 3543, 'cur_wt': 3681}
+2025-05-21 11:39:10,397 - INFO - 127.0.0.1 - - [21/May/2025 11:39:10] "POST /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:39:13,444 - INFO - Paquet reçu: {'type': 'status', 'full_wt': 3679, 'empty_wt': 3543, 'cur_wt': 3680}
+2025-05-21 11:39:15,515 - INFO - 127.0.0.1 - - [21/May/2025 11:39:15] "POST /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:39:18,555 - INFO - Paquet reçu: {'type': 'status', 'full_wt': 3679, 'empty_wt': 3543, 'cur_wt': 3681}
+2025-05-21 11:39:20,645 - INFO - 127.0.0.1 - - [21/May/2025 11:39:20] "POST /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:39:23,688 - INFO - Paquet reçu: {'type': 'status', 'full_wt': 3679, 'empty_wt': 3543, 'cur_wt': 3682}
+2025-05-21 11:39:24,215 - INFO - 127.0.0.1 - - [21/May/2025 11:39:24] "GET /api/plantes HTTP/1.1" 200 -
+2025-05-21 11:39:24,222 - INFO - 127.0.0.1 - - [21/May/2025 11:39:24] "GET /api/zones HTTP/1.1" 200 -
+2025-05-21 11:39:25,755 - INFO - 127.0.0.1 - - [21/May/2025 11:39:25] "POST /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:39:28,197 - INFO - 127.0.0.1 - - [21/May/2025 11:39:28] "GET /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:39:28,796 - INFO - Paquet reçu: {'type': 'status', 'full_wt': 3679, 'empty_wt': 3543, 'cur_wt': 3680}
+2025-05-21 11:39:30,912 - INFO - 127.0.0.1 - - [21/May/2025 11:39:30] "POST /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:40:02,850 - INFO - 127.0.0.1 - - [21/May/2025 11:40:02] "GET /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:40:06,554 - ERROR - Erreur de connexion série: could not open port 'COM3': PermissionError(13, 'Accès refusé.', None, 5)
+2025-05-21 11:40:06,556 - INFO - 127.0.0.1 - - [21/May/2025 11:40:06] "[35m[1mPOST /api/robot/command HTTP/1.1[0m" 500 -
+2025-05-21 11:40:12,272 - INFO - Arrêt du programme par l'utilisateur
+2025-05-21 11:40:15,084 - INFO - Connexion établie sur COM3 à 19200 bauds
+2025-05-21 11:40:15,085 - INFO - paquet envoyé dans la methode send_packet
+2025-05-21 11:40:15,213 - INFO - 127.0.0.1 - - [21/May/2025 11:40:15] "POST /api/robot/command HTTP/1.1" 200 -
+2025-05-21 11:40:18,540 - INFO - Connexion établie sur COM3 à 19200 bauds
+2025-05-21 11:40:18,544 - INFO - paquet envoyé dans la methode send_packet
+2025-05-21 11:40:18,671 - INFO - 127.0.0.1 - - [21/May/2025 11:40:18] "POST /api/robot/command HTTP/1.1" 200 -
+2025-05-21 11:40:24,204 - INFO - 127.0.0.1 - - [21/May/2025 11:40:24] "GET /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:40:24,209 - INFO - 127.0.0.1 - - [21/May/2025 11:40:24] "GET /api/plantes HTTP/1.1" 200 -
+2025-05-21 11:40:24,220 - INFO - 127.0.0.1 - - [21/May/2025 11:40:24] "GET /api/zones HTTP/1.1" 200 -
+2025-05-21 11:40:25,343 - INFO - ceci est un test de renvoi de logs
+2025-05-21 11:40:25,369 - INFO - Connexion établie sur COM3 à 19200 bauds
+2025-05-21 11:40:25,472 - INFO - Paquet reçu: {'type': 'colour', 'r': 533333, 'g': 269662, 'b': 235294}
+2025-05-21 11:40:25,472 - INFO - envoi d'un packet de '1'
+2025-05-21 11:40:25,473 - INFO - paquet envoyé dans la methode send_packet
+2025-05-21 11:40:29,398 - INFO - Paquet reçu: {'type': 'status', 'full_wt': 3679, 'empty_wt': 3543, 'cur_wt': 3678}
+2025-05-21 11:40:31,497 - INFO - 127.0.0.1 - - [21/May/2025 11:40:31] "POST /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:40:32,606 - INFO - Paquet reçu: {'type': 'humidity', 'humidity': 4010}
+2025-05-21 11:40:32,607 - INFO - paquet envoyé dans la methode send_packet
+2025-05-21 11:40:32,607 - INFO - Commande d'humidité exécutée avec succès
+2025-05-21 11:40:33,418 - INFO - Paquet reçu: {'type': 'status', 'full_wt': 3679, 'empty_wt': 3543, 'cur_wt': 3681}
+2025-05-21 11:40:35,532 - INFO - 127.0.0.1 - - [21/May/2025 11:40:35] "POST /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:40:37,346 - INFO - Paquet reçu: {'type': 'status', 'full_wt': 3679, 'empty_wt': 3543, 'cur_wt': 3679}
+2025-05-21 11:40:39,411 - INFO - 127.0.0.1 - - [21/May/2025 11:40:39] "POST /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:40:45,351 - INFO - Paquet reçu: {'type': 'status', 'full_wt': 3679, 'empty_wt': 3543, 'cur_wt': 3681}
+2025-05-21 11:40:47,405 - INFO - 127.0.0.1 - - [21/May/2025 11:40:47] "POST /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:40:49,329 - INFO - Paquet reçu: {'type': 'status', 'full_wt': 3679, 'empty_wt': 3543, 'cur_wt': 3680}
+2025-05-21 11:40:51,385 - INFO - 127.0.0.1 - - [21/May/2025 11:40:51] "POST /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:40:53,507 - INFO - Paquet reçu: {'type': 'status', 'full_wt': 3679, 'empty_wt': 3543, 'cur_wt': 3679}
+2025-05-21 11:40:54,204 - INFO - 127.0.0.1 - - [21/May/2025 11:40:54] "GET /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:40:55,594 - INFO - 127.0.0.1 - - [21/May/2025 11:40:55] "POST /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:40:58,636 - INFO - Paquet reçu: {'type': 'status', 'full_wt': 3679, 'empty_wt': 3543, 'cur_wt': 3680}
+2025-05-21 11:41:00,717 - INFO - 127.0.0.1 - - [21/May/2025 11:41:00] "POST /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:41:03,749 - INFO - Paquet reçu: {'type': 'status', 'full_wt': 3679, 'empty_wt': 3543, 'cur_wt': 3687}
+2025-05-21 11:41:05,831 - INFO - 127.0.0.1 - - [21/May/2025 11:41:05] "POST /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:41:08,867 - INFO - Paquet reçu: {'type': 'colour', 'r': 631578, 'g': 320000, 'b': 282352}
+2025-05-21 11:41:08,868 - INFO - envoi d'un packet de '1'
+2025-05-21 11:41:08,868 - INFO - paquet envoyé dans la methode send_packet
+2025-05-21 11:41:12,412 - INFO - Paquet reçu: {'type': 'humidity', 'humidity': 4004}
+2025-05-21 11:41:12,413 - INFO - paquet envoyé dans la methode send_packet
+2025-05-21 11:41:12,414 - INFO - Commande d'humidité exécutée avec succès
+2025-05-21 11:41:13,322 - INFO - Paquet reçu: {'type': 'status', 'full_wt': 3679, 'empty_wt': 3543, 'cur_wt': 3682}
+2025-05-21 11:41:15,374 - INFO - 127.0.0.1 - - [21/May/2025 11:41:15] "POST /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:41:17,290 - INFO - Paquet reçu: {'type': 'status', 'full_wt': 3679, 'empty_wt': 3543, 'cur_wt': 3684}
+2025-05-21 11:41:19,405 - INFO - 127.0.0.1 - - [21/May/2025 11:41:19] "POST /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:41:24,230 - INFO - 127.0.0.1 - - [21/May/2025 11:41:24] "GET /api/plantes HTTP/1.1" 200 -
+2025-05-21 11:41:24,246 - INFO - 127.0.0.1 - - [21/May/2025 11:41:24] "GET /api/zones HTTP/1.1" 200 -
+2025-05-21 11:41:25,251 - INFO - Paquet reçu: {'type': 'status', 'full_wt': 3679, 'empty_wt': 3543, 'cur_wt': 3682}
+2025-05-21 11:41:27,298 - INFO - 127.0.0.1 - - [21/May/2025 11:41:27] "POST /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:41:29,312 - INFO - Paquet reçu: {'type': 'status', 'full_wt': 3679, 'empty_wt': 3543, 'cur_wt': 3683}
+2025-05-21 11:41:31,375 - INFO - 127.0.0.1 - - [21/May/2025 11:41:31] "POST /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:41:33,198 - INFO - 127.0.0.1 - - [21/May/2025 11:41:33] "GET /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:41:33,293 - INFO - Paquet reçu: {'type': 'status', 'full_wt': 3679, 'empty_wt': 3543, 'cur_wt': 3684}
+2025-05-21 11:41:35,410 - INFO - 127.0.0.1 - - [21/May/2025 11:41:35] "POST /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:41:38,147 - INFO - Paquet reçu: {'type': 'status', 'full_wt': 3679, 'empty_wt': 3543, 'cur_wt': 3680}
+2025-05-21 11:41:40,205 - INFO - 127.0.0.1 - - [21/May/2025 11:41:40] "POST /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:41:43,246 - INFO - Paquet reçu: {'type': 'status', 'full_wt': 3679, 'empty_wt': 3543, 'cur_wt': 3680}
+2025-05-21 11:41:45,297 - INFO - 127.0.0.1 - - [21/May/2025 11:41:45] "POST /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:41:48,342 - INFO - Paquet reçu: {'type': 'status', 'full_wt': 3679, 'empty_wt': 3543, 'cur_wt': 3682}
+2025-05-21 11:41:50,447 - INFO - 127.0.0.1 - - [21/May/2025 11:41:50] "POST /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:41:53,483 - INFO - Paquet reçu: {'type': 'status', 'full_wt': 3679, 'empty_wt': 3543, 'cur_wt': 3680}
+2025-05-21 11:41:55,532 - INFO - 127.0.0.1 - - [21/May/2025 11:41:55] "POST /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:41:58,570 - INFO - Paquet reçu: {'type': 'status', 'full_wt': 3679, 'empty_wt': 3543, 'cur_wt': 3681}
+2025-05-21 11:42:00,606 - INFO - 127.0.0.1 - - [21/May/2025 11:42:00] "POST /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:42:06,376 - INFO - Paquet reçu: {'type': 'colour', 'r': 666666, 'g': 328767, 'b': 285714}
+2025-05-21 11:42:06,376 - INFO - envoi d'un packet de '1'
+2025-05-21 11:42:06,377 - INFO - paquet envoyé dans la methode send_packet
+2025-05-21 11:42:09,011 - INFO - Paquet reçu: {'type': 'status', 'full_wt': 3679, 'empty_wt': 3543, 'cur_wt': 3679}
+2025-05-21 11:42:11,092 - INFO - 127.0.0.1 - - [21/May/2025 11:42:11] "POST /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:42:14,123 - INFO - Paquet reçu: {'type': 'status', 'full_wt': 3679, 'empty_wt': 3543, 'cur_wt': 3682}
+2025-05-21 11:42:16,180 - INFO - 127.0.0.1 - - [21/May/2025 11:42:16] "POST /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:42:19,217 - INFO - Paquet reçu: {'type': 'status', 'full_wt': 3679, 'empty_wt': 3543, 'cur_wt': 3679}
+2025-05-21 11:42:21,304 - INFO - 127.0.0.1 - - [21/May/2025 11:42:21] "POST /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:42:24,341 - INFO - Paquet reçu: {'type': 'status', 'full_wt': 3679, 'empty_wt': 3543, 'cur_wt': 3681}
+2025-05-21 11:42:26,408 - INFO - 127.0.0.1 - - [21/May/2025 11:42:26] "POST /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:42:29,452 - INFO - Paquet reçu: {'type': 'status', 'full_wt': 3679, 'empty_wt': 3543, 'cur_wt': 3683}
+2025-05-21 11:42:31,494 - INFO - 127.0.0.1 - - [21/May/2025 11:42:31] "POST /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:42:33,225 - INFO - 127.0.0.1 - - [21/May/2025 11:42:33] "GET /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:42:33,236 - INFO - 127.0.0.1 - - [21/May/2025 11:42:33] "GET /api/plantes HTTP/1.1" 200 -
+2025-05-21 11:42:33,246 - INFO - 127.0.0.1 - - [21/May/2025 11:42:33] "GET /api/zones HTTP/1.1" 200 -
+2025-05-21 11:42:34,536 - INFO - Paquet reçu: {'type': 'status', 'full_wt': 3679, 'empty_wt': 3543, 'cur_wt': 3680}
+2025-05-21 11:42:36,633 - INFO - 127.0.0.1 - - [21/May/2025 11:42:36] "POST /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:42:39,672 - INFO - Paquet reçu: {'type': 'status', 'full_wt': 3679, 'empty_wt': 3543, 'cur_wt': 3681}
+2025-05-21 11:42:41,755 - INFO - 127.0.0.1 - - [21/May/2025 11:42:41] "POST /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:42:44,799 - INFO - Paquet reçu: {'type': 'status', 'full_wt': 3679, 'empty_wt': 3543, 'cur_wt': 3680}
+2025-05-21 11:42:46,920 - INFO - 127.0.0.1 - - [21/May/2025 11:42:46] "POST /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:42:52,695 - INFO - Paquet reçu: {'type': 'colour', 'r': 685714, 'g': 338028, 'b': 300000}
+2025-05-21 11:42:52,696 - INFO - envoi d'un packet de '1'
+2025-05-21 11:42:52,698 - INFO - paquet envoyé dans la methode send_packet
+2025-05-21 11:42:55,330 - INFO - Paquet reçu: {'type': 'status', 'full_wt': 3679, 'empty_wt': 3543, 'cur_wt': 3681}
+2025-05-21 11:42:57,412 - INFO - 127.0.0.1 - - [21/May/2025 11:42:57] "POST /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:43:00,452 - INFO - Paquet reçu: {'type': 'status', 'full_wt': 3679, 'empty_wt': 3543, 'cur_wt': 3680}
+2025-05-21 11:43:02,502 - INFO - 127.0.0.1 - - [21/May/2025 11:43:02] "POST /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:43:05,753 - INFO - Paquet reçu: {'type': 'humidity', 'humidity': 4006}
+2025-05-21 11:43:05,755 - INFO - paquet envoyé dans la methode send_packet
+2025-05-21 11:43:05,756 - INFO - Commande d'humidité exécutée avec succès
+2025-05-21 11:43:05,961 - INFO - Paquet reçu: {'type': 'status', 'full_wt': 3679, 'empty_wt': 3543, 'cur_wt': 3684}
+2025-05-21 11:43:08,025 - INFO - 127.0.0.1 - - [21/May/2025 11:43:08] "POST /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:43:08,231 - INFO - Paquet reçu: {'type': 'humidity', 'humidity': 4007}
+2025-05-21 11:43:08,231 - INFO - paquet envoyé dans la methode send_packet
+2025-05-21 11:43:08,231 - INFO - Commande d'humidité exécutée avec succès
+2025-05-21 11:43:08,435 - INFO - Paquet reçu: {'type': 'status', 'full_wt': 3679, 'empty_wt': 3543, 'cur_wt': 3678}
+2025-05-21 11:43:10,530 - INFO - 127.0.0.1 - - [21/May/2025 11:43:10] "POST /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:43:10,735 - INFO - Paquet reçu: {'type': 'humidity', 'humidity': 4007}
+2025-05-21 11:43:10,735 - INFO - paquet envoyé dans la methode send_packet
+2025-05-21 11:43:10,736 - INFO - Commande d'humidité exécutée avec succès
+2025-05-21 11:43:10,940 - INFO - Paquet reçu: {'type': 'status', 'full_wt': 3679, 'empty_wt': 3543, 'cur_wt': 3679}
+2025-05-21 11:43:13,043 - INFO - 127.0.0.1 - - [21/May/2025 11:43:13] "POST /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:43:13,248 - INFO - Paquet reçu: {'type': 'humidity', 'humidity': 4009}
+2025-05-21 11:43:13,248 - INFO - paquet envoyé dans la methode send_packet
+2025-05-21 11:43:13,249 - INFO - Commande d'humidité exécutée avec succès
+2025-05-21 11:43:13,657 - INFO - Paquet reçu: {'type': 'status', 'full_wt': 3679, 'empty_wt': 3543, 'cur_wt': 3684}
+2025-05-21 11:43:15,738 - INFO - 127.0.0.1 - - [21/May/2025 11:43:15] "POST /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:43:17,052 - INFO - Paquet reçu: {'type': 'status', 'full_wt': 3679, 'empty_wt': 3543, 'cur_wt': 3679}
+2025-05-21 11:43:19,128 - INFO - 127.0.0.1 - - [21/May/2025 11:43:19] "POST /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:43:21,044 - INFO - Paquet reçu: {'type': 'status', 'full_wt': 3679, 'empty_wt': 3543, 'cur_wt': 3680}
+2025-05-21 11:43:23,091 - INFO - 127.0.0.1 - - [21/May/2025 11:43:23] "POST /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:43:25,108 - INFO - Paquet reçu: {'type': 'status', 'full_wt': 3679, 'empty_wt': 3543, 'cur_wt': 3678}
+2025-05-21 11:43:27,193 - INFO - 127.0.0.1 - - [21/May/2025 11:43:27] "POST /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:43:29,107 - INFO - Paquet reçu: {'type': 'status', 'full_wt': 3679, 'empty_wt': 3543, 'cur_wt': 3679}
+2025-05-21 11:43:31,252 - INFO - 127.0.0.1 - - [21/May/2025 11:43:31] "POST /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:43:33,068 - INFO - Paquet reçu: {'type': 'status', 'full_wt': 3679, 'empty_wt': 3543, 'cur_wt': 3678}
+2025-05-21 11:43:33,202 - INFO - 127.0.0.1 - - [21/May/2025 11:43:33] "GET /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:43:33,209 - INFO - 127.0.0.1 - - [21/May/2025 11:43:33] "GET /api/plantes HTTP/1.1" 200 -
+2025-05-21 11:43:33,218 - INFO - 127.0.0.1 - - [21/May/2025 11:43:33] "GET /api/zones HTTP/1.1" 200 -
+2025-05-21 11:43:35,152 - INFO - 127.0.0.1 - - [21/May/2025 11:43:35] "POST /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:43:37,070 - INFO - Paquet reçu: {'type': 'status', 'full_wt': 3679, 'empty_wt': 3543, 'cur_wt': 3681}
+2025-05-21 11:43:39,216 - INFO - 127.0.0.1 - - [21/May/2025 11:43:39] "POST /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:43:41,034 - INFO - Paquet reçu: {'type': 'status', 'full_wt': 3679, 'empty_wt': 3543, 'cur_wt': 3682}
+2025-05-21 11:43:43,231 - INFO - 127.0.0.1 - - [21/May/2025 11:43:43] "POST /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:43:45,051 - INFO - Paquet reçu: {'type': 'status', 'full_wt': 3679, 'empty_wt': 3543, 'cur_wt': 3682}
+2025-05-21 11:43:47,286 - INFO - 127.0.0.1 - - [21/May/2025 11:43:47] "POST /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:43:49,003 - INFO - Paquet reçu: {'type': 'status', 'full_wt': 3679, 'empty_wt': 3543, 'cur_wt': 3680}
+2025-05-21 11:43:51,187 - INFO - 127.0.0.1 - - [21/May/2025 11:43:51] "POST /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:43:53,101 - INFO - Paquet reçu: {'type': 'status', 'full_wt': 3679, 'empty_wt': 3543, 'cur_wt': 3682}
+2025-05-21 11:43:55,160 - INFO - 127.0.0.1 - - [21/May/2025 11:43:55] "POST /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:43:56,979 - INFO - Paquet reçu: {'type': 'status', 'full_wt': 3679, 'empty_wt': 3543, 'cur_wt': 3680}
+2025-05-21 11:43:59,044 - INFO - 127.0.0.1 - - [21/May/2025 11:43:59] "POST /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:44:01,057 - INFO - Paquet reçu: {'type': 'status', 'full_wt': 3679, 'empty_wt': 3543, 'cur_wt': 3679}
+2025-05-21 11:44:03,125 - INFO - 127.0.0.1 - - [21/May/2025 11:44:03] "POST /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:44:05,047 - INFO - Paquet reçu: {'type': 'status', 'full_wt': 3679, 'empty_wt': 3543, 'cur_wt': 3678}
+2025-05-21 11:44:07,087 - INFO - Arrêt du programme par l'utilisateur
+2025-05-21 11:44:08,084 - INFO - 127.0.0.1 - - [21/May/2025 11:44:08] "GET /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:44:09,955 - INFO - Connexion établie sur COM3 à 19200 bauds
+2025-05-21 11:44:09,957 - INFO - paquet envoyé dans la methode send_packet
+2025-05-21 11:44:10,076 - INFO - 127.0.0.1 - - [21/May/2025 11:44:10] "POST /api/robot/command HTTP/1.1" 200 -
+2025-05-21 11:44:23,374 - INFO - 127.0.0.1 - - [21/May/2025 11:44:23] "GET /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:44:23,384 - INFO - 127.0.0.1 - - [21/May/2025 11:44:23] "GET /api/plantes HTTP/1.1" 200 -
+2025-05-21 11:44:23,393 - INFO - 127.0.0.1 - - [21/May/2025 11:44:23] "GET /api/zones HTTP/1.1" 200 -
+2025-05-21 11:44:25,780 - INFO - Connexion établie sur COM3 à 19200 bauds
+2025-05-21 11:44:25,781 - INFO - paquet envoyé dans la methode send_packet
+2025-05-21 11:44:25,897 - INFO - 127.0.0.1 - - [21/May/2025 11:44:25] "POST /api/robot/command HTTP/1.1" 200 -
+2025-05-21 11:44:32,506 - INFO - ceci est un test de renvoi de logs
+2025-05-21 11:44:32,530 - INFO - Connexion établie sur COM3 à 19200 bauds
+2025-05-21 11:44:35,061 - INFO - Paquet reçu: {'type': 'status', 'full_wt': 3679, 'empty_wt': 3543, 'cur_wt': 3681}
+2025-05-21 11:44:37,144 - INFO - 127.0.0.1 - - [21/May/2025 11:44:37] "POST /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:44:40,176 - INFO - Paquet reçu: {'type': 'status', 'full_wt': 3679, 'empty_wt': 3543, 'cur_wt': 3682}
+2025-05-21 11:44:42,231 - INFO - 127.0.0.1 - - [21/May/2025 11:44:42] "POST /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:44:45,260 - INFO - Paquet reçu: {'type': 'status', 'full_wt': 3679, 'empty_wt': 3543, 'cur_wt': 3681}
+2025-05-21 11:44:47,328 - INFO - 127.0.0.1 - - [21/May/2025 11:44:47] "POST /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:44:50,370 - INFO - Paquet reçu: {'type': 'status', 'full_wt': 3679, 'empty_wt': 3543, 'cur_wt': 3682}
+2025-05-21 11:44:52,461 - INFO - 127.0.0.1 - - [21/May/2025 11:44:52] "POST /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:44:54,218 - INFO - 127.0.0.1 - - [21/May/2025 11:44:54] "GET /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:44:55,504 - INFO - Paquet reçu: {'type': 'status', 'full_wt': 3679, 'empty_wt': 3543, 'cur_wt': 3678}
+2025-05-21 11:44:57,576 - INFO - 127.0.0.1 - - [21/May/2025 11:44:57] "POST /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:45:00,617 - INFO - Paquet reçu: {'type': 'status', 'full_wt': 3679, 'empty_wt': 3543, 'cur_wt': 3682}
+2025-05-21 11:45:02,707 - INFO - 127.0.0.1 - - [21/May/2025 11:45:02] "POST /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:45:11,206 - INFO - Paquet reçu: {'type': 'colour', 'r': 685714, 'g': 342857, 'b': 303797}
+2025-05-21 11:45:11,206 - INFO - envoi d'un packet de '1'
+2025-05-21 11:45:11,207 - INFO - paquet envoyé dans la methode send_packet
+2025-05-21 11:45:13,848 - INFO - Paquet reçu: {'type': 'status', 'full_wt': 3679, 'empty_wt': 3543, 'cur_wt': 3682}
+2025-05-21 11:45:15,887 - INFO - 127.0.0.1 - - [21/May/2025 11:45:15] "POST /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:45:16,699 - INFO - Paquet reçu: {'type': 'status', 'full_wt': 3679, 'empty_wt': 3543, 'cur_wt': 3681}
+2025-05-21 11:45:18,747 - INFO - 127.0.0.1 - - [21/May/2025 11:45:18] "POST /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:45:18,951 - INFO - Paquet reçu: {'type': 'humidity', 'humidity': 4009}
+2025-05-21 11:45:18,951 - INFO - paquet envoyé dans la methode send_packet
+2025-05-21 11:45:18,952 - INFO - Commande d'humidité exécutée avec succès
+2025-05-21 11:45:19,156 - INFO - Paquet reçu: {'type': 'status', 'full_wt': 3679, 'empty_wt': 3543, 'cur_wt': 3682}
+2025-05-21 11:45:21,216 - INFO - 127.0.0.1 - - [21/May/2025 11:45:21] "POST /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:45:21,822 - INFO - Paquet reçu: {'type': 'humidity', 'humidity': 4008}
+2025-05-21 11:45:21,822 - INFO - paquet envoyé dans la methode send_packet
+2025-05-21 11:45:21,823 - INFO - Commande d'humidité exécutée avec succès
+2025-05-21 11:45:23,031 - INFO - Paquet reçu: {'type': 'status', 'full_wt': 3679, 'empty_wt': 3543, 'cur_wt': 3677}
+2025-05-21 11:45:24,201 - INFO - 127.0.0.1 - - [21/May/2025 11:45:24] "GET /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:45:24,210 - INFO - 127.0.0.1 - - [21/May/2025 11:45:24] "GET /api/plantes HTTP/1.1" 200 -
+2025-05-21 11:45:24,219 - INFO - 127.0.0.1 - - [21/May/2025 11:45:24] "GET /api/zones HTTP/1.1" 200 -
+2025-05-21 11:45:25,113 - INFO - 127.0.0.1 - - [21/May/2025 11:45:25] "POST /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:45:34,973 - INFO - Paquet reçu: {'type': 'status', 'full_wt': 3679, 'empty_wt': 3543, 'cur_wt': 3684}
+2025-05-21 11:45:37,023 - INFO - 127.0.0.1 - - [21/May/2025 11:45:37] "POST /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:45:38,945 - INFO - Paquet reçu: {'type': 'status', 'full_wt': 3679, 'empty_wt': 3543, 'cur_wt': 3678}
+2025-05-21 11:45:41,011 - INFO - 127.0.0.1 - - [21/May/2025 11:45:41] "POST /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:45:43,025 - INFO - Paquet reçu: {'type': 'status', 'full_wt': 3679, 'empty_wt': 3543, 'cur_wt': 3682}
+2025-05-21 11:45:45,119 - INFO - 127.0.0.1 - - [21/May/2025 11:45:45] "POST /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:45:46,937 - INFO - Paquet reçu: {'type': 'status', 'full_wt': 3679, 'empty_wt': 3543, 'cur_wt': 3681}
+2025-05-21 11:45:48,977 - INFO - 127.0.0.1 - - [21/May/2025 11:45:48] "POST /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:45:51,511 - INFO - Paquet reçu: {'type': 'colour', 'r': 571428, 'g': 292682, 'b': 255319}
+2025-05-21 11:45:51,512 - INFO - envoi d'un packet de '1'
+2025-05-21 11:45:51,514 - INFO - paquet envoyé dans la methode send_packet
+2025-05-21 11:45:55,137 - INFO - Paquet reçu: {'type': 'humidity', 'humidity': 4008}
+2025-05-21 11:45:55,137 - INFO - paquet envoyé dans la methode send_packet
+2025-05-21 11:45:55,138 - INFO - Commande d'humidité exécutée avec succès
+2025-05-21 11:45:58,957 - INFO - Paquet reçu: {'type': 'status', 'full_wt': 3679, 'empty_wt': 3543, 'cur_wt': 3680}
+2025-05-21 11:46:01,019 - INFO - 127.0.0.1 - - [21/May/2025 11:46:01] "POST /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:46:06,964 - INFO - Paquet reçu: {'type': 'status', 'full_wt': 3679, 'empty_wt': 3543, 'cur_wt': 3680}
+2025-05-21 11:46:09,001 - INFO - 127.0.0.1 - - [21/May/2025 11:46:09] "POST /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:46:10,920 - INFO - Paquet reçu: {'type': 'status', 'full_wt': 3679, 'empty_wt': 3543, 'cur_wt': 3680}
+2025-05-21 11:46:12,999 - INFO - 127.0.0.1 - - [21/May/2025 11:46:12] "POST /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:46:14,915 - INFO - Paquet reçu: {'type': 'status', 'full_wt': 3679, 'empty_wt': 3543, 'cur_wt': 3684}
+2025-05-21 11:46:16,989 - INFO - 127.0.0.1 - - [21/May/2025 11:46:16] "POST /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:46:18,907 - INFO - Paquet reçu: {'type': 'status', 'full_wt': 3679, 'empty_wt': 3543, 'cur_wt': 3682}
+2025-05-21 11:46:20,963 - INFO - 127.0.0.1 - - [21/May/2025 11:46:20] "POST /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:46:22,882 - INFO - Paquet reçu: {'type': 'status', 'full_wt': 3679, 'empty_wt': 3543, 'cur_wt': 3682}
+2025-05-21 11:46:24,951 - INFO - 127.0.0.1 - - [21/May/2025 11:46:24] "POST /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:46:26,868 - INFO - Paquet reçu: {'type': 'status', 'full_wt': 3679, 'empty_wt': 3543, 'cur_wt': 3679}
+2025-05-21 11:46:27,208 - INFO - 127.0.0.1 - - [21/May/2025 11:46:27] "GET /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:46:27,216 - INFO - 127.0.0.1 - - [21/May/2025 11:46:27] "GET /api/plantes HTTP/1.1" 200 -
+2025-05-21 11:46:27,225 - INFO - 127.0.0.1 - - [21/May/2025 11:46:27] "GET /api/zones HTTP/1.1" 200 -
+2025-05-21 11:46:28,922 - INFO - 127.0.0.1 - - [21/May/2025 11:46:28] "POST /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:46:30,841 - INFO - Paquet reçu: {'type': 'status', 'full_wt': 3679, 'empty_wt': 3543, 'cur_wt': 3681}
+2025-05-21 11:46:32,898 - INFO - 127.0.0.1 - - [21/May/2025 11:46:32] "POST /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:46:34,917 - INFO - Paquet reçu: {'type': 'status', 'full_wt': 3679, 'empty_wt': 3543, 'cur_wt': 3688}
+2025-05-21 11:46:36,999 - INFO - 127.0.0.1 - - [21/May/2025 11:46:36] "POST /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:46:38,813 - INFO - Paquet reçu: {'type': 'status', 'full_wt': 3679, 'empty_wt': 3543, 'cur_wt': 3679}
+2025-05-21 11:46:40,889 - INFO - 127.0.0.1 - - [21/May/2025 11:46:40] "POST /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:46:42,804 - INFO - Paquet reçu: {'type': 'status', 'full_wt': 3679, 'empty_wt': 3543, 'cur_wt': 3682}
+2025-05-21 11:46:44,872 - INFO - 127.0.0.1 - - [21/May/2025 11:46:44] "POST /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:46:48,900 - INFO - Paquet reçu: {'type': 'status', 'full_wt': 3679, 'empty_wt': 3543, 'cur_wt': 3674}
+2025-05-21 11:46:50,984 - INFO - 127.0.0.1 - - [21/May/2025 11:46:50] "POST /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:47:33,212 - INFO - 127.0.0.1 - - [21/May/2025 11:47:33] "GET /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:47:33,217 - INFO - 127.0.0.1 - - [21/May/2025 11:47:33] "GET /api/plantes HTTP/1.1" 200 -
+2025-05-21 11:47:33,228 - INFO - 127.0.0.1 - - [21/May/2025 11:47:33] "GET /api/zones HTTP/1.1" 200 -
+2025-05-21 11:48:33,214 - INFO - 127.0.0.1 - - [21/May/2025 11:48:33] "GET /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:48:33,218 - INFO - 127.0.0.1 - - [21/May/2025 11:48:33] "GET /api/plantes HTTP/1.1" 200 -
+2025-05-21 11:48:33,229 - INFO - 127.0.0.1 - - [21/May/2025 11:48:33] "GET /api/zones HTTP/1.1" 200 -
+2025-05-21 11:49:33,221 - INFO - 127.0.0.1 - - [21/May/2025 11:49:33] "GET /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:49:33,225 - INFO - 127.0.0.1 - - [21/May/2025 11:49:33] "GET /api/plantes HTTP/1.1" 200 -
+2025-05-21 11:49:33,236 - INFO - 127.0.0.1 - - [21/May/2025 11:49:33] "GET /api/zones HTTP/1.1" 200 -
+2025-05-21 11:50:33,206 - INFO - 127.0.0.1 - - [21/May/2025 11:50:33] "GET /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:50:33,211 - INFO - 127.0.0.1 - - [21/May/2025 11:50:33] "GET /api/plantes HTTP/1.1" 200 -
+2025-05-21 11:50:33,222 - INFO - 127.0.0.1 - - [21/May/2025 11:50:33] "GET /api/zones HTTP/1.1" 200 -
+2025-05-21 11:51:33,223 - INFO - 127.0.0.1 - - [21/May/2025 11:51:33] "GET /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:51:33,233 - INFO - 127.0.0.1 - - [21/May/2025 11:51:33] "GET /api/plantes HTTP/1.1" 200 -
+2025-05-21 11:51:33,245 - INFO - 127.0.0.1 - - [21/May/2025 11:51:33] "GET /api/zones HTTP/1.1" 200 -
+2025-05-21 11:52:33,214 - INFO - 127.0.0.1 - - [21/May/2025 11:52:33] "GET /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:52:33,222 - INFO - 127.0.0.1 - - [21/May/2025 11:52:33] "GET /api/plantes HTTP/1.1" 200 -
+2025-05-21 11:52:33,231 - INFO - 127.0.0.1 - - [21/May/2025 11:52:33] "GET /api/zones HTTP/1.1" 200 -
+2025-05-21 11:53:33,212 - INFO - 127.0.0.1 - - [21/May/2025 11:53:33] "GET /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:53:33,218 - INFO - 127.0.0.1 - - [21/May/2025 11:53:33] "GET /api/plantes HTTP/1.1" 200 -
+2025-05-21 11:53:33,228 - INFO - 127.0.0.1 - - [21/May/2025 11:53:33] "GET /api/zones HTTP/1.1" 200 -
+2025-05-21 11:54:33,215 - INFO - 127.0.0.1 - - [21/May/2025 11:54:33] "GET /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:54:33,220 - INFO - 127.0.0.1 - - [21/May/2025 11:54:33] "GET /api/plantes HTTP/1.1" 200 -
+2025-05-21 11:54:33,227 - INFO - 127.0.0.1 - - [21/May/2025 11:54:33] "GET /api/zones HTTP/1.1" 200 -
+2025-05-21 11:55:33,200 - INFO - 127.0.0.1 - - [21/May/2025 11:55:33] "GET /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:55:33,209 - INFO - 127.0.0.1 - - [21/May/2025 11:55:33] "GET /api/plantes HTTP/1.1" 200 -
+2025-05-21 11:55:33,216 - INFO - 127.0.0.1 - - [21/May/2025 11:55:33] "GET /api/zones HTTP/1.1" 200 -
+2025-05-21 11:56:33,219 - INFO - 127.0.0.1 - - [21/May/2025 11:56:33] "GET /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:56:33,226 - INFO - 127.0.0.1 - - [21/May/2025 11:56:33] "GET /api/plantes HTTP/1.1" 200 -
+2025-05-21 11:56:33,233 - INFO - 127.0.0.1 - - [21/May/2025 11:56:33] "GET /api/zones HTTP/1.1" 200 -
+2025-05-21 11:57:33,209 - INFO - 127.0.0.1 - - [21/May/2025 11:57:33] "GET /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:57:33,218 - INFO - 127.0.0.1 - - [21/May/2025 11:57:33] "GET /api/plantes HTTP/1.1" 200 -
+2025-05-21 11:57:33,227 - INFO - 127.0.0.1 - - [21/May/2025 11:57:33] "GET /api/zones HTTP/1.1" 200 -
+2025-05-21 11:58:33,204 - INFO - 127.0.0.1 - - [21/May/2025 11:58:33] "GET /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:58:33,209 - INFO - 127.0.0.1 - - [21/May/2025 11:58:33] "GET /api/plantes HTTP/1.1" 200 -
+2025-05-21 11:58:33,218 - INFO - 127.0.0.1 - - [21/May/2025 11:58:33] "GET /api/zones HTTP/1.1" 200 -
+2025-05-21 11:59:33,206 - INFO - 127.0.0.1 - - [21/May/2025 11:59:33] "GET /api/robot/status HTTP/1.1" 200 -
+2025-05-21 11:59:33,211 - INFO - 127.0.0.1 - - [21/May/2025 11:59:33] "GET /api/plantes HTTP/1.1" 200 -
+2025-05-21 11:59:33,219 - INFO - 127.0.0.1 - - [21/May/2025 11:59:33] "GET /api/zones HTTP/1.1" 200 -
+2025-05-21 13:33:53,073 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:33:53,235 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:33:53,425 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:33:53,531 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:33:53,635 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:33:53,738 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:33:53,813 - INFO - 127.0.0.1 - - [21/May/2025 13:33:53] "GET /api/robot/status HTTP/1.1" 200 -
+2025-05-21 13:33:53,824 - INFO - 127.0.0.1 - - [21/May/2025 13:33:53] "GET /api/plantes HTTP/1.1" 200 -
+2025-05-21 13:33:53,841 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:33:53,843 - INFO - 127.0.0.1 - - [21/May/2025 13:33:53] "GET /api/zones HTTP/1.1" 200 -
+2025-05-21 13:33:53,944 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:33:54,052 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:33:54,154 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:33:54,256 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:33:54,535 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:33:54,716 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:33:54,881 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:33:55,050 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:33:55,189 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:33:55,291 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:33:55,405 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:33:55,527 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:33:55,641 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:33:55,743 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:33:55,844 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:33:55,946 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:33:56,047 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:33:56,148 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:33:56,249 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:33:56,351 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:33:56,452 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:33:56,589 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:33:56,709 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:33:56,824 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:33:56,936 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:33:57,037 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:33:57,142 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:33:57,251 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:33:57,356 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:33:57,464 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:33:57,620 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:33:57,732 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:33:57,844 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:33:57,948 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:33:58,051 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:33:58,154 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:33:58,257 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:33:58,359 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:33:58,464 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:33:58,567 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:33:58,670 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:33:58,774 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:33:58,879 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:33:58,985 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:33:59,104 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:33:59,224 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:33:59,334 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:33:59,435 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:33:59,536 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:33:59,638 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:33:59,738 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:33:59,840 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:33:59,941 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:00,044 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:00,148 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:00,249 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:00,351 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:00,452 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:00,553 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:00,654 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:00,755 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:00,857 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:00,959 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:01,064 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:01,169 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:01,270 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:01,372 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:01,473 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:01,574 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:01,675 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:01,776 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:01,877 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:01,979 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:02,080 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:02,181 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:02,283 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:02,384 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:02,485 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:02,587 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:02,688 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:02,789 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:02,890 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:02,991 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:03,092 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:03,193 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:03,295 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:03,396 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:03,497 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:03,598 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:03,699 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:03,801 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:03,902 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:04,003 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:04,104 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:04,205 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:04,306 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:04,407 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:04,512 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:04,613 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:04,714 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:04,816 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:04,917 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:05,026 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:05,131 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:05,233 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:05,338 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:05,448 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:05,551 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:05,657 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:05,758 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:05,860 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:05,962 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:06,063 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:06,164 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:06,266 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:06,366 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:06,468 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:06,569 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:06,670 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:06,772 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:06,873 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:06,984 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:07,085 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:07,186 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:07,287 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:07,388 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:07,489 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:07,591 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:07,692 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:07,794 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:07,895 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:07,997 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:08,098 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:08,199 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:08,301 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:08,402 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:08,504 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:08,606 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:08,707 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:08,808 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:08,909 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:09,011 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:09,231 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:09,332 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:09,433 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:09,539 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:09,651 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:09,752 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:09,854 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:09,955 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:10,056 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:10,158 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:10,259 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:10,365 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:10,469 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:10,571 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:10,671 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:10,773 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:10,874 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:10,976 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:11,077 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:11,178 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:11,279 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:11,387 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:11,494 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:11,595 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:11,696 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:12,252 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:12,354 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:12,455 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:12,556 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:12,657 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:12,759 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:12,860 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:12,961 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:13,062 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:13,164 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:13,265 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:13,374 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:13,487 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:13,588 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:13,689 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:13,790 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:13,891 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:13,993 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:14,175 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:14,295 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:14,396 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:14,498 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:14,619 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:14,722 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:14,824 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:14,926 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:15,027 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:15,128 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:15,230 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:15,331 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:15,432 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:15,534 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:15,635 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:15,737 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:15,841 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:15,942 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:16,043 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:16,145 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:16,246 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:16,347 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:16,457 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:16,558 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:16,659 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:16,762 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:16,863 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:16,965 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:17,066 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:17,167 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:17,268 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:17,369 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:17,471 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:17,573 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:17,674 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:17,775 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:17,876 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:17,977 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:18,078 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:18,179 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:18,281 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:18,382 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:18,483 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:18,584 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:18,685 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:18,786 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:18,888 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:18,989 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:19,090 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:19,191 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:19,294 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:19,395 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:19,496 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:19,597 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:19,699 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:20,174 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:20,395 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:20,511 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:20,612 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:20,713 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:20,814 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:20,916 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:21,017 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:21,145 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:21,277 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:21,421 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:21,571 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:21,714 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:21,847 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:22,002 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:22,182 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:22,298 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:22,414 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:22,524 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:22,645 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:22,793 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:22,957 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:23,176 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:23,301 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:23,434 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:23,579 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:23,696 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:23,813 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:23,914 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:24,018 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:24,119 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:24,220 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:24,321 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:24,426 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:24,527 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:24,629 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:24,731 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:24,832 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:24,933 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:25,034 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:25,135 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:25,236 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:25,339 - ERROR - Erreur lors de la lecture: ClearCommError failed (PermissionError(13, 'Accès refusé.', None, 5))
+2025-05-21 13:34:25,437 - INFO - Arrêt du programme par l'utilisateur
+2025-05-21 13:34:28,666 - INFO - 127.0.0.1 - - [21/May/2025 13:34:28] "GET /api/zones HTTP/1.1" 200 -
+2025-05-21 13:34:28,697 - INFO - 127.0.0.1 - - [21/May/2025 13:34:28] "GET /api/plantes HTTP/1.1" 200 -
+2025-05-21 13:34:28,815 - INFO - 127.0.0.1 - - [21/May/2025 13:34:28] "GET /api/robot/status HTTP/1.1" 200 -
