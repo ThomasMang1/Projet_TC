@@ -3,16 +3,10 @@ from models import db, Plante, Zone, Arrosage, Robot
 from datetime import datetime, timezone, timedelta
 import csv
 import io
-import os
-import logging
-from models import DatasetData
-from meteomatics.api import query_time_series
 import requests
 from sqlalchemy import func
 from flask import request
 from flask import Flask, render_template, jsonify, request
-from sqlalchemy import create_engine, text
-from flask_sqlalchemy import SQLAlchemy
 from uart_to_flask import RobotBridge
 
 app = Flask(__name__)
@@ -35,41 +29,6 @@ def get_plantes():
         'humidite_max': p.humidite_max,
         'zone': p.zone.nom if p.zone else None
     } for p in plantes])
-
-
-@app.route('/api/robot/status', methods=['GET'])
-def get_robot_status():
-    robot = Robot.query.first()
-    if robot:
-        return jsonify({
-            'batterie': robot.niveau_batterie,
-            'eau': robot.niveau_eau,
-            'etat': robot.etat,
-            'position': {'x': robot.position_x, 'y': robot.position_y}
-        })
-    return jsonify({'error': 'Robot non trouvé'}), 404
-
-@app.route('/api/zones', methods=['GET'])
-def get_zones():
-    zones = Zone.query.all()
-    return jsonify([{
-        'id': z.id,
-        'nom': z.nom,
-        'humidite_actuelle': z.humidite_actuelle,
-        'nombre_plantes': len(z.plantes)
-    } for z in zones])
-
-@app.route('/api/arrosages', methods=['GET'])
-def get_arrosages():
-    arrosages = Arrosage.query.order_by(Arrosage.date.desc()).limit(10).all()
-    return jsonify([{
-        'id': a.id,
-        'date': a.date.isoformat(),
-        'plante': a.plante.nom,
-        'quantite': a.quantite_eau,
-        'humidite_avant': a.humidite_avant,
-        'humidite_apres': a.humidite_apres
-    } for a in arrosages])
 
 @app.route('/api/plantes', methods=['POST'])
 def create_plante():
@@ -185,6 +144,16 @@ def get_plante(plante_id):
         'color': plante.color
     })
 
+@app.route('/api/zones', methods=['GET'])
+def get_zones():
+    zones = Zone.query.all()
+    return jsonify([{
+        'id': z.id,
+        'nom': z.nom,
+        'humidite_actuelle': z.humidite_actuelle,
+        'nombre_plantes': len(z.plantes)
+    } for z in zones])
+
 @app.route('/api/zones', methods=['POST'])
 def create_zone():
     data = request.get_json()
@@ -261,6 +230,17 @@ def get_zone(zone_id):
         } for p in zone.plantes]
     })
 
+@app.route('/api/arrosages', methods=['GET'])
+def get_arrosages():
+    arrosages = Arrosage.query.order_by(Arrosage.date.desc()).limit(10).all()
+    return jsonify([{
+        'id': a.id,
+        'date': a.date.isoformat(),
+        'plante': a.plante.nom,
+        'quantite': a.quantite_eau,
+        'humidite_avant': a.humidite_avant,
+    } for a in arrosages])
+
 @app.route('/api/plantes/export', methods=['GET'])
 def export_plantes():
     # Créer un buffer en mémoire pour le fichier CSV
@@ -305,57 +285,6 @@ def export_plantes():
         as_attachment=True,
         download_name=f'plantes_export_{datetime.now().strftime("%Y%m%d_%H%M%S")}.csv'
     )
-
-@app.route('/api/data', methods=['POST'])
-def receive_data():
-    """Reçoit les données du robot via UART et met à jour la base de données"""
-    try:
-        data = request.get_json()
-        
-        # Vérifier que toutes les données requises sont présentes
-        required_fields = ['temperature', 'humidity', 'battery', 'water_level']
-        if not all(field in data for field in required_fields):
-            return jsonify({"status": "error", "message": "Données incomplètes"}), 400
-        
-        # Récupérer le robot (on suppose qu'il n'y en a qu'un pour l'instant)
-        robot = Robot.query.first()
-        if not robot:
-            # Créer un robot s'il n'existe pas
-            robot = Robot(
-                nom="Robot Principal",
-                niveau_batterie=data['battery'],
-                niveau_eau=data['water_level'],
-                position_x=0,
-                position_y=0,
-                etat="en_attente"
-            )
-            db.session.add(robot)
-        else:
-            # Mettre à jour les données du robot
-            robot.niveau_batterie = data['battery']
-            robot.niveau_eau = data['water_level']
-            robot.derniere_mise_a_jour = datetime.now()
-        
-        # Mettre à jour l'humidité des zones
-        zones = Zone.query.all()
-        for zone in zones:
-            # Pour l'exemple, on met à jour toutes les zones avec la même humidité
-            # Dans un cas réel, il faudrait identifier la zone concernée
-            zone.humidite_actuelle = data['humidity']
-            zone.derniere_mesure = datetime.now()
-        
-        # Enregistrer les modifications
-        db.session.commit()
-        
-        return jsonify({"status": "ok", "message": "Données reçues et traitées"})
-        
-    except Exception as e:
-        db.session.rollback()
-        logging.error(f"Erreur lors du traitement des données: {e}")
-        return jsonify({"status": "error", "message": str(e)}), 500
-    
-
-
 
 @app.route('/api/meteo', methods=['GET'])
 def get_meteo():
@@ -467,6 +396,17 @@ def check_plant():
         
     except Exception as e:
         return jsonify({'error': str(e)}), 500
+
+@app.route('/api/robot/status', methods=['GET'])
+def get_robot_status():
+    robot = Robot.query.first()
+    if robot:
+        return jsonify({
+            'batterie': robot.niveau_batterie,
+            'eau': robot.niveau_eau,
+            'etat': robot.etat
+        })
+    return jsonify({'error': 'Robot non trouvé'}), 404
 
 @app.route('/api/robot/status', methods=['POST'])
 def update_robot_status():

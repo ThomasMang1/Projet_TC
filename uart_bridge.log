@@ -2380,3 +2380,103 @@
 2025-05-21 13:34:28,666 - INFO - 127.0.0.1 - - [21/May/2025 13:34:28] "GET /api/zones HTTP/1.1" 200 -
 2025-05-21 13:34:28,697 - INFO - 127.0.0.1 - - [21/May/2025 13:34:28] "GET /api/plantes HTTP/1.1" 200 -
 2025-05-21 13:34:28,815 - INFO - 127.0.0.1 - - [21/May/2025 13:34:28] "GET /api/robot/status HTTP/1.1" 200 -
+2025-05-27 10:47:12,302 - INFO - [31m[1mWARNING: This is a development server. Do not use it in a production deployment. Use a production WSGI server instead.[0m
+ * Running on http://127.0.0.1:5000
+2025-05-27 10:47:12,304 - INFO - [33mPress CTRL+C to quit[0m
+2025-05-27 10:47:12,316 - INFO -  * Restarting with stat
+2025-05-27 10:47:15,740 - WARNING -  * Debugger is active!
+2025-05-27 10:47:15,756 - INFO -  * Debugger PIN: 925-914-748
+2025-05-27 10:47:25,551 - INFO - 127.0.0.1 - - [27/May/2025 10:47:25] "GET / HTTP/1.1" 200 -
+2025-05-27 10:47:25,753 - INFO - 127.0.0.1 - - [27/May/2025 10:47:25] "[36mGET /static/js/consommation-eau.js HTTP/1.1[0m" 304 -
+2025-05-27 10:47:25,882 - INFO - 127.0.0.1 - - [27/May/2025 10:47:25] "GET /api/robot/status HTTP/1.1" 200 -
+2025-05-27 10:47:25,926 - INFO - 127.0.0.1 - - [27/May/2025 10:47:25] "GET /api/plantes HTTP/1.1" 200 -
+2025-05-27 10:47:25,933 - INFO - 127.0.0.1 - - [27/May/2025 10:47:25] "GET /api/zones HTTP/1.1" 200 -
+2025-05-27 10:47:25,998 - INFO - 127.0.0.1 - - [27/May/2025 10:47:25] "GET /api/zones HTTP/1.1" 200 -
+2025-05-27 10:47:26,033 - INFO - 127.0.0.1 - - [27/May/2025 10:47:26] "GET /api/consommation-eau HTTP/1.1" 200 -
+2025-05-27 10:47:26,266 - INFO - 127.0.0.1 - - [27/May/2025 10:47:26] "GET /api/meteo?lat=43.6045&lon=1.4442 HTTP/1.1" 200 -
+2025-05-27 10:47:55,855 - INFO - 127.0.0.1 - - [27/May/2025 10:47:55] "GET /api/robot/status HTTP/1.1" 200 -
+2025-05-27 10:48:25,855 - INFO - 127.0.0.1 - - [27/May/2025 10:48:25] "GET /api/robot/status HTTP/1.1" 200 -
+2025-05-27 10:48:25,863 - INFO - 127.0.0.1 - - [27/May/2025 10:48:25] "GET /api/plantes HTTP/1.1" 200 -
+2025-05-27 10:48:25,871 - INFO - 127.0.0.1 - - [27/May/2025 10:48:25] "GET /api/zones HTTP/1.1" 200 -
+2025-05-27 10:48:56,383 - INFO - 127.0.0.1 - - [27/May/2025 10:48:56] "GET /api/robot/status HTTP/1.1" 200 -
+2025-05-27 10:49:26,371 - INFO - 127.0.0.1 - - [27/May/2025 10:49:26] "GET /api/robot/status HTTP/1.1" 200 -
+2025-05-27 10:49:26,371 - INFO - 127.0.0.1 - - [27/May/2025 10:49:26] "GET /api/plantes HTTP/1.1" 200 -
+2025-05-27 10:49:26,395 - INFO - 127.0.0.1 - - [27/May/2025 10:49:26] "GET /api/zones HTTP/1.1" 200 -
+2025-05-27 10:49:56,371 - INFO - 127.0.0.1 - - [27/May/2025 10:49:56] "GET /api/robot/status HTTP/1.1" 200 -
+2025-05-27 10:50:26,381 - INFO - 127.0.0.1 - - [27/May/2025 10:50:26] "GET /api/robot/status HTTP/1.1" 200 -
+2025-05-27 10:50:26,397 - INFO - 127.0.0.1 - - [27/May/2025 10:50:26] "GET /api/plantes HTTP/1.1" 200 -
+2025-05-27 10:50:26,406 - INFO - 127.0.0.1 - - [27/May/2025 10:50:26] "GET /api/zones HTTP/1.1" 200 -
+2025-05-27 10:51:26,374 - INFO - 127.0.0.1 - - [27/May/2025 10:51:26] "GET /api/plantes HTTP/1.1" 200 -
+2025-05-27 10:51:26,399 - INFO - 127.0.0.1 - - [27/May/2025 10:51:26] "GET /api/zones HTTP/1.1" 200 -
+2025-05-27 10:51:28,385 - INFO - 127.0.0.1 - - [27/May/2025 10:51:28] "GET /api/robot/status HTTP/1.1" 200 -
+2025-05-27 10:52:26,390 - INFO - 127.0.0.1 - - [27/May/2025 10:52:26] "GET /api/plantes HTTP/1.1" 200 -
+2025-05-27 10:52:26,400 - INFO - 127.0.0.1 - - [27/May/2025 10:52:26] "GET /api/zones HTTP/1.1" 200 -
+2025-05-27 10:52:28,380 - INFO - 127.0.0.1 - - [27/May/2025 10:52:28] "GET /api/robot/status HTTP/1.1" 200 -
+2025-05-27 10:53:26,383 - INFO - 127.0.0.1 - - [27/May/2025 10:53:26] "GET /api/plantes HTTP/1.1" 200 -
+2025-05-27 10:53:26,391 - INFO - 127.0.0.1 - - [27/May/2025 10:53:26] "GET /api/zones HTTP/1.1" 200 -
+2025-05-27 10:53:28,390 - INFO - 127.0.0.1 - - [27/May/2025 10:53:28] "GET /api/robot/status HTTP/1.1" 200 -
+2025-05-27 10:54:16,471 - INFO -  * Detected change in 'c:\\Users\\Thomas\\Desktop\\CPE\\4A\\S8\\PROJET_TC\\Projet_TC\\app.py', reloading
+2025-05-27 10:54:16,712 - INFO -  * Restarting with stat
+2025-05-27 10:54:19,912 - WARNING -  * Debugger is active!
+2025-05-27 10:54:19,912 - INFO -  * Debugger PIN: 925-914-748
+2025-05-27 10:54:28,405 - INFO - 127.0.0.1 - - [27/May/2025 10:54:28] "GET /api/robot/status HTTP/1.1" 200 -
+2025-05-27 10:54:28,434 - INFO - 127.0.0.1 - - [27/May/2025 10:54:28] "GET /api/plantes HTTP/1.1" 200 -
+2025-05-27 10:54:28,445 - INFO - 127.0.0.1 - - [27/May/2025 10:54:28] "GET /api/zones HTTP/1.1" 200 -
+2025-05-27 10:55:28,410 - INFO - 127.0.0.1 - - [27/May/2025 10:55:28] "GET /api/robot/status HTTP/1.1" 200 -
+2025-05-27 10:55:28,418 - INFO - 127.0.0.1 - - [27/May/2025 10:55:28] "GET /api/plantes HTTP/1.1" 200 -
+2025-05-27 10:55:28,430 - INFO - 127.0.0.1 - - [27/May/2025 10:55:28] "GET /api/zones HTTP/1.1" 200 -
+2025-05-27 10:55:58,533 - INFO -  * Detected change in 'c:\\Users\\Thomas\\Desktop\\CPE\\4A\\S8\\PROJET_TC\\Projet_TC\\app.py', reloading
+2025-05-27 10:55:58,757 - INFO -  * Restarting with stat
+2025-05-27 10:56:01,206 - WARNING -  * Debugger is active!
+2025-05-27 10:56:01,213 - INFO -  * Debugger PIN: 925-914-748
+2025-05-27 10:56:28,409 - INFO - 127.0.0.1 - - [27/May/2025 10:56:28] "GET /api/robot/status HTTP/1.1" 200 -
+2025-05-27 10:56:28,437 - INFO - 127.0.0.1 - - [27/May/2025 10:56:28] "GET /api/plantes HTTP/1.1" 200 -
+2025-05-27 10:56:28,463 - INFO - 127.0.0.1 - - [27/May/2025 10:56:28] "GET /api/zones HTTP/1.1" 200 -
+2025-05-27 10:57:28,376 - INFO - 127.0.0.1 - - [27/May/2025 10:57:28] "GET /api/robot/status HTTP/1.1" 200 -
+2025-05-27 10:57:28,392 - INFO - 127.0.0.1 - - [27/May/2025 10:57:28] "GET /api/plantes HTTP/1.1" 200 -
+2025-05-27 10:57:28,409 - INFO - 127.0.0.1 - - [27/May/2025 10:57:28] "GET /api/zones HTTP/1.1" 200 -
+2025-05-27 10:58:06,799 - INFO -  * Detected change in 'c:\\Users\\Thomas\\Desktop\\CPE\\4A\\S8\\PROJET_TC\\Projet_TC\\app.py', reloading
+2025-05-27 10:58:07,019 - INFO -  * Restarting with stat
+2025-05-27 10:58:09,369 - WARNING -  * Debugger is active!
+2025-05-27 10:58:09,369 - INFO -  * Debugger PIN: 925-914-748
+2025-05-27 10:58:28,411 - INFO - 127.0.0.1 - - [27/May/2025 10:58:28] "GET /api/robot/status HTTP/1.1" 200 -
+2025-05-27 10:58:28,460 - INFO - 127.0.0.1 - - [27/May/2025 10:58:28] "GET /api/zones HTTP/1.1" 200 -
+2025-05-27 10:58:28,460 - INFO - 127.0.0.1 - - [27/May/2025 10:58:28] "GET /api/plantes HTTP/1.1" 200 -
+2025-05-27 10:59:28,373 - INFO - 127.0.0.1 - - [27/May/2025 10:59:28] "GET /api/robot/status HTTP/1.1" 200 -
+2025-05-27 10:59:28,427 - INFO - 127.0.0.1 - - [27/May/2025 10:59:28] "GET /api/plantes HTTP/1.1" 200 -
+2025-05-27 10:59:28,429 - INFO - 127.0.0.1 - - [27/May/2025 10:59:28] "GET /api/zones HTTP/1.1" 200 -
+2025-05-27 11:00:28,405 - INFO - 127.0.0.1 - - [27/May/2025 11:00:28] "GET /api/robot/status HTTP/1.1" 200 -
+2025-05-27 11:00:28,405 - INFO - 127.0.0.1 - - [27/May/2025 11:00:28] "GET /api/plantes HTTP/1.1" 200 -
+2025-05-27 11:00:28,427 - INFO - 127.0.0.1 - - [27/May/2025 11:00:28] "GET /api/zones HTTP/1.1" 200 -
+2025-05-27 11:01:28,403 - INFO - 127.0.0.1 - - [27/May/2025 11:01:28] "GET /api/robot/status HTTP/1.1" 200 -
+2025-05-27 11:01:28,430 - INFO - 127.0.0.1 - - [27/May/2025 11:01:28] "GET /api/plantes HTTP/1.1" 200 -
+2025-05-27 11:01:28,443 - INFO - 127.0.0.1 - - [27/May/2025 11:01:28] "GET /api/zones HTTP/1.1" 200 -
+2025-05-27 11:02:28,389 - INFO - 127.0.0.1 - - [27/May/2025 11:02:28] "GET /api/robot/status HTTP/1.1" 200 -
+2025-05-27 11:02:28,406 - INFO - 127.0.0.1 - - [27/May/2025 11:02:28] "GET /api/plantes HTTP/1.1" 200 -
+2025-05-27 11:02:28,420 - INFO - 127.0.0.1 - - [27/May/2025 11:02:28] "GET /api/zones HTTP/1.1" 200 -
+2025-05-27 11:03:24,071 - INFO - 127.0.0.1 - - [27/May/2025 11:03:24] "GET /api/robot/status HTTP/1.1" 200 -
+2025-05-27 11:03:25,854 - INFO - 127.0.0.1 - - [27/May/2025 11:03:25] "GET /api/robot/status HTTP/1.1" 200 -
+2025-05-27 11:03:25,863 - INFO - 127.0.0.1 - - [27/May/2025 11:03:25] "GET /api/plantes HTTP/1.1" 200 -
+2025-05-27 11:03:25,875 - INFO - 127.0.0.1 - - [27/May/2025 11:03:25] "GET /api/zones HTTP/1.1" 200 -
+2025-05-27 11:03:56,378 - INFO - 127.0.0.1 - - [27/May/2025 11:03:56] "GET /api/robot/status HTTP/1.1" 200 -
+2025-05-27 11:04:26,378 - INFO - 127.0.0.1 - - [27/May/2025 11:04:26] "GET /api/robot/status HTTP/1.1" 200 -
+2025-05-27 11:04:26,393 - INFO - 127.0.0.1 - - [27/May/2025 11:04:26] "GET /api/plantes HTTP/1.1" 200 -
+2025-05-27 11:04:26,402 - INFO - 127.0.0.1 - - [27/May/2025 11:04:26] "GET /api/zones HTTP/1.1" 200 -
+2025-05-27 11:05:20,277 - INFO -  * Detected change in 'c:\\Users\\Thomas\\Desktop\\CPE\\4A\\S8\\PROJET_TC\\Projet_TC\\app.py', reloading
+2025-05-27 11:05:20,559 - INFO -  * Restarting with stat
+2025-05-27 11:05:23,378 - WARNING -  * Debugger is active!
+2025-05-27 11:05:23,394 - INFO -  * Debugger PIN: 925-914-748
+2025-05-27 11:05:28,389 - INFO - 127.0.0.1 - - [27/May/2025 11:05:28] "GET /api/robot/status HTTP/1.1" 200 -
+2025-05-27 11:05:28,439 - INFO - 127.0.0.1 - - [27/May/2025 11:05:28] "GET /api/plantes HTTP/1.1" 200 -
+2025-05-27 11:05:28,449 - INFO - 127.0.0.1 - - [27/May/2025 11:05:28] "GET /api/zones HTTP/1.1" 200 -
+2025-05-27 11:06:28,383 - INFO - 127.0.0.1 - - [27/May/2025 11:06:28] "GET /api/robot/status HTTP/1.1" 200 -
+2025-05-27 11:06:28,399 - INFO - 127.0.0.1 - - [27/May/2025 11:06:28] "GET /api/plantes HTTP/1.1" 200 -
+2025-05-27 11:06:28,484 - INFO - 127.0.0.1 - - [27/May/2025 11:06:28] "GET /api/zones HTTP/1.1" 200 -
+2025-05-27 11:07:28,390 - INFO - 127.0.0.1 - - [27/May/2025 11:07:28] "GET /api/robot/status HTTP/1.1" 200 -
+2025-05-27 11:07:28,397 - INFO - 127.0.0.1 - - [27/May/2025 11:07:28] "GET /api/plantes HTTP/1.1" 200 -
+2025-05-27 11:07:28,405 - INFO - 127.0.0.1 - - [27/May/2025 11:07:28] "GET /api/zones HTTP/1.1" 200 -
+2025-05-27 11:08:28,372 - INFO - 127.0.0.1 - - [27/May/2025 11:08:28] "GET /api/robot/status HTTP/1.1" 200 -
+2025-05-27 11:08:28,415 - INFO - 127.0.0.1 - - [27/May/2025 11:08:28] "GET /api/plantes HTTP/1.1" 200 -
+2025-05-27 11:08:28,429 - INFO - 127.0.0.1 - - [27/May/2025 11:08:28] "GET /api/zones HTTP/1.1" 200 -
+2025-05-27 11:09:07,319 - INFO -  * Detected change in 'c:\\Users\\Thomas\\Desktop\\CPE\\4A\\S8\\PROJET_TC\\Projet_TC\\models.py', reloading
+2025-05-27 11:09:07,568 - INFO -  * Restarting with stat
