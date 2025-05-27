@@ -241,6 +241,34 @@ def get_arrosages():
         'humidite_avant': a.humidite_avant,
     } for a in arrosages])
 
+@app.route('/api/arrosages', methods=['POST'])
+def create_arrosage():
+    data = request.get_json()
+    if not all(k in data for k in ['plante_id', 'quantite_eau', 'humidite_avant']):
+        return jsonify({'error': 'Données manquantes. Les champs "plante_id", "quantite_eau" et "humidite_avant" sont obligatoires.'}), 400
+    
+    nouvel_arrosage = Arrosage(
+        date=datetime.now(),
+        plante_id=data['plante_id'],
+        quantite_eau=data['quantite_eau'],
+        humidite_avant=data['humidite_avant']
+    )
+    
+    try:
+        db.session.add(nouvel_arrosage)
+        db.session.commit()
+        return jsonify({
+            'id': nouvel_arrosage.id,
+            'date': nouvel_arrosage.date.isoformat(),
+            'plante_id': nouvel_arrosage.plante_id,
+            'quantite_eau': nouvel_arrosage.quantite_eau,
+            'humidite_avant': nouvel_arrosage.humidite_avant,
+            'message': 'Arrosage créé avec succès'
+        }), 201
+    except Exception as e:
+        db.session.rollback()
+        return jsonify({'error': str(e)}), 500
+
 @app.route('/api/plantes/export', methods=['GET'])
 def export_plantes():
     # Créer un buffer en mémoire pour le fichier CSV
