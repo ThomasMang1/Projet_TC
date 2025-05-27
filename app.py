@@ -70,6 +70,15 @@ def add_plante():
 
     return jsonify({'message': 'Plante ajoutée avec succès'}), 201
 
+
+@app.route('/api/plantes_catalogue', methods=['GET'])
+def get_plantes_catalogue():
+    result = db.session.execute(text("SELECT nom, description FROM plante"))
+    plantes = [{'nom': row[0], 'description': row[1]} for row in result]
+    return jsonify(plantes)
+
+
+
 @app.route('/api/robot/status', methods=['GET'])
 def get_robot_status():
     robot = Robot.query.first()
