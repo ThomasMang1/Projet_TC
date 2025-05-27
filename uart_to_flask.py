@@ -27,40 +27,7 @@ BAUD_RATE = int(os.environ.get('BAUD_RATE', '19200'))
 API_URL = os.environ.get('API_URL', 'http://localhost:5000')
 RETRY_INTERVAL = int(os.environ.get('RETRY_INTERVAL', '10'))
 MAX_RETRIES = int(os.environ.get('MAX_RETRIES', '3'))
-STATUS_INTERVAL = 10  # Intervalle d'envoi du status en secondes.
-
-class RobotPacket:
-    """Classe pour gérer les paquets de communication avec le robot"""
-    
-    @staticmethod
-    def parse_packet(data_string: str) -> Optional[Dict]:
-        """Parse un paquet reçu du robot"""
-        try:
-            # Vérifier si le paquet commence par $$$
-            if not data_string.startswith('$$$'):
-                return None
-                
-            # Extraire la partie JSON après $$$
-            json_str = data_string[3:]
-            
-            # Vérifier si le paquet est valide
-            if not (json_str.startswith('{') and json_str.endswith('}')):
-                return None
-                
-            # Parser le JSON
-            data = json.loads(json_str)
-            print("parsed")
-            
-            # Vérifier le type de paquet
-            if 'type' not in data:
-                return None
-                
-            return data
-            
-        except Exception as e:
-            logger.error(f"Erreur lors du parsing du paquet: {e}")
-            return None
-
+STATUS_INTERVAL = 10  # Intervalle d'envoi du status en secondes
 
 class RobotBridge:
     """Classe principale pour gérer la communication avec le robot"""
@@ -119,6 +86,26 @@ class RobotBridge:
             self.buffer.clear()
             return None
     
+    def parse_packet(self, data_string: str) -> Optional[Dict]:
+        """Parse un paquet reçu du robot"""
+        try:
+            if not data_string.startswith('$$$'):
+                return None
+                
+            json_str = data_string[3:]
+            if not (json_str.startswith('{') and json_str.endswith('}')):
+                return None
+                
+            data = json.loads(json_str)
+            if 'type' not in data:
+                return None
+                
+            return data
+                
+        except Exception as e:
+            logger.error(f"Erreur lors du parsing du paquet: {e}")
+            return None
+    
     def check_plant_by_color(self, color: Dict) -> Tuple[bool, Optional[int]]:
         """Vérifie si une plante correspond à la couleur détectée"""
         try:
@@ -140,44 +127,43 @@ class RobotBridge:
     
     def handle_packet(self, packet: Dict) -> None:
         """Gère un paquet reçu du robot"""
-        packet_type = packet['type']
-        
-        if packet_type == 'colour':
-            self.current_color = packet
-            # is_plant, water_volume = self.check_plant_by_color(packet)
-            is_plant = True # pour le test
-            water_volume = "1" # pour le test
+        try:
+            packet_type = packet['type']
+            
+            if packet_type == 'colour':
+                self.current_color = packet
+                is_plant = True  # pour le test
+                water_volume = "1"  # pour le test
 
-            if is_plant and water_volume:
-                # Envoyer la commande d'arrosage
-                logger.info("envoi d'un packet de '1'")
-                self.send_packet("1")
+                if is_plant and water_volume:
+                    self.send_packet("1")
+                else:
+                    self.send_packet("0")
+                    
+            elif packet_type == 'humidity':
+                self.send_packet("100")
+                logger.info("Commande d'humidité exécutée avec succès")
+                    
+            elif packet_type == 'status':
+                try:
+                    response = requests.post(
+                        f"{API_URL}/api/robot/status",
+                        json=packet,
+                        timeout=5
+                    )
+                    if response.status_code != 200:
+                        logger.warning(f"Erreur lors de l'envoi du status: {response.text}")
+                except Exception as e:
+                    logger.error(f"Erreur lors de l'envoi du status: {e}")
             else:
-                # Envoyer une commande d'arrosage nulle
-                water_volume = "0"
-                self.send_packet(water_volume)
+                logger.warning(f"Type de paquet inconnu: {packet_type}")
                 
-        elif packet_type == 'humidity':
-            water_volume = "100"
-            self.send_packet(water_volume)
-            logger.info("Commande d'humidité exécutée avec succès")
-                
-        elif packet_type == 'status':
-            # Envoyer le status à l'API
-            try:
-                response = requests.post(
-                    f"{API_URL}/api/robot/status",
-                    json=packet,
-                    timeout=5
-                )
-                if response.status_code != 200:
-                    logger.warning(f"Erreur lors de l'envoi du status: {response.text}")
-            except Exception as e:
-                logger.error(f"Erreur lors de l'envoi du status: {e}")
+        except Exception as e:
+            logger.error(f"Erreur lors du traitement du paquet: {e}")
     
     def run(self):
         """Boucle principale de communication"""
-        logger.info("ceci est un test de renvoi de logs")
+        logger.info("Démarrage du bridge UART")
         if not self.connect():
             return
         
@@ -187,8 +173,7 @@ class RobotBridge:
                 line = self.read_line()
                 
                 if line:
-                    # Parser le paquet
-                    packet = RobotPacket.parse_packet(line)
+                    packet = self.parse_packet(line)
                     if packet:
                         logger.info(f"Paquet reçu: {packet}")
                         self.handle_packet(packet)
