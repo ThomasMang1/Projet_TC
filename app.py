@@ -430,9 +430,7 @@ def get_robot_status():
     robot = Robot.query.first()
     if robot:
         return jsonify({
-            'batterie': robot.niveau_batterie,
-            'eau': robot.niveau_eau,
-            'etat': robot.etat
+            'eau': robot.niveau_eau
         })
     return jsonify({'error': 'Robot non trouvé'}), 404
 
@@ -508,6 +506,7 @@ def send_robot_command():
         
         # Créer une instance de RobotBridge et envoyer la commande
         bridge = RobotBridge()
+        bridge.run()
         
         if bridge.connect():
             success = bridge.send_packet(uart_command)

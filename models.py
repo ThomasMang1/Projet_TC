@@ -34,10 +34,8 @@ class Arrosage(db.Model):
 class Robot(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     nom = db.Column(db.String(100), nullable=False)
-    niveau_batterie = db.Column(db.Float)  # en pourcentage
     niveau_eau = db.Column(db.Float)  # en litres
     niveau_eau_max = db.Column(db.Float)  # en litres
     niveau_eau_min = db.Column(db.Float)  # en litres
-    etat = db.Column(db.String(50))  # 'en_charge', 'en_arrosage', 'en_recharge_eau', 'en_attente'
     derniere_mise_a_jour = db.Column(db.DateTime, default=datetime.now(timezone.utc))
     couleur_actuelle = db.Column(db.String(50))  # Stocke la dernière couleur détectée
