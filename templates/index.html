@@ -668,9 +668,10 @@ document.addEventListener('DOMContentLoaded', () => {
     document.getElementById('addPlantForm').addEventListener('submit', function(e) {
         e.preventDefault();
         
-        const plantName = document.getElementById('plantName').value;
-        const humiditeMin = document.getElementById('humiditeMin').value;
-        const humiditeMax = document.getElementById('humiditeMax').value;
+        const plantName = document.getElementById('plantSelect').value;
+        const humiditeMin = document.getElementById('humidityMin').value;
+        const humiditeMax = document.getElementById('humidityMax').value;
+        const zoneId = document.getElementById('zoneSelect').value;
 
         fetch('/api/plantes', {
             method: 'POST',
@@ -681,7 +682,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 nom: plantName,
                 humidite_min: humiditeMin,
                 humidite_max: humiditeMax,
-                zone: zone
+                zone_id: zoneId
             })
         })
         .then(response => response.json())
@@ -828,4 +829,4 @@ document.addEventListener("DOMContentLoaded", () => {
 
 </script>
 </body>
-</html> 
+</html>

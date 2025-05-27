@@ -40,35 +40,6 @@ def get_plantes():
     return jsonify(plantes)
 
 
-@app.route('/api/plantes', methods=['POST'])
-def add_plante():
-    data = request.get_json()
-    nom = data.get('nom')
-    humidite_min = data.get('humidite_min')
-    humidite_max = data.get('humidite_max')
-
-    if not nom:
-        return jsonify({'error': 'Nom de plante manquant'}), 400
-
-    # Vérifier que la plante existe bien dans tableau_plantes
-    result = db.session.execute(
-        text("SELECT * FROM tableau_plantes WHERE plantes = :nom"),
-        {'nom': nom}
-    )
-    plante_existante = result.fetchone()
-
-    if not plante_existante:
-        return jsonify({'error': "Cette plante n'existe pas dans la base de référence"}), 400
-
-    new_plante = Plante(
-        nom=nom,
-        humidite_min=humidite_min,
-        humidite_max=humidite_max
-    )
-    db.session.add(new_plante)
-    db.session.commit()
-
-    return jsonify({'message': 'Plante ajoutée avec succès'}), 201
 
 
 @app.route('/api/plantes_catalogue', methods=['GET'])
