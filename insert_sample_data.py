@@ -14,8 +14,7 @@ def insert_sample_data():
                 date=date,
                 quantite_eau=2.5 + (i * 0.5),  # Quantité d'eau variable
                 plante_id=2,  # Assurez-vous que cette plante existe dans votre base
-                humidite_avant=45.0 - (i * 2),
-                humidite_apres=65.0 + (i * 2)
+                humidite_avant=45.0 - (i * 2)
             )
             db.session.add(arrosage)
         

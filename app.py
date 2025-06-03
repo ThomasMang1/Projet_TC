@@ -411,15 +411,38 @@ def check_plant():
         if not all(k in data for k in ['r', 'g', 'b']):
             return jsonify({'error': 'Données de couleur incomplètes'}), 400
             
-        # Ici, vous devrez implémenter la logique pour vérifier si la couleur
-        # correspond à une plante dans votre base de données
-        # Pour l'exemple, nous retournons des valeurs fictives
-        is_plant = True  # À remplacer par votre logique
-        water_volume = 100  # Volume en ml
+        # Récupérer les valeurs RGB
+        r = int(data['r'])
+        g = int(data['g'])
+        b = int(data['b'])
         
+        # Récupérer toutes les plantes
+        plantes = Plante.query.all()
+        
+        # Pour chaque plante, vérifier si la couleur correspond
+        for plante in plantes:
+            if plante.color:
+                # Convertir la couleur stockée en RGB
+                stored_r, stored_g, stored_b = map(int, plante.color.split(','))
+                
+                # Calculer la différence en pourcentage pour chaque composante
+                diff_r = abs(r - stored_r) / stored_r * 100
+                diff_g = abs(g - stored_g) / stored_g * 100
+                diff_b = abs(b - stored_b) / stored_b * 100
+                
+                # Si toutes les différences sont inférieures à 10%
+                if diff_r <= 10 and diff_g <= 10 and diff_b <= 10:
+                    print(f"Plante trouvée: {plante.nom} (ID: {plante.id})")
+                    return jsonify({
+                        'is_plant': True,
+                        'water_volume': 100,  # Volume en ml
+                        'plant_id': plante.id
+                    })
+        
+        # Si aucune correspondance n'est trouvée
         return jsonify({
-            'is_plant': is_plant,
-            'water_volume': water_volume if is_plant else 0
+            'is_plant': False,
+            'water_volume': 0
         })
         
     except Exception as e:
@@ -430,7 +453,7 @@ def get_robot_status():
     robot = Robot.query.first()
     if robot:
         return jsonify({
-            'eau': robot.niveau_eau
+            'eau': round((robot.niveau_eau-robot.niveau_eau_min)/(robot.niveau_eau_max-robot.niveau_eau_min)*100,2)
         })
     return jsonify({'error': 'Robot non trouvé'}), 404
 

@@ -132,8 +132,9 @@ class RobotBridge:
             
             if packet_type == 'colour':
                 self.current_color = packet
-                is_plant = True  # pour le test
-                water_volume = "1"  # pour le test
+                is_plant, water_volume = self.check_plant_by_color(self.current_color)
+                #is_plant = True  # pour le test
+                #water_volume = "1"  # pour le test
 
                 if is_plant and water_volume:
                     self.send_packet("1")
@@ -203,3 +204,5 @@ if __name__ == "__main__":
         logger.info("Arrêt du programme par l'utilisateur")
     except Exception as e:
         logger.critical(f"Erreur critique: {e}")
+
+        

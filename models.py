@@ -11,7 +11,7 @@ class Plante(db.Model):
     humidite_max = db.Column(db.Float, nullable=False)
     description = db.Column(db.Text)
     date_plantation = db.Column(db.DateTime, default=datetime.now(timezone.utc))
-    qr_code = db.Column(db.String(200))
+    couleur = db.Column(db.String(50))  # Stocke la couleur au format "r,g,b"
     zone_id = db.Column(db.Integer, db.ForeignKey('zone.id'))
     arrosages = db.relationship('Arrosage', backref='plante', lazy=True)
 
