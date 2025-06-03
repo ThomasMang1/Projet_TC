@@ -44,14 +44,14 @@
 
     <div class="container mt-4">
         <div class="row">
-            <!-- État du Robot -->
             <div class="col-md-4">
                 <div class="card status-card">
                     <div class="card-body">
                         <h5 class="card-title"><i class='bx bx-robot'></i> État du Robot</h5>
                         <div id="robot-status">
-                            <p>Batterie: 100 <span id="battery-level">--</span>%</p>
-                            <p>Niveau d'eau: <span id="water-level">--</span>%</p>
+                            <p>Batterie: <span id="battery-level">--</span>%</p>
+                            <p>Niveau d'eau: <span id="water-level">--</span>L</p>
+                            <p>État: <span id="robot-state">--</span></p>
                             <div class="mt-3">
                                 <button class="btn btn-success me-2" onclick="sendStartCommand()">
                                     <i class='bx bx-play'></i> Start
@@ -65,7 +65,6 @@
                 </div>
             </div>
 
-            <!-- Consommation d'eau -->
             <div class="col-md-4">
                 <div class="card">
                     <div class="card-body">
@@ -75,7 +74,6 @@
                 </div>
             </div>
 
-            <!-- Météo -->
             <div class="col-md-4">
                 <div class="card">
                     <div class="card-body">
@@ -94,7 +92,6 @@
         </div>
 
         <div class="row mt-4">
-            <!-- Liste des plantes -->
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-body">
@@ -114,7 +111,6 @@
                 </div>
             </div>
 
-            <!-- Zones -->
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-body">
@@ -131,7 +127,6 @@
         </div>
     </div>
 
-    <!-- Modal Ajout Plante -->
     <div class="modal fade" id="addPlantModal" tabindex="-1">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -142,19 +137,25 @@
                 <div class="modal-body">
                     <form id="addPlantForm">
                         <div class="mb-3">
-                            <label for="plantName" class="form-label">Nom de la plante</label>
-                            <input type="text" class="form-control" id="plantName" required>
+                            <label for="plantSelect" class="form-label">Nom de la plante (Catalogue)</label>
+                            <select id="plantSelect" class="form-select" onchange="showPlantInfo()">
+                                <option value="" selected disabled>Choisir une plante...</option>
+                            </select>
                         </div>
-                        <div class="mb-3">
-                            <label for="humidityMin" class="form-label">Humidité minimale (%)</label>
-                            <input type="number" class="form-control" id="humidityMin" required>
+
+                        <div id="plantInfo" style="display: none;">
+                            <div class="mb-3">
+                                <label for="humidityMin" class="form-label">Humidité minimale (%)</label>
+                                <input type="number" class="form-control" id="humidityMin" readonly>
+                            </div>
+                            <div class="mb-3">
+                                <label for="humidityMax" class="form-label">Humidité maximale (%)</label>
+                                <input type="number" class="form-control" id="humidityMax" readonly>
+                            </div>
                         </div>
+
                         <div class="mb-3">
-                            <label for="humidityMax" class="form-label">Humidité maximale (%)</label>
-                            <input type="number" class="form-control" id="humidityMax" required>
-                        </div>
-                        <div class="mb-3">
-                            <label for="plantDescription" class="form-label">Description</label>
+                            <label for="plantDescription" class="form-label">Description (Optionnel)</label>
                             <textarea class="form-control" id="plantDescription"></textarea>
                         </div>
                         <div class="mb-3">
@@ -173,7 +174,6 @@
         </div>
     </div>
 
-    <!-- Modal Modification Plante -->
     <div class="modal fade" id="editPlantModal" tabindex="-1">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -216,7 +216,6 @@
         </div>
     </div>
 
-    <!-- Modal Ajout Zone -->
     <div class="modal fade" id="addZoneModal" tabindex="-1">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -244,7 +243,6 @@
         </div>
     </div>
 
-    <!-- Modal Modification Zone -->
     <div class="modal fade" id="editZoneModal" tabindex="-1">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -275,17 +273,21 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
+        // Variable globale pour stocker les plantes du catalogue
+        let cataloguePlantesData = [];
+
         // Fonction pour mettre à jour l'état du robot
         function updateRobotStatus() {
             fetch('/api/robot/status')
                 .then(response => response.json())
                 .then(data => {
+                    document.getElementById('battery-level').textContent = data.batterie;
                     document.getElementById('water-level').textContent = data.eau;
                     document.getElementById('robot-state').textContent = data.etat;
                 });
         }
 
-        // Fonction pour mettre à jour la liste des plantes
+        // Fonction pour mettre à jour la liste des plantes de l'utilisateur
         function updatePlantsList() {
             fetch('/api/plantes')
                 .then(response => response.json())
@@ -324,8 +326,8 @@
                             <div class="d-flex justify-content-between align-items-start">
                                 <div>
                                     <h6>${zone.nom}</h6>
-                                    <p class="mb-1">Humidité actuelle: ${zone.humidite_actuelle}%</p>
-                                    <p class="mb-0">Nombre de plantes: ${zone.nombre_plantes}</p>
+                                    <p class="mb-1">Description: ${zone.description || 'N/A'}</p>
+                                    <p class="mb-0">Nombre de plantes: ${zone.nombre_plantes || 0}</p>
                                 </div>
                                 <div>
                                     <button class="btn btn-sm btn-outline-primary me-2" onclick="editZone(${zone.id})">
@@ -341,10 +343,63 @@
                 });
         }
 
+        // Fonction pour charger les zones dans le select d'ajout de plante
+        function loadZones() {
+            fetch('/api/zones')
+                .then(response => response.json())
+                .then(zones => {
+                    const select = document.getElementById('plantZone');
+                    select.innerHTML = '<option value="">Sélectionner une zone</option>'; // Réinitialiser pour éviter les doublons
+                    zones.forEach(zone => {
+                        const option = document.createElement('option');
+                        option.value = zone.id;
+                        option.textContent = zone.nom;
+                        select.appendChild(option);
+                    });
+                });
+        }
+
+        // Fonction pour charger les zones dans le select de modification de plante
+        function loadZonesForEditPlant() {
+            fetch('/api/zones')
+                .then(response => response.json())
+                .then(zones => {
+                    const select = document.getElementById('editPlantZone');
+                    select.innerHTML = '<option value="">Sélectionner une zone</option>'; // Réinitialiser
+                    zones.forEach(zone => {
+                        const option = document.createElement('option');
+                        option.value = zone.id;
+                        option.textContent = zone.nom;
+                        select.appendChild(option);
+                    });
+                });
+        }
+
+        // Fonction pour récupérer les données météo et les afficher
+        async function fetchWeather() {
+            try {
+                const response = await fetch('/api/meteo?lat=43.6045&lon=1.4442');  // Toulouse par défaut
+                const data = await response.json(); 
+
+                if (response.ok) {
+                    document.getElementById('temperature').textContent = data.temperature_C;
+                    document.getElementById('forecast').textContent = data.description;
+                    document.getElementById('humidity').textContent = data.humidity + '%'; 
+                    document.getElementById('wind').textContent = data.wind_speed + ' m/s';
+                } else {
+                    console.error('Erreur API:', data.error);
+                    document.getElementById('weather-info').innerHTML = '<p>Erreur lors de la récupération de la météo</p>';
+                }
+            } catch (error) {
+                console.error('Erreur fetch:', error);
+                document.getElementById('weather-info').innerHTML = '<p>Erreur de chargement des données météo</p>';
+            }
+        }
+
         // Fonction pour ajouter une plante
         function addPlant() {
             const formData = {
-                nom: document.getElementById('plantName').value,
+                nom: document.getElementById('plantSelect').value, // Utilise le nom du catalogue
                 humidite_min: parseFloat(document.getElementById('humidityMin').value),
                 humidite_max: parseFloat(document.getElementById('humidityMax').value),
                 description: document.getElementById('plantDescription').value,
@@ -367,56 +422,16 @@
                     // Fermer le modal
                     const modal = bootstrap.Modal.getInstance(document.getElementById('addPlantModal'));
                     modal.hide();
-                    // Mettre à jour la liste des plantes
+                    // Mettre à jour la liste des plantes de l'utilisateur
                     updatePlantsList();
+                    document.getElementById('addPlantForm').reset(); // Réinitialiser le formulaire
+                    document.getElementById('plantInfo').style.display = 'none'; // Cacher les infos auto-remplies
                 }
             })
             .catch(error => {
                 alert('Erreur lors de l\'ajout de la plante: ' + error);
             });
         }
-
-        // Fonction pour charger les zones dans le select
-        function loadZones() {
-            fetch('/api/zones')
-                .then(response => response.json())
-                .then(zones => {
-                    const select = document.getElementById('plantZone');
-                    zones.forEach(zone => {
-                        const option = document.createElement('option');
-                        option.value = zone.id;
-                        option.textContent = zone.nom;
-                        select.appendChild(option);
-                    });
-                });
-        }
-
-       
-        // Fonction pour récupérer les données météo et les afficher
-        async function fetchWeather() {
-            try {
-                const response = await fetch('/api/meteo?lat=43.6045&lon=1.4442');  // Toulouse par défaut
-                const data = await response.json(); 
-
-                if (response.ok) {
-                    document.getElementById('temperature').textContent = data.temperature_C;
-                    document.getElementById('forecast').textContent = data.description;
-                    document.getElementById('humidity').textContent = data.humidity + '%'; // Si tu veux l'humidité, il faut la rajouter côté API
-                    document.getElementById('wind').textContent = data.wind_speed + ' m/s';
-                } else {
-                    console.error('Erreur API:', data.error);
-                    document.getElementById('weather-info').innerHTML = '<p>Erreur lors de la récupération de la météo</p>';
-                }
-            } catch (error) {
-                console.error('Erreur fetch:', error);
-                document.getElementById('weather-info').innerHTML = '<p>Erreur de chargement des données météo</p>';
-            }
-        }
-
-        // Appelle la fonction au chargement de la page
-        window.addEventListener('DOMContentLoaded', fetchWeather);
-   
-
 
         // Fonction pour supprimer une plante
         function deletePlant(planteId) {
@@ -439,7 +454,7 @@
             }
         }
 
-        // Fonction pour ouvrir le modal de modification
+        // Fonction pour ouvrir le modal de modification d'une plante
         function editPlant(planteId) {
             fetch(`/api/plantes/${planteId}`)
                 .then(response => response.json())
@@ -449,10 +464,13 @@
                     document.getElementById('editHumidityMin').value = plante.humidite_min;
                     document.getElementById('editHumidityMax').value = plante.humidite_max;
                     document.getElementById('editPlantDescription').value = plante.description || '';
-                    document.getElementById('editPlantZone').value = plante.zone_id || '';
                     
-                    const modal = new bootstrap.Modal(document.getElementById('editPlantModal'));
-                    modal.show();
+                    // Assurez-vous que les zones sont chargées avant de sélectionner la zone
+                    loadZonesForEditPlant().then(() => { // Charger les zones de manière asynchrone
+                        document.getElementById('editPlantZone').value = plante.zone_id || '';
+                        const modal = new bootstrap.Modal(document.getElementById('editPlantModal'));
+                        modal.show();
+                    });
                 });
         }
 
@@ -513,7 +531,8 @@
                     const modal = bootstrap.Modal.getInstance(document.getElementById('addZoneModal'));
                     modal.hide();
                     updateZonesList();
-                    loadZones(); // Recharger les zones dans les selects
+                    loadZones(); // Recharger les zones dans les selects d'ajout de plante
+                    loadZonesForEditPlant(); // Recharger les zones dans les selects de modification de plante
                 }
             })
             .catch(error => {
@@ -560,6 +579,7 @@
                     modal.hide();
                     updateZonesList();
                     loadZones(); // Recharger les zones dans les selects
+                    loadZonesForEditPlant(); // Recharger les zones dans les selects de modification de plante
                 }
             })
             .catch(error => {
@@ -581,6 +601,7 @@
                         alert('Zone supprimée avec succès!');
                         updateZonesList();
                         loadZones(); // Recharger les zones dans les selects
+                        loadZonesForEditPlant(); // Recharger les zones dans les selects de modification de plante
                     }
                 })
                 .catch(error => {
@@ -637,17 +658,64 @@
             });
         }
 
+        // ✅ Fonction pour charger les plantes du catalogue dans le dropdown (menu déroulant)
+        function loadCataloguePlantsDropdown() {
+            fetch('/api/plantes/dropdown')
+                .then(response => response.json())
+                .then(data => {
+                    cataloguePlantesData = data; // Stocker les plantes du catalogue
+                    const plantSelect = document.getElementById('plantSelect');
+                    plantSelect.innerHTML = '<option value="" selected disabled>Choisir une plante...</option>'; // Réinitialiser
+                    
+                    data.forEach(plant => {
+                        const option = document.createElement('option');
+                        option.value = plant.nom; // Utiliser le nom du catalogue comme valeur
+                        option.textContent = plant.nom;
+                        plantSelect.appendChild(option);
+                    });
+                })
+                .catch(error => console.error("Erreur lors du chargement des plantes du catalogue :", error));
+        }
+
+        // ✅ Fonction pour afficher les informations de la plante sélectionnée depuis le catalogue
+        function showPlantInfo() {
+            const selectedPlantName = document.getElementById('plantSelect').value;
+            const plantInfo = cataloguePlantesData.find(p => p.nom === selectedPlantName);
+
+            if (plantInfo) {
+                document.getElementById('plantInfo').style.display = 'block';
+                document.getElementById('humidityMin').value = plantInfo.humidite_min ?? '';
+                document.getElementById('humidityMax').value = plantInfo.humidite_max ?? '';
+            } else {
+                document.getElementById('plantInfo').style.display = 'none';
+                document.getElementById('humidityMin').value = '';
+                document.getElementById('humidityMax').value = '';
+            }
+        }
+
+        // Écoute l'ouverture de la modale d'ajout de plante pour charger le catalogue
+        const addPlantModal = document.getElementById('addPlantModal');
+        addPlantModal.addEventListener('show.bs.modal', function () {
+            loadCataloguePlantsDropdown(); // Recharge les options du catalogue
+            document.getElementById('plantInfo').style.display = 'none'; // Cacher les infos au début
+            document.getElementById('addPlantForm').reset(); // Réinitialiser le formulaire
+        });
+
         // Mise à jour périodique des données
         setInterval(updateRobotStatus, 30000);
         setInterval(updatePlantsList, 60000);
         setInterval(updateZonesList, 60000);
 
         // Chargement initial des données
-        updateRobotStatus();
-        updatePlantsList();
-        updateZonesList();
-        loadZones();
+        document.addEventListener('DOMContentLoaded', () => {
+            updateRobotStatus();
+            updatePlantsList();
+            updateZonesList();
+            loadZones(); // Charger les zones pour le modal d'ajout de plante
+            loadZonesForEditPlant(); // Charger les zones pour le modal de modification de plante
+            fetchWeather();
+        });
     </script>
     <script src="{{ url_for('static', filename='js/consommation-eau.js') }}"></script>
 </body>
-</html> 
+</html>
