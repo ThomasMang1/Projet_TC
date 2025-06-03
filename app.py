@@ -7,6 +7,7 @@ import requests
 from sqlalchemy import func
 from flask import request
 from flask import Flask, render_template, jsonify, request
+from sqlalchemy import text
 from uart_to_flask import RobotBridge
 
 app = Flask(__name__)
@@ -29,6 +30,17 @@ def get_plantes():
         'humidite_max': p.humidite_max,
         'zone': p.zone.nom if p.zone else None
     } for p in plantes])
+
+@app.route('/api/plantes/dropdown', methods=['GET'])
+def get_plantes_dropdown():
+    result = db.session.execute(text("SELECT plantes, humidite_min, humidite_max FROM tableau_plantes"))
+    plantes_disponibles = result.fetchall()
+    plantes = [{
+        'nom': p[0],
+        'humidite_min': p[1],
+        'humidite_max': p[2]
+    } for p in plantes_disponibles]
+    return jsonify(plantes)
 
 @app.route('/api/plantes', methods=['POST'])
 def create_plante():
