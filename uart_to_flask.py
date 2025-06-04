@@ -37,6 +37,7 @@ class RobotBridge:
         self.last_status_time = 0
         self.current_color = None
         self.buffer = bytearray()
+        self.last_detected_plant_id = None
         
     def connect(self) -> bool:
         """Établit la connexion série avec le robot"""
@@ -61,7 +62,7 @@ class RobotBridge:
             if not self.ser:
                 return False
             self.ser.write((packet).encode("ASCII"))
-            logger.info("paquet ", packet, " envoyé dans l'UART")
+            logger.info(f"paquet {packet} envoyé dans l'UART")
             return True
         except Exception as e:
             logger.error(f"Erreur lors de l'envoi du paquet: {e}")
@@ -112,18 +113,56 @@ class RobotBridge:
             # Appel à l'API pour vérifier la plante
             response = requests.post(
                 f"{API_URL}/api/check_plant",
-                json={'color': color},
+                json={
+                    'r': color['r'],
+                    'g': color['g'],
+                    'b': color['b']
+                    },
                 timeout=5
             )
             
             if response.status_code == 200:
                 data = response.json()
-                return data.get('is_plant', False), data.get('water_volume')
-            return False, None
+                is_plant = data.get('is_plant', False)
+                if is_plant:
+                    self.last_detected_plant_id = data.get('plant_id', None)
+                    logger.info(f"Plante détectée: ID {self.last_detected_plant_id}")
+                return is_plant
+            return False
             
         except Exception as e:
             logger.error(f"Erreur lors de la vérification de la plante: {e}")
-            return False, None
+            return False
+        
+    def check_plant_by_humidity(self, humidity: Dict) -> Optional[int]:
+        """Vérifie l'arrosage à envoyer à une plante en fonction de l'humidité"""
+        try:
+            if self.last_detected_plant_id is None:
+                logger.warning("Aucune plante détectée précédemment, impossible de vérifier l'humidité")
+                return None
+
+            # Appel à l'API pour vérifier la plante
+            response = requests.post(
+                f"{API_URL}/api/robot/check_humidity",
+                json={
+                    'plant_id': self.last_detected_plant_id,
+                    'humidity': humidity['humidity']
+                    },
+                timeout=5
+            )
+            
+            if response.status_code == 200:
+                data = response.json()
+                water_volume = data.get('water_volume')
+                # Envoi de la commande d'arrosage
+                logger.info(f"Valeur d'arrosage transmise {water_volume}")
+                self.send_packet(str(water_volume))
+                return water_volume
+            return 0
+            
+        except Exception as e:
+            logger.error(f"Erreur lors de la vérification de l'humidité: {e}")
+            return None
     
     def handle_packet(self, packet: Dict) -> None:
         """Gère un paquet reçu du robot"""
@@ -132,17 +171,18 @@ class RobotBridge:
             
             if packet_type == 'colour':
                 self.current_color = packet
-                is_plant, water_volume = self.check_plant_by_color(self.current_color)
+                is_plant = self.check_plant_by_color(self.current_color)
                 #is_plant = True  # pour le test
                 #water_volume = "1"  # pour le test
 
-                if is_plant and water_volume:
+                if is_plant :
                     self.send_packet("1")
                 else:
                     self.send_packet("0")
                     
             elif packet_type == 'humidity':
-                self.send_packet("100")
+                self.current_humidity = packet
+                volume = self.check_plant_by_humidity(self.current_humidity)
                 logger.info("Commande d'humidité exécutée avec succès")
                     
             elif packet_type == 'status':

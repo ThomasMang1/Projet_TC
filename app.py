@@ -415,49 +415,52 @@ def get_consommation_eau():
 
 @app.route('/api/check_plant', methods=['POST'])
 def check_plant():
-    """Vérifie si une plante correspond à la couleur détectée"""
     try:
         data = request.get_json()
+        print(f"Données reçues: {data}")
         
-        # Vérifier que les données de couleur sont présentes
         if not all(k in data for k in ['r', 'g', 'b']):
+            print(f"Données manquantes. Reçu: {list(data.keys())}")
             return jsonify({'error': 'Données de couleur incomplètes'}), 400
-            
-        # Récupérer les valeurs RGB
+        
+        # Convertir les valeurs en entiers
         r = int(data['r'])
         g = int(data['g'])
         b = int(data['b'])
         
+        print(f"Valeurs RGB brutes: R={r}, G={g}, B={b}")
+        
+        # Déterminer la couleur dominante
+        max_val = max(r, g, b)
+        if r == max_val:
+            dominant_color = "255,0,0"  # Rouge
+        elif g == max_val:
+            dominant_color = "0,255,0"  # Vert
+        else:
+            dominant_color = "0,0,255"  # Bleu
+            
+        print(f"Couleur dominante détectée: {dominant_color}")
+
         # Récupérer toutes les plantes
         plantes = Plante.query.all()
+        print(f"Nombre de plantes trouvées: {len(plantes)}")
         
-        # Pour chaque plante, vérifier si la couleur correspond
+        # Chercher une plante avec la même couleur dominante
         for plante in plantes:
-            if plante.color:
-                # Convertir la couleur stockée en RGB
-                stored_r, stored_g, stored_b = map(int, plante.color.split(','))
-                
-                # Calculer la différence en pourcentage pour chaque composante
-                diff_r = abs(r - stored_r) / stored_r * 100
-                diff_g = abs(g - stored_g) / stored_g * 100
-                diff_b = abs(b - stored_b) / stored_b * 100
-                
-                # Si toutes les différences sont inférieures à 10%
-                if diff_r <= 10 and diff_g <= 10 and diff_b <= 10:
-                    print(f"Plante trouvée: {plante.nom} (ID: {plante.id})")
-                    return jsonify({
-                        'is_plant': True,
-                        'water_volume': 100,  # Volume en ml
-                        'plant_id': plante.id
-                    })
+            if plante.color == dominant_color:
+                print(f"Plante trouvée: {plante.nom} (ID: {plante.id})")
+                return jsonify({
+                    'is_plant': True,
+                    'plant_id': plante.id
+                })
         
-        # Si aucune correspondance n'est trouvée
+        print("Aucune plante correspondante trouvée")
         return jsonify({
-            'is_plant': False,
-            'water_volume': 0
+            'is_plant': False
         })
         
     except Exception as e:
+        print(f"Erreur générale: {str(e)}")
         return jsonify({'error': str(e)}), 500
 
 @app.route('/api/robot/status', methods=['GET'])
@@ -498,29 +501,40 @@ def update_robot_status():
         db.session.rollback()
         return jsonify({'error': str(e)}), 500
 
-@app.route('/api/robot/humidity', methods=['POST'])
-def update_humidity():
+@app.route('/api/robot/check_humidity', methods=['POST'])
+def check_humidity():
     """Met à jour les données d'humidité"""
     try:
         data = request.get_json()
         
-        # Vérifier les données requises
-        required_fields = ['dry_val', 'wet_val', 'humidity']
-        if not all(field in data for field in required_fields):
+        # Vérifier que les données requises sont présentes
+        if not all(k in data for k in ['plant_id', 'humidity']):
             return jsonify({'error': 'Données incomplètes'}), 400
-            
-        # Mettre à jour l'humidité de la zone actuelle
-        # Note: Dans un cas réel, vous devrez déterminer la zone actuelle
-        zones = Zone.query.all()
-        for zone in zones:
-            zone.humidite_actuelle = data['humidity']
-            zone.derniere_mesure = datetime.now()
-            
-        db.session.commit()
-        return jsonify({'status': 'ok'})
         
+         # Récupérer la plante
+        plante = Plante.query.get(data['plant_id'])
+        if not plante:
+            return jsonify({'error': 'Plante non trouvée'}), 404
+            
+        # Vérifier si l'humidité est en dessous du seuil minimum
+        pourcentage = (1-(float(data['humidity']))/4095)*100
+        print(f"pourcentage d'humidité calculé: {pourcentage:.2f}")
+        if pourcentage <= plante.humidite_min:
+            print(f"Plante {plante.nom} (ID: {plante.id}) nécessite de l'eau. Humidité actuelle: {data['humidity']}, seuil minimum: {plante.humidite_min}")
+            return jsonify({
+                'need_water': True,
+                'water_volume': 100,  # Quantité d'eau fixe en mL
+                'plant_id': plante.id
+            })
+        
+        print(f"Plante {plante.nom} (ID: {plante.id}) n'a pas besoin d'eau. Humidité actuelle: {data['humidity']}, seuil minimum: {plante.humidite_min}")
+        return jsonify({
+            'need_water': False,
+            'water_volume': 0,
+            'plant_id': plante.id
+        })
+
     except Exception as e:
-        db.session.rollback()
         return jsonify({'error': str(e)}), 500
 
 @app.route('/api/robot/command', methods=['POST'])
